@@ -1,1 +1,395 @@
-// Put your custom SCSS code here
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+//  朱墨 — Ink & Vermilion · component styles
+//  Loaded LAST in the cascade — safe to use Bootstrap CSS vars + final overrides.
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+:root {
+  --vermilion: #d8472a;
+  --vermilion-soft: #e9694e;
+  --gold: #c0902f;
+  --paper-grain: rgba(120, 90, 50, 0.045);
+  --seal: #d8472a;
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-bs-theme="dark"] {
+  --vermilion: #f0775a;
+  --vermilion-soft: #ff8e72;
+  --gold: #d6a84a;
+  --paper-grain: rgba(255, 255, 255, 0.02);
+  --seal: #f0775a;
+}
+
+// ── Paper grain & atmosphere ────────────────────────────────────
+body {
+  background-image:
+    radial-gradient(var(--paper-grain) 1px, transparent 1px);
+  background-size: 22px 22px;
+  letter-spacing: 0.003em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+// Optical sizing + true italics for the variable display face
+h1, h2, h3, .h1, .h2, .h3,
+.navbar-brand, .blog-header h1 {
+  font-optical-sizing: auto;
+  letter-spacing: -0.018em;
+}
+
+// ── Selection ───────────────────────────────────────────────────
+::selection {
+  background: var(--vermilion);
+  color: #fff;
+}
+
+// ── Navbar: thin editorial rule + seal-dot brand ────────────────
+.navbar {
+  backdrop-filter: saturate(1.2) blur(10px);
+  background-color: color-mix(in srgb, var(--bs-body-bg) 82%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--bs-border-color) 70%, transparent);
+}
+
+.navbar-brand {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+  position: relative;
+  padding-left: 1.05rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0.62rem;
+    height: 0.62rem;
+    border-radius: 0.16rem;
+    background: var(--seal);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--seal) 18%, transparent);
+    transition: transform 0.5s var(--ease-spring);
+  }
+  &:hover::before { transform: translateY(-50%) rotate(45deg); }
+}
+
+.navbar-nav .nav-link {
+  position: relative;
+  font-weight: 500;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.35rem;
+    height: 1.5px;
+    background: var(--vermilion);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.34s var(--ease-spring);
+  }
+  &:hover::after,
+  &.active::after { transform: scaleX(1); }
+}
+
+// ── Buttons: ink-press tactility ────────────────────────────────
+.btn-primary {
+  --bs-btn-bg: var(--vermilion);
+  --bs-btn-border-color: var(--vermilion);
+  --bs-btn-hover-bg: #{darken(#d8472a, 6%)};
+  --bs-btn-hover-border-color: #{darken(#d8472a, 6%)};
+  --bs-btn-active-bg: #{darken(#d8472a, 10%)};
+  box-shadow: 0 6px 18px -8px color-mix(in srgb, var(--vermilion) 70%, transparent);
+  transition:
+    transform 0.25s var(--ease-spring),
+    box-shadow 0.25s var(--ease-spring);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px -10px color-mix(in srgb, var(--vermilion) 75%, transparent);
+  }
+  &:active { transform: translateY(0); }
+}
+
+.btn-cta {
+  font-family: "Fraunces", serif;
+  letter-spacing: 0.01em;
+}
+
+// ── HERO (homepage) ─────────────────────────────────────────────
+.hero {
+  position: relative;
+  padding: clamp(3.5rem, 9vw, 7rem) 0 clamp(2.5rem, 6vw, 4.5rem);
+  overflow: hidden;
+
+  &__eyebrow {
+    font-family: "Newsreader", serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    color: var(--vermilion);
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(2.6rem, 7.5vw, 5.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.4rem;
+
+    em {
+      font-style: italic;
+      color: var(--vermilion);
+      font-feature-settings: "swsh" 1;
+    }
+  }
+
+  &__lead {
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    line-height: 1.66;
+    color: var(--bs-secondary-color);
+    max-width: 40ch;
+    margin: 0 auto 2rem;
+  }
+
+  // Large translucent seal character behind hero
+  &__seal {
+    position: absolute;
+    right: clamp(-2rem, 2vw, 4rem);
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: "Noto Serif SC", serif;
+    font-weight: 900;
+    font-size: clamp(12rem, 34vw, 30rem);
+    line-height: 1;
+    color: var(--vermilion);
+    opacity: 0.06;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+  &__inner { position: relative; z-index: 1; }
+}
+
+// ── Section heading rule ────────────────────────────────────────
+.section-rule {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0 0 2rem;
+
+  h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    margin: 0;
+    white-space: nowrap;
+  }
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--bs-border-color), transparent);
+    transform: translateY(-0.3rem);
+  }
+  &__count {
+    font-family: "Newsreader", serif;
+    font-style: italic;
+    color: var(--vermilion);
+  }
+}
+
+// ── Blog cards: editorial clipping ──────────────────────────────
+.card {
+  background: color-mix(in srgb, var(--bs-body-bg) 55%, var(--bs-secondary-bg));
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius-lg);
+  overflow: hidden;
+  transition:
+    transform 0.4s var(--ease-spring),
+    box-shadow 0.4s var(--ease-spring),
+    border-color 0.4s var(--ease-spring);
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--vermilion) 45%, var(--bs-border-color));
+    box-shadow: 0 22px 40px -24px rgba(40, 20, 10, 0.4);
+  }
+
+  .card-body { padding: 1.6rem 1.7rem 1.5rem; }
+
+  h2 a, .h3 a {
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    transition: color 0.25s ease;
+  }
+  &:hover h2 a { color: var(--vermilion) !important; }
+
+  img { transition: transform 0.6s var(--ease-spring); }
+  &:hover img { transform: scale(1.04); }
+}
+
+// Reading-time + meta refinement
+.reading-time,
+small .link-muted { color: var(--bs-secondary-color); }
+
+// ── Post grid for homepage ──────────────────────────────────────
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 1.6rem;
+}
+
+// ── Article (single post) typography ────────────────────────────
+.blog-header h1 {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+}
+
+article {
+  .lead {
+    font-family: "Newsreader", serif;
+    font-style: italic;
+    font-size: 1.32rem;
+    line-height: 1.6;
+    color: var(--bs-secondary-color);
+    border-left: 3px solid var(--vermilion);
+    padding-left: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  // Drop-cap on first paragraph of body content
+  > .col-lg-9 > p:first-of-type::first-letter,
+  > div > p:first-of-type::first-letter {
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    float: left;
+    font-size: 3.6em;
+    line-height: 0.72;
+    padding: 0.05em 0.12em 0 0;
+    color: var(--vermilion);
+  }
+
+  h2, h3 {
+    margin-top: 2.4rem;
+    scroll-margin-top: 6rem;
+  }
+  h2 {
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--bs-border-color);
+  }
+
+  blockquote {
+    font-family: "Newsreader", serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    border-left: 3px solid var(--vermilion);
+    padding: 0.4rem 0 0.4rem 1.4rem;
+    color: var(--bs-secondary-color);
+  }
+
+  // In-prose links only: fill-on-hover. Exclude heading anchors,
+  // card/stretched title links and tag buttons so titles never get a red wash.
+  p a:not(.btn):not(.stretched-link),
+  li a:not(.btn):not(.stretched-link) {
+    background-image: linear-gradient(var(--vermilion), var(--vermilion));
+    background-size: 100% 1.5px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s var(--ease-spring);
+    &:hover { background-size: 100% 100%; color: #fff; padding: 0 2px; border-radius: 2px; }
+  }
+}
+
+// Tag pills
+.tag-list-single {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--bs-border-color);
+
+  .btn-light {
+    background: transparent;
+    border: 1px solid var(--bs-border-color);
+    border-radius: 50rem;
+    font-size: 0.85rem;
+    color: var(--bs-secondary-color);
+    transition: all 0.25s var(--ease-spring);
+    &::before { content: "#"; color: var(--vermilion); margin-right: 1px; }
+    &:hover {
+      border-color: var(--vermilion);
+      color: var(--vermilion);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// ── Inline code & blocks ────────────────────────────────────────
+:not(pre) > code {
+  color: var(--vermilion);
+  background: color-mix(in srgb, var(--vermilion) 9%, transparent);
+  border-radius: 0.3rem;
+  padding: 0.12em 0.4em;
+  font-size: 0.88em;
+}
+
+// ── Reading progress bar ────────────────────────────────────────
+.read-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, var(--vermilion), var(--gold));
+  z-index: 1080;
+  transition: width 0.1s linear;
+}
+
+// ── To-top button ───────────────────────────────────────────────
+#toTop, .to-top {
+  border-radius: 50%;
+  border: 1px solid var(--bs-border-color);
+  background: var(--bs-body-bg);
+  box-shadow: 0 10px 24px -12px rgba(0,0,0,0.4);
+}
+
+// ── Footer ──────────────────────────────────────────────────────
+.footer {
+  border-top: 1px solid var(--bs-border-color);
+  .nav-link.social-link:hover { color: var(--vermilion); }
+}
+
+// ── Scroll-reveal animation ─────────────────────────────────────
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.7s var(--ease-spring),
+      transform 0.7s var(--ease-spring);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  // Staggered hero entrance
+  .hero__eyebrow,
+  .hero__title,
+  .hero__lead,
+  .hero__actions {
+    animation: rise 0.9s var(--ease-spring) both;
+  }
+  .hero__title   { animation-delay: 0.08s; }
+  .hero__lead    { animation-delay: 0.16s; }
+  .hero__actions { animation-delay: 0.24s; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: none; }
+}

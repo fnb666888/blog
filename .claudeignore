@@ -1,0 +1,17 @@
+# 忽略构建输出目录
+public/
+resources/
+node_modules/
+
+# 忽略锁文件
+.hugo_build.lock
+package-lock.json
+
+# 忽略 IDE 配置
+.vscode/
+.idea/
+
+# 忽略临时文件
+*.tmp
+*.bak
+*~

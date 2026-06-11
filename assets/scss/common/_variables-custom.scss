@@ -1,1 +1,124 @@
-// Put your custom SCSS variables here
+// ░░░ 朱墨 — Ink & Vermilion ░░░
+// Editorial literary-tech theme. Warm paper / deep ink, single vermilion accent.
+// This file loads BEFORE Bootstrap variables, so these override the defaults.
+
+// ── Brand palette ───────────────────────────────────────────────
+$ink-vermilion:    hsl(8, 74%, 52%);   // 朱砂 — seal-ink red, the one accent
+$ink-vermilion-dk: hsl(8, 70%, 47%);
+$ink-cinnabar:     hsl(18, 78%, 56%);  // warmer secondary
+$ink-gold:         hsl(38, 56%, 50%);  // restrained metallic
+
+// Light "paper" surfaces
+$paper:            hsl(40, 36%, 97%);  // warm rice paper
+$paper-sunk:       hsl(38, 30%, 94%);
+$ink-900:          hsl(220, 18%, 14%); // near-black ink for text
+$ink-700:          hsl(220, 12%, 30%);
+$ink-500:          hsl(220, 8%, 46%);
+
+// ── Bootstrap theme color overrides ─────────────────────────────
+$primary: $ink-vermilion;
+$info:    $ink-vermilion;
+$red:     $ink-vermilion;
+$yellow:  $ink-gold;
+
+$enable-negative-margins: true;
+
+// Surfaces
+$body-bg:              $paper;
+$body-overlay:         hsl(40, 30%, 99%);
+
+// Text + links
+$body-color:           $ink-900;
+$link-decoration:      none;
+$link-hover-decoration: none;
+$link-color:           $ink-vermilion;
+$link-hover-color:     $ink-vermilion-dk;
+
+// ── Typography ──────────────────────────────────────────────────
+// Body: literary serif + CJK serif fallback for clean Chinese rendering
+$font-family-serif-cjk:
+  "Noto Serif SC",
+  "Songti SC",
+  "SimSun",
+  "Source Han Serif SC",
+  serif;
+
+$font-family-sans-serif:
+  "Newsreader",
+  "Georgia",
+  #{$font-family-serif-cjk},
+  -apple-system,
+  "Segoe UI",
+  sans-serif,
+  "Apple Color Emoji",
+  "Segoe UI Emoji";
+
+// Expressive display face for headings
+$headings-font-family:
+  "Fraunces",
+  #{$font-family-serif-cjk},
+  Georgia,
+  serif;
+
+$font-size-base:  1.0625rem;          // slightly larger for prose comfort
+$font-size-md:    $font-size-base * 1.125;
+$font-size-xl:    $font-size-base * 1.45;
+
+$headings-font-weight: 600;
+$headings-line-height: 1.18;
+$line-height-base:     1.72;          // airy editorial leading
+$lead-font-weight:     400;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1180px,
+  xxl: 1280px
+);
+
+@include _assert-ascending($container-max-widths, "$container-max-widths");
+
+$grid-columns: 16;
+$grid-gutter-width: 3rem;
+
+// Components
+$border-radius:    0.5rem;
+$border-radius-sm: 0.35rem;
+$border-radius-lg: 0.85rem;
+
+$card-border-color: hsl(38, 24%, 88%);
+$card-border-width: 1px;
+$card-cap-bg:       transparent;
+
+$input-btn-focus-width: 0;
+$input-btn-focus-box-shadow: none;
+
+$gray-200: #e9ecef;
+
+$spacer: 1rem;
+
+$alert-padding-x:     $spacer * 1.5;
+$alert-margin-bottom: 0;
+$alert-border-radius: 0;
+$alert-border-width:  0;
+
+$offcanvas-horizontal-width: 332px;
+
+// ── Dark "ink" color mode ───────────────────────────────────────
+$body-bg-dark:        hsl(222, 24%, 8%);   // deep midnight ink
+$body-overlay-dark:   hsl(222, 20%, 12%);
+$border-dark:         hsl(222, 16%, 18%);
+$light-bg-subtle-dark:    hsl(222, 20%, 12%);
+$light-border-subtle-dark: hsl(222, 16%, 20%);
+$body-color-dark:     hsl(40, 14%, 80%);   // warm paper-tinted text on ink
+$headings-color-dark: hsl(40, 30%, 94%);
+$dots-dark:           hsl(222, 12%, 26%);
+
+$link-color-dark:     hsl(12, 90%, 68%);   // glowing vermilion on dark
+$button-color-dark:   $link-color-dark;
+$focus-color-dark:    lighten($link-color-dark, 4%);
+
+$navbar-dark-color:        $body-color-dark;
+$navbar-dark-hover-color:  $link-color-dark;
+$navbar-dark-active-color: $link-color-dark;

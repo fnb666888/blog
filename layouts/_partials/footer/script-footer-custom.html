@@ -1,4 +1,6 @@
 {{/* Put your custom <script></script> tags here */}}
+{{ partial "footer/esbuild" (dict "src" "js/custom.js" "load" "defer" "transpile" false) -}}
+
 
 {{/* EXAMPLE - only load script for production
 {{ if eq (hugo.Environment) "production" -}}

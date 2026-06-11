@@ -4,731 +4,778 @@
 // ───────────────────────────────────────────────────────────────
 
 :root {
-  --accent: hsl(212, 84%, 50%);
-  --accent-2: hsl(190, 90%, 50%);
-  --accent-3: hsl(232, 84%, 64%);
-  --rule: var(--bs-border-color);
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --accent: hsl(212, 84%, 50%);
+    --accent-2: hsl(190, 90%, 50%);
+    --accent-3: hsl(232, 84%, 64%);
+    --rule: var(--bs-border-color);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
-  // Tech tokens
-  --grad: linear-gradient(135deg, var(--accent), var(--accent-2));
-  --grad-soft: linear-gradient(135deg,
-      color-mix(in srgb, var(--accent) 92%, transparent),
-      color-mix(in srgb, var(--accent-3) 90%, transparent));
-  --glow: 0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent),
-          0 8px 30px -10px color-mix(in srgb, var(--accent) 45%, transparent);
-  --glass-bg: color-mix(in srgb, var(--bs-body-bg) 72%, transparent);
-  --glass-brd: color-mix(in srgb, var(--bs-border-color) 80%, transparent);
-  --halo: color-mix(in srgb, var(--accent) 12%, transparent);
+    // Tech tokens
+    --grad: linear-gradient(135deg, var(--accent), var(--accent-2));
+    --grad-soft: linear-gradient(135deg, color-mix(in srgb, var(--accent) 92%, transparent), color-mix(in srgb, var(--accent-3) 90%, transparent));
+    --glow: 0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent), 0 8px 30px -10px color-mix(in srgb, var(--accent) 45%, transparent);
+    --glass-bg: color-mix(in srgb, var(--bs-body-bg) 72%, transparent);
+    --glass-brd: color-mix(in srgb, var(--bs-border-color) 80%, transparent);
+    --halo: color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
 [data-bs-theme="dark"] {
-  --accent: hsl(204, 96%, 64%);
-  --accent-2: hsl(176, 92%, 52%);
-  --accent-3: hsl(248, 92%, 72%);
-  --glass-bg: color-mix(in srgb, var(--bs-body-bg) 58%, transparent);
-  --halo: color-mix(in srgb, var(--accent) 18%, transparent);
+    --accent: hsl(204, 96%, 64%);
+    --accent-2: hsl(176, 92%, 52%);
+    --accent-3: hsl(248, 92%, 72%);
+    --glass-bg: color-mix(in srgb, var(--bs-body-bg) 58%, transparent);
+    --halo: color-mix(in srgb, var(--accent) 18%, transparent);
 }
 
 // ── Base atmosphere ─────────────────────────────────────────────
 body {
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  letter-spacing: -0.003em;
-  // faint aurora wash anchored top — barely there, sets the mood
-  background-image:
-    radial-gradient(60rem 40rem at 78% -8%, var(--halo), transparent 60%),
-    radial-gradient(48rem 36rem at -10% 6%,
-      color-mix(in srgb, var(--accent-3) 9%, transparent), transparent 55%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    letter-spacing: -0.003em;
+    // faint aurora wash anchored top — barely there, sets the mood
+    background-image: radial-gradient(60rem 40rem at 78% -8%, var(--halo), transparent 60%), radial-gradient(48rem 36rem at -10% 6%, color-mix(in srgb, var(--accent-3) 9%, transparent), transparent 55%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
-h1, h2, h3, .h1, .h2, .h3 {
-  letter-spacing: -0.02em;
+h1,
+h2,
+h3,
+.h1,
+.h2,
+.h3 {
+    letter-spacing: -0.02em;
 }
 
 ::selection {
-  background: var(--accent);
-  color: #fff;
+    background: var(--accent);
+    color: #fff;
 }
 
 // gradient-text utility
 .grad-text {
-  background: var(--grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
-// ── Navbar: glass + gradient detail ─────────────────────────────
-.navbar {
-  backdrop-filter: saturate(1.4) blur(14px);
-  -webkit-backdrop-filter: saturate(1.4) blur(14px);
-  background-color: var(--glass-bg);
-  border-bottom: 1px solid var(--glass-brd);
-  transition: border-color 0.3s var(--ease), background-color 0.3s var(--ease);
-}
-
-.navbar-brand {
-  font-weight: 800;
-  font-size: 1.2rem;
-  letter-spacing: -0.02em;
-  background: var(--grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
-.navbar-nav .nav-link {
-  position: relative;
-  font-weight: 500;
-
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0.5rem;
-    right: 0.5rem;
-    bottom: 0.35rem;
-    height: 2px;
-    border-radius: 2px;
-    background: var(--grad);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.28s var(--ease);
-  }
-  &:hover::after,
-  &.active::after { transform: scaleX(1); }
-}
-
-// ── Buttons: gradient primary + glass ghost ─────────────────────
-.btn-primary {
-  --bs-btn-bg: transparent;
-  --bs-btn-border-color: transparent;
-  --bs-btn-hover-border-color: transparent;
-  --bs-btn-active-border-color: transparent;
-  position: relative;
-  border: 0;
-  background: var(--grad);
-  color: #fff;
-  box-shadow: 0 6px 20px -8px color-mix(in srgb, var(--accent) 70%, transparent);
-  transition: transform 0.2s var(--ease), box-shadow 0.25s var(--ease), filter 0.2s var(--ease);
-
-  &:hover {
-    color: #fff;
-    transform: translateY(-2px);
-    filter: saturate(1.15);
-    box-shadow: 0 12px 28px -8px color-mix(in srgb, var(--accent) 80%, transparent);
-  }
-  &:active { transform: translateY(0); }
-}
-
-.btn-outline-secondary {
-  border-color: var(--glass-brd);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  transition: transform 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease);
-
-  &:hover {
-    transform: translateY(-2px);
-    border-color: color-mix(in srgb, var(--accent) 55%, var(--bs-border-color));
-    color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 8%, transparent);
-  }
-}
-
-// ── HERO (homepage) ─────────────────────────────────────────────
-.hero {
-  position: relative;
-  padding: clamp(4.5rem, 12vw, 9rem) 0 clamp(2.5rem, 6vw, 4.5rem);
-  text-align: center;
-  overflow: hidden;
-  isolation: isolate;
-
-  // cursor-follow glow (driven by --mx / --my from JS)
-  &__glow {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-    pointer-events: none;
-    background: radial-gradient(
-      30rem 30rem at var(--mx, 50%) var(--my, 30%),
-      color-mix(in srgb, var(--accent) 22%, transparent),
-      transparent 60%
-    );
-    opacity: 0.9;
-    transition: background-position 0.2s linear;
-  }
-
-  // technical grid, fades out toward the edges
-  &__grid {
-    position: absolute;
-    inset: -1px;
-    z-index: -3;
-    pointer-events: none;
-    --g: color-mix(in srgb, var(--bs-body-color) 7%, transparent);
-    background-image:
-      linear-gradient(var(--g) 1px, transparent 1px),
-      linear-gradient(90deg, var(--g) 1px, transparent 1px);
-    background-size: 3.2rem 3.2rem;
-    -webkit-mask-image: radial-gradient(70% 60% at 50% 38%, #000 0%, transparent 78%);
-    mask-image: radial-gradient(70% 60% at 50% 38%, #000 0%, transparent 78%);
-  }
-
-  &__eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--bs-font-monospace);
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    padding: 0.3rem 0.85rem;
-    margin-bottom: 1.5rem;
-    border: 1px solid var(--glass-brd);
-    border-radius: 50rem;
-    background: color-mix(in srgb, var(--accent) 7%, transparent);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-
-    &::before {
-      content: "";
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 70%, transparent);
-      animation: ping 2.4s var(--ease) infinite;
-    }
-  }
-
-  &__title {
-    font-weight: 800;
-    font-size: clamp(2.3rem, 6.5vw, 3.9rem);
-    line-height: 1.08;
-    letter-spacing: -0.035em;
-    margin-bottom: 1.5rem;
-  }
-
-  // Motto block — the soul of the site
-  &__motto {
-    font-size: clamp(1.05rem, 2.4vw, 1.35rem);
-    line-height: 1.9;
-    color: var(--bs-secondary-color);
-    max-width: 34ch;
-    margin: 0 auto 2.25rem;
-
-    span { display: block; }
-    em {
-      font-style: normal;
-      font-weight: 600;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      color: transparent;
-    }
-  }
-
-  &__lead {
-    font-size: 1.05rem;
-    color: var(--bs-secondary-color);
-    max-width: 46ch;
-    margin: 0 auto 2rem;
-  }
-}
-
-@keyframes ping {
-  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); }
-  70%  { box-shadow: 0 0 0 7px transparent; }
-  100% { box-shadow: 0 0 0 0 transparent; }
-}
-
-// ── Hero stat strip ─────────────────────────────────────────────
-.hero-stats {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: clamp(1.5rem, 5vw, 3.5rem);
-  margin-top: clamp(2.5rem, 6vw, 4rem);
-
-  &__item { text-align: center; }
-  &__num {
-    display: block;
-    font-family: var(--bs-font-monospace);
-    font-weight: 700;
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    line-height: 1;
     background: var(--grad);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-  }
-  &__label {
-    display: block;
-    margin-top: 0.45rem;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--bs-secondary-color);
-  }
+}
+
+// ── Navbar: glass + gradient detail ─────────────────────────────
+.navbar {
+    backdrop-filter: saturate(1.4) blur(14px);
+    -webkit-backdrop-filter: saturate(1.4) blur(14px);
+    background-color: var(--glass-bg);
+    border-bottom: 1px solid var(--glass-brd);
+    transition:
+        border-color 0.3s var(--ease),
+        background-color 0.3s var(--ease);
+}
+
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+    font-weight: 500;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0.5rem;
+        right: 0.5rem;
+        bottom: 0.35rem;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--grad);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.28s var(--ease);
+    }
+    &:hover::after,
+    &.active::after {
+        transform: scaleX(1);
+    }
+}
+
+// ── Buttons: gradient primary + glass ghost ─────────────────────
+.btn-primary {
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: transparent;
+    --bs-btn-hover-border-color: transparent;
+    --bs-btn-active-border-color: transparent;
+    position: relative;
+    border: 0;
+    background: var(--grad);
+    color: #fff;
+    box-shadow: 0 6px 20px -8px color-mix(in srgb, var(--accent) 70%, transparent);
+    transition:
+        transform 0.2s var(--ease),
+        box-shadow 0.25s var(--ease),
+        filter 0.2s var(--ease);
+
+    &:hover {
+        color: #fff;
+        transform: translateY(-2px);
+        filter: saturate(1.15);
+        box-shadow: 0 12px 28px -8px color-mix(in srgb, var(--accent) 80%, transparent);
+    }
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.btn-outline-secondary {
+    border-color: var(--glass-brd);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition:
+        transform 0.2s var(--ease),
+        border-color 0.2s var(--ease),
+        color 0.2s var(--ease);
+
+    &:hover {
+        transform: translateY(-2px);
+        border-color: color-mix(in srgb, var(--accent) 55%, var(--bs-border-color));
+        color: var(--accent);
+        background: color-mix(in srgb, var(--accent) 8%, transparent);
+    }
+}
+
+// ── HERO (homepage) ─────────────────────────────────────────────
+.hero {
+    position: relative;
+    padding: clamp(4.5rem, 12vw, 9rem) 0 clamp(2.5rem, 6vw, 4.5rem);
+    text-align: center;
+    overflow: hidden;
+    isolation: isolate;
+
+    // cursor-follow glow (driven by --mx / --my from JS)
+    &__glow {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        pointer-events: none;
+        background: radial-gradient(30rem 30rem at var(--mx, 50%) var(--my, 30%), color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%);
+        opacity: 0.9;
+        transition: background-position 0.2s linear;
+    }
+
+    // technical grid, fades out toward the edges
+    &__grid {
+        position: absolute;
+        inset: -1px;
+        z-index: -3;
+        pointer-events: none;
+        --g: color-mix(in srgb, var(--bs-body-color) 7%, transparent);
+        background-image: linear-gradient(var(--g) 1px, transparent 1px), linear-gradient(90deg, var(--g) 1px, transparent 1px);
+        background-size: 3.2rem 3.2rem;
+        -webkit-mask-image: radial-gradient(70% 60% at 50% 38%, #000 0%, transparent 78%);
+        mask-image: radial-gradient(70% 60% at 50% 38%, #000 0%, transparent 78%);
+    }
+
+    &__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--bs-font-monospace);
+        font-size: 0.82rem;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        padding: 0.3rem 0.85rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--glass-brd);
+        border-radius: 50rem;
+        background: color-mix(in srgb, var(--accent) 7%, transparent);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+
+        &::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 70%, transparent);
+            animation: ping 2.4s var(--ease) infinite;
+        }
+    }
+
+    &__title {
+        font-weight: 800;
+        font-size: clamp(2.3rem, 6.5vw, 3.9rem);
+        line-height: 1.08;
+        letter-spacing: -0.035em;
+        margin-bottom: 1.5rem;
+    }
+
+    // Motto block — the soul of the site
+    &__motto {
+        font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+        line-height: 1.9;
+        color: var(--bs-secondary-color);
+        max-width: 34ch;
+        margin: 0 auto 2.25rem;
+
+        span {
+            display: block;
+        }
+        em {
+            font-style: normal;
+            font-weight: 600;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+    }
+
+    &__lead {
+        font-size: 1.05rem;
+        color: var(--bs-secondary-color);
+        max-width: 46ch;
+        margin: 0 auto 2rem;
+    }
+}
+
+@keyframes ping {
+    0% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent);
+    }
+    70% {
+        box-shadow: 0 0 0 7px transparent;
+    }
+    100% {
+        box-shadow: 0 0 0 0 transparent;
+    }
+}
+
+// ── Hero stat strip ─────────────────────────────────────────────
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(1.5rem, 5vw, 3.5rem);
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+
+    &__item {
+        text-align: center;
+    }
+    &__num {
+        display: block;
+        font-family: var(--bs-font-monospace);
+        font-weight: 700;
+        font-size: clamp(1.6rem, 4vw, 2.2rem);
+        line-height: 1;
+        background: var(--grad);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
+    &__label {
+        display: block;
+        margin-top: 0.45rem;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--bs-secondary-color);
+    }
 }
 
 // ── Section heading rule ────────────────────────────────────────
 .section-rule {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-  margin: 0 0 2rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin: 0 0 2rem;
 
-  h2 {
-    font-weight: 700;
-    font-size: 1.5rem;
-    margin: 0;
-    white-space: nowrap;
-    position: relative;
-    padding-left: 0.9rem;
+    h2 {
+        font-weight: 700;
+        font-size: 1.5rem;
+        margin: 0;
+        white-space: nowrap;
+        position: relative;
+        padding-left: 0.9rem;
 
-    &::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.15em;
-      bottom: 0.15em;
-      width: 4px;
-      border-radius: 4px;
-      background: var(--grad);
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.15em;
+            bottom: 0.15em;
+            width: 4px;
+            border-radius: 4px;
+            background: var(--grad);
+        }
     }
-  }
-  &::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg,
-      var(--bs-border-color), transparent);
-    transform: translateY(-0.3rem);
-  }
-  &__count {
-    font-family: var(--bs-font-monospace);
-    font-size: 0.85rem;
-    color: var(--bs-secondary-color);
-  }
+    &::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, var(--bs-border-color), transparent);
+        transform: translateY(-0.3rem);
+    }
+    &__count {
+        font-family: var(--bs-font-monospace);
+        font-size: 0.85rem;
+        color: var(--bs-secondary-color);
+    }
 }
 
 // ── Post list (homepage + blog) ─────────────────────────────────
 .post-list {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .post-row {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--bs-border-color);
-  transition: padding-left 0.25s var(--ease);
-
-  &:hover { padding-left: 0.5rem; }
-
-  &__title {
-    font-size: 1.3rem;
-    font-weight: 650;
-    margin: 0;
-    line-height: 1.3;
-
-    a {
-      color: var(--bs-body-color);
-      transition: color 0.2s ease;
-    }
-  }
-  &:hover &__title a { color: var(--accent); }
-
-  &__summary {
-    color: var(--bs-secondary-color);
-    margin: 0.15rem 0 0;
-    font-size: 0.98rem;
-  }
-
-  &__meta {
-    font-size: 0.82rem;
-    color: var(--bs-secondary-color);
-    letter-spacing: 0.01em;
     display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    align-items: center;
-  }
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--bs-border-color);
+    transition: padding-left 0.25s var(--ease);
+
+    &:hover {
+        padding-left: 0.5rem;
+    }
+
+    &__title {
+        font-size: 1.3rem;
+        font-weight: 650;
+        margin: 0;
+        line-height: 1.3;
+
+        a {
+            color: var(--bs-body-color);
+            transition: color 0.2s ease;
+        }
+    }
+    &:hover &__title a {
+        color: var(--accent);
+    }
+
+    &__summary {
+        color: var(--bs-secondary-color);
+        margin: 0.15rem 0 0;
+        font-size: 0.98rem;
+    }
+
+    &__meta {
+        font-size: 0.82rem;
+        color: var(--bs-secondary-color);
+        letter-spacing: 0.01em;
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        align-items: center;
+    }
 }
 
 // ── Post card grid (homepage) ───────────────────────────────────
 .post-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
 
-  @media (max-width: 767.98px) {
-    grid-template-columns: 1fr;
-  }
+    @media (max-width: 767.98px) {
+        grid-template-columns: 1fr;
+    }
 
-  // first card spans full width — the "featured" slot
-  &__item--lead {
-    grid-column: 1 / -1;
-  }
+    // first card spans full width — the "featured" slot
+    &__item--lead {
+        grid-column: 1 / -1;
+    }
 }
 
 .post-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  padding: 1.5rem 1.6rem;
-  border-radius: var(--bs-border-radius-lg);
-  border: 1px solid var(--glass-brd);
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  overflow: hidden;
-  isolation: isolate;
-  transition: transform 0.35s var(--ease), border-color 0.35s var(--ease),
-    box-shadow 0.35s var(--ease);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.5rem 1.6rem;
+    border-radius: var(--bs-border-radius-lg);
+    border: 1px solid var(--glass-brd);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    overflow: hidden;
+    isolation: isolate;
+    transition:
+        transform 0.35s var(--ease),
+        border-color 0.35s var(--ease),
+        box-shadow 0.35s var(--ease);
 
-  // pointer-tracked sheen (driven by --cx/--cy from JS)
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0;
-    background: radial-gradient(
-      18rem 18rem at var(--cx, 50%) var(--cy, 0%),
-      color-mix(in srgb, var(--accent) 16%, transparent),
-      transparent 60%
-    );
-    transition: opacity 0.35s var(--ease);
-  }
-
-  // gradient hairline that lights up on hover
-  &::after {
-    content: "";
-    position: absolute;
-    inset-inline: 0;
-    top: 0;
-    height: 2px;
-    background: var(--grad);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s var(--ease);
-  }
-
-  &:hover {
-    transform: translateY(-4px);
-    border-color: color-mix(in srgb, var(--accent) 45%, var(--glass-brd));
-    box-shadow: 0 18px 40px -24px color-mix(in srgb, var(--accent) 60%, transparent);
-
-    &::before { opacity: 1; }
-    &::after { transform: scaleX(1); }
-  }
-
-  &__title {
-    font-size: 1.18rem;
-    font-weight: 650;
-    line-height: 1.35;
-    margin: 0;
-
-    a {
-      color: var(--bs-body-color);
-      transition: color 0.2s ease;
-      &::after {
+    // pointer-tracked sheen (driven by --cx/--cy from JS)
+    &::before {
         content: "";
         position: absolute;
         inset: 0;
-        z-index: 1;
-      }
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0;
+        background: radial-gradient(18rem 18rem at var(--cx, 50%) var(--cy, 0%), color-mix(in srgb, var(--accent) 16%, transparent), transparent 60%);
+        transition: opacity 0.35s var(--ease);
     }
-  }
-  &:hover &__title a { color: var(--accent); }
 
-  &--lead &__title { font-size: 1.5rem; }
+    // gradient hairline that lights up on hover
+    &::after {
+        content: "";
+        position: absolute;
+        inset-inline: 0;
+        top: 0;
+        height: 2px;
+        background: var(--grad);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s var(--ease);
+    }
 
-  &__summary {
-    color: var(--bs-secondary-color);
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
+    &:hover {
+        transform: translateY(-4px);
+        border-color: color-mix(in srgb, var(--accent) 45%, var(--glass-brd));
+        box-shadow: 0 18px 40px -24px color-mix(in srgb, var(--accent) 60%, transparent);
 
-  &__meta {
-    margin-top: auto;
-    padding-top: 0.4rem;
-    font-family: var(--bs-font-monospace);
-    font-size: 0.76rem;
-    color: var(--bs-secondary-color);
-    display: flex;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-    align-items: center;
-  }
+        &::before {
+            opacity: 1;
+        }
+        &::after {
+            transform: scaleX(1);
+        }
+    }
 
-  &__cat {
-    color: var(--accent);
-  }
+    &__title {
+        font-size: 1.18rem;
+        font-weight: 650;
+        line-height: 1.35;
+        margin: 0;
+
+        a {
+            color: var(--bs-body-color);
+            transition: color 0.2s ease;
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                z-index: 1;
+            }
+        }
+    }
+    &:hover &__title a {
+        color: var(--accent);
+    }
+
+    &--lead &__title {
+        font-size: 1.5rem;
+    }
+
+    &__summary {
+        color: var(--bs-secondary-color);
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    &__meta {
+        margin-top: auto;
+        padding-top: 0.4rem;
+        font-family: var(--bs-font-monospace);
+        font-size: 0.76rem;
+        color: var(--bs-secondary-color);
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    &__cat {
+        color: var(--accent);
+    }
 }
 
 // ── Cards (theme-rendered, e.g. related posts) ──────────────────
 .card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-brd);
-  border-radius: var(--bs-border-radius-lg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  overflow: hidden;
-  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease),
-    box-shadow 0.3s var(--ease);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-brd);
+    border-radius: var(--bs-border-radius-lg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    overflow: hidden;
+    transition:
+        transform 0.3s var(--ease),
+        border-color 0.3s var(--ease),
+        box-shadow 0.3s var(--ease);
 
-  &:hover {
-    transform: translateY(-3px);
-    border-color: color-mix(in srgb, var(--accent) 45%, var(--bs-border-color));
-    box-shadow: 0 16px 36px -24px color-mix(in srgb, var(--accent) 55%, transparent);
-  }
+    &:hover {
+        transform: translateY(-3px);
+        border-color: color-mix(in srgb, var(--accent) 45%, var(--bs-border-color));
+        box-shadow: 0 16px 36px -24px color-mix(in srgb, var(--accent) 55%, transparent);
+    }
 
-  .card-body { padding: 1.4rem 1.5rem; }
+    .card-body {
+        padding: 1.4rem 1.5rem;
+    }
 
-  h2 a, .h3 a {
-    font-weight: 650;
-    color: var(--bs-body-color);
-    transition: color 0.2s ease;
-  }
-  &:hover h2 a { color: var(--accent) !important; }
+    h2 a,
+    .h3 a {
+        font-weight: 650;
+        color: var(--bs-body-color);
+        transition: color 0.2s ease;
+    }
+    &:hover h2 a {
+        color: var(--accent) !important;
+    }
 }
 
 .reading-time,
-small .link-muted { color: var(--bs-secondary-color); }
+small .link-muted {
+    color: var(--bs-secondary-color);
+}
 
 // ── Article (single post) typography ────────────────────────────
 .blog-header h1 {
-  font-weight: 750;
-  font-size: clamp(1.9rem, 4.5vw, 2.9rem);
-  letter-spacing: -0.028em;
-  line-height: 1.15;
+    font-weight: 750;
+    font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+    letter-spacing: -0.028em;
+    line-height: 1.15;
 }
 
 article {
-  .lead {
-    font-size: 1.18rem;
-    line-height: 1.6;
-    color: var(--bs-secondary-color);
-    margin-bottom: 2rem;
-  }
+    .lead {
+        font-size: 1.18rem;
+        line-height: 1.6;
+        color: var(--bs-secondary-color);
+        margin-bottom: 2rem;
+    }
 
-  h2, h3 {
-    margin-top: 2.4rem;
-    scroll-margin-top: 6rem;
-  }
-  h2 {
-    padding-bottom: 0.4rem;
-    border-bottom: 1px solid var(--bs-border-color);
-  }
+    h2,
+    h3 {
+        margin-top: 2.4rem;
+        scroll-margin-top: 6rem;
+    }
+    h2 {
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid var(--bs-border-color);
+    }
 
-  blockquote {
-    border-left: 3px solid var(--bs-border-color);
-    padding: 0.2rem 0 0.2rem 1.3rem;
-    color: var(--bs-secondary-color);
-  }
+    blockquote {
+        border-left: 3px solid var(--bs-border-color);
+        padding: 0.2rem 0 0.2rem 1.3rem;
+        color: var(--bs-secondary-color);
+    }
 
-  p a:not(.btn):not(.stretched-link),
-  li a:not(.btn):not(.stretched-link) {
-    border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-    transition: border-color 0.2s ease, color 0.2s ease;
-    &:hover { border-bottom-color: var(--accent); }
-  }
+    p a:not(.btn):not(.stretched-link),
+    li a:not(.btn):not(.stretched-link) {
+        border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+        transition:
+            border-color 0.2s ease,
+            color 0.2s ease;
+        &:hover {
+            border-bottom-color: var(--accent);
+        }
+    }
 }
 
 // ── Tag pills ───────────────────────────────────────────────────
 .tag-list-single {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--bs-border-color);
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--bs-border-color);
 
-  .btn-light {
-    background: transparent;
-    border: 1px solid var(--glass-brd);
-    border-radius: 50rem;
-    font-family: var(--bs-font-monospace);
-    font-size: 0.8rem;
-    color: var(--bs-secondary-color);
-    transition: all 0.2s var(--ease);
-    &::before { content: "#"; color: var(--accent); margin-right: 1px; }
-    &:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: color-mix(in srgb, var(--accent) 8%, transparent);
+    .btn-light {
+        background: transparent;
+        border: 1px solid var(--glass-brd);
+        border-radius: 50rem;
+        font-family: var(--bs-font-monospace);
+        font-size: 0.8rem;
+        color: var(--bs-secondary-color);
+        transition: all 0.2s var(--ease);
+        &::before {
+            content: "#";
+            color: var(--accent);
+            margin-right: 1px;
+        }
+        &:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: color-mix(in srgb, var(--accent) 8%, transparent);
+        }
     }
-  }
 }
 
 // ── Inline code ─────────────────────────────────────────────────
 :not(pre) > code {
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
-  border-radius: 0.3rem;
-  padding: 0.1em 0.4em;
-  font-size: 0.86em;
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+    border-radius: 0.3rem;
+    padding: 0.1em 0.4em;
+    font-size: 0.86em;
 }
 
 // ── Reading progress bar ────────────────────────────────────────
 .read-progress {
-  position: fixed;
-  top: 0; left: 0;
-  height: 3px;
-  width: 0;
-  background: var(--grad);
-  box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 70%, transparent);
-  z-index: 1080;
-  transition: width 0.1s linear;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: var(--grad);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 70%, transparent);
+    z-index: 1080;
+    transition: width 0.1s linear;
 }
 
 // ── To-top button ───────────────────────────────────────────────
-#toTop, .to-top {
-  border-radius: 50%;
-  border: 1px solid var(--glass-brd);
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 8px 24px -12px color-mix(in srgb, var(--accent) 60%, transparent);
-  transition: transform 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease);
+#toTop,
+.to-top {
+    border-radius: 50%;
+    border: 1px solid var(--glass-brd);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px -12px color-mix(in srgb, var(--accent) 60%, transparent);
+    transition:
+        transform 0.2s var(--ease),
+        border-color 0.2s var(--ease),
+        color 0.2s var(--ease);
 
-  &:hover {
-    transform: translateY(-3px);
-    color: var(--accent);
-    border-color: color-mix(in srgb, var(--accent) 55%, var(--glass-brd));
-  }
+    &:hover {
+        transform: translateY(-3px);
+        color: var(--accent);
+        border-color: color-mix(in srgb, var(--accent) 55%, var(--glass-brd));
+    }
 }
 
 // ── Footer ──────────────────────────────────────────────────────
 .footer {
-  position: relative;
-  border-top: 1px solid var(--bs-border-color);
+    position: relative;
+    border-top: 1px solid var(--bs-border-color);
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: -1px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    max-width: 30rem;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    opacity: 0.7;
-  }
+    &::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        max-width: 30rem;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        opacity: 0.7;
+    }
 
-  .nav-link.social-link:hover { color: var(--accent); }
+    .nav-link.social-link:hover {
+        color: var(--accent);
+    }
 }
 
 // ── About avatar (circular, glowing) ────────────────────────────
 .about-avatar {
-  position: relative;
-  display: inline-block;
-  width: clamp(11rem, 26vw, 16rem);
-  aspect-ratio: 1;
-  margin: 1rem auto;
-  isolation: isolate;
+    position: relative;
+    display: inline-block;
+    width: clamp(11rem, 26vw, 16rem);
+    aspect-ratio: 1;
+    margin: 1rem auto;
+    isolation: isolate;
 
-  // soft conic halo behind the avatar
-  &::before {
-    content: "";
-    position: absolute;
-    inset: -6%;
-    z-index: -1;
-    border-radius: 50%;
-    background: conic-gradient(
-      from 180deg,
-      var(--accent),
-      var(--accent-2),
-      var(--accent-3),
-      var(--accent)
-    );
-    filter: blur(18px);
-    opacity: 0.55;
-    animation: spin 14s linear infinite;
-  }
+    // soft conic halo behind the avatar
+    &::before {
+        content: "";
+        position: absolute;
+        inset: -6%;
+        z-index: -1;
+        border-radius: 50%;
+        background: conic-gradient(from 180deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+        filter: blur(18px);
+        opacity: 0.55;
+        animation: spin 14s linear infinite;
+    }
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 1px solid var(--glass-brd);
-    box-shadow: 0 18px 50px -20px color-mix(in srgb, var(--accent) 65%, transparent);
-    transition: transform 0.4s var(--ease);
-  }
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 1px solid var(--glass-brd);
+        box-shadow: 0 18px 50px -20px color-mix(in srgb, var(--accent) 65%, transparent);
+        transition: transform 0.4s var(--ease);
+    }
 
-  &:hover img { transform: translateY(-4px) scale(1.02); }
+    &:hover img {
+        transform: translateY(-4px) scale(1.02);
+    }
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about-avatar::before { animation: none; }
+    .about-avatar::before {
+        animation: none;
+    }
 }
 
 // ── Scroll-reveal animation ─────────────────────────────────────
-@media (prefers-reduced-motion: no-preference) {
-  .reveal {
+// (.shown class is applied by JS with inline styles — libsass purge breaks it)
+.fade-in {
     opacity: 0;
     transform: translateY(16px);
-    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
-  }
-  .reveal.is-visible {
-    opacity: 1;
-    transform: none;
-  }
+}
 
-  .hero__eyebrow,
-  .hero__title,
-  .hero__motto,
-  .hero__actions,
-  .hero-stats {
-    animation: rise 0.8s var(--ease) both;
-  }
-  .hero__title   { animation-delay: 0.06s; }
-  .hero__motto   { animation-delay: 0.14s; }
-  .hero__actions { animation-delay: 0.22s; }
-  .hero-stats    { animation-delay: 0.3s; }
+@media (prefers-reduced-motion: no-preference) {
+    .fade-in {
+        transition:
+            opacity 0.6s var(--ease),
+            transform 0.6s var(--ease);
+    }
+
+    .hero__eyebrow,
+    .hero__title,
+    .hero__motto,
+    .hero__actions,
+    .hero-stats {
+        animation: rise 0.8s var(--ease) both;
+    }
+    .hero__title {
+        animation-delay: 0.06s;
+    }
+    .hero__motto {
+        animation-delay: 0.14s;
+    }
+    .hero__actions {
+        animation-delay: 0.22s;
+    }
+    .hero-stats {
+        animation-delay: 0.3s;
+    }
 }
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: none; }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
 }
 
-// ── View Transitions: smooth cross-page fade ────────────────────
-@media (prefers-reduced-motion: no-preference) {
-  @view-transition {
-    navigation: auto;
-  }
-
-  ::view-transition-old(root) {
-    animation: vt-fade-out 0.28s var(--ease) both;
-  }
-  ::view-transition-new(root) {
-    animation: vt-fade-in 0.32s var(--ease) both;
-  }
-}
-
-@keyframes vt-fade-out {
-  to { opacity: 0; transform: translateY(-8px); }
-}
-@keyframes vt-fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-}
+// View Transitions live as raw CSS in custom-head.html — the deprecated
+// libsass transpiler mis-parses the @view-transition at-rule.

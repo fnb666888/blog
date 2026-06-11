@@ -13,30 +13,7 @@
     ]
   },
   "permissions": {
-    "allow": [
-      "Read",
-      "Edit",
-      "Write",
-      "Bash(hugo:*)",
-      "Bash(npm:*)",
-      "Bash(npx:*)",
-      "Bash(date:*)",
-      "Bash(find:*)",
-      "Bash(du:*)",
-      "Bash(ls:*)",
-      "Bash(cat:*)",
-      "Bash(head:*)",
-      "Bash(tail:*)",
-      "Bash(grep:*)",
-      "Bash(mkdir:*)",
-      "Bash(cp:*)",
-      "Bash(mv:*)"
-    ],
-    "deny": [
-      "Bash(rm:*)",
-      "Bash(rmdir:*)",
-      "Bash(del:*)",
-      "Bash(rd:*)"
-    ]
+    "allow": ["Read", "Edit", "Write", "Bash(hugo:*)", "Bash(npm:*)", "Bash(npx:*)", "Bash(date:*)", "Bash(find:*)", "Bash(du:*)", "Bash(ls:*)", "Bash(cat:*)", "Bash(head:*)", "Bash(tail:*)", "Bash(grep:*)", "Bash(mkdir:*)", "Bash(cp:*)", "Bash(mv:*)"],
+    "deny": ["Bash(rm:*)", "Bash(rmdir:*)", "Bash(del:*)", "Bash(rd:*)"]
   }
 }

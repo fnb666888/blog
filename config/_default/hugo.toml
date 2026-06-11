@@ -64,14 +64,11 @@ copyRight = "Copyright (c) 2026 Fengnb"
     maxAge = -1 # "30m"
 
 [taxonomies]
-  contributor = "contributors"
   category = "categories"
   tag = "tags"
 
 [permalinks]
   blog = "/blog/:slug/"
-  docs = "/docs/:sections[1:]/:slug/"
-# docs = "/docs/1.0/:sections[1:]/:slug/"
 
 [minify.tdewolff.html]
   keepComments = true # If set to false, build signatures are removed

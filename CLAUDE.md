@@ -40,16 +40,17 @@ blog/
 
 ## 常用命令
 
-| 命令 | 说明 |
-|------|------|
-| `npm run dev` | 启动 Hugo 开发服务器（端口 1313） |
-| `npm run build` | 构建生产版本（压缩、GC） |
-| `npm run format` | 使用 Prettier 格式化所有文件 |
-| `npm run preview` | 预览构建后的网站 |
+| 命令              | 说明                              |
+| ----------------- | --------------------------------- |
+| `npm run dev`     | 启动 Hugo 开发服务器（端口 1313） |
+| `npm run build`   | 构建生产版本（压缩、GC）          |
+| `npm run format`  | 使用 Prettier 格式化所有文件      |
+| `npm run preview` | 预览构建后的网站                  |
 
 ## 博客文章规范
 
 ### 文件位置
+
 - 每篇文章是独立目录：`content/blog/{slug}/index.md`
 - slug 使用小写英文、数字和连字符（如 `hugo-setup-guide`）
 
@@ -57,18 +58,18 @@ blog/
 
 ```yaml
 ---
-title: "文章标题"              # 必填，不超过 60 字符
-description: "文章描述"        # 必填，不超过 160 字符
-summary: "文章摘要"            # 必填，用于列表展示
-date: 2026-06-10T10:00:00+08:00  # 必填，ISO 8601 格式
-lastmod: 2026-06-10T10:00:00+08:00  # 最后修改时间
-draft: true                    # 草稿状态，发布前改为 false
-weight: 50                     # 排序权重
-categories: [技术]             # 分类
-tags: [Hugo, 教程]             # 标签
-contributors: []               # 贡献者
-pinned: false                  # 是否置顶
-homepage: false                # 是否在首页显示
+title: "文章标题" # 必填，不超过 60 字符
+description: "文章描述" # 必填，不超过 160 字符
+summary: "文章摘要" # 必填，用于列表展示
+date: 2026-06-10T10:00:00+08:00 # 必填，ISO 8601 格式
+lastmod: 2026-06-10T10:00:00+08:00 # 最后修改时间
+draft: true # 草稿状态，发布前改为 false
+weight: 50 # 排序权重
+categories: [技术] # 分类
+tags: [Hugo, 教程] # 标签
+contributors: [] # 贡献者
+pinned: false # 是否置顶
+homepage: false # 是否在首页显示
 ---
 ```
 

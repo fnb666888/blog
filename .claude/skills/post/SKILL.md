@@ -61,12 +61,12 @@ date -u +"%Y-%m-%dT%H:%M:%S+00:00"
 title: "{标题}"
 description: "{描述}"
 summary: "{描述的前 150 个字符}"
-date: {当前时间 ISO 格式}
-lastmod: {当前时间 ISO 格式}
+date: { 当前时间 ISO 格式 }
+lastmod: { 当前时间 ISO 格式 }
 draft: false
 weight: 50
-categories: [{分类}]
-tags: [{标签}]
+categories: [{ 分类 }]
+tags: [{ 标签 }]
 contributors: []
 pinned: false
 homepage: false
@@ -77,8 +77,7 @@ params:
     canonical: ""
     robots: ""
 ---
-
-{用户提供的正文内容}
+{ 用户提供的正文内容 }
 ```
 
 ### 第 5 步：确认结果

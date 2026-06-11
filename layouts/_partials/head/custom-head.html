@@ -7,3 +7,31 @@
 />
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+
+<!-- View Transitions: smooth cross-page fade (raw CSS — libsass can't parse @view-transition) -->
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+      navigation: auto;
+    }
+    ::view-transition-old(root) {
+      animation: vt-fade-out 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    ::view-transition-new(root) {
+      animation: vt-fade-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    @keyframes vt-fade-out {
+      to {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+    }
+    @keyframes vt-fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+    }
+  }
+</style>
+

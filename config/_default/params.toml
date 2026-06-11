@@ -1,6 +1,6 @@
 # Hugo
-title = "朱墨"
-description = "一个关于技术、写作与思考的个人博客 —— 以墨为底，以朱为记。"
+title = "Fengnb"
+description = "Fengnb 的个人博客 —— 向外求，十年如一日；向内求，日日如新生。"
 images = ["cover.png"]
 
 # mainSections
@@ -11,7 +11,7 @@ math = false # false (default) or true
 mathEngine = "KaTeX" # "KaTeX" (default) or "MathJax"
 
 [social]
-  twitter = "getdoks"
+  twitter = ""
 
 # Doks (@thulite/doks-core)
 [doks]
@@ -65,8 +65,8 @@ mathEngine = "KaTeX" # "KaTeX" (default) or "MathJax"
 
   # UX
   headerBar = false # true (default) or false
-  backgroundDots = true # true (default) or false
-  aiButtons = true # true (default) or false
+  backgroundDots = false # true (default) or false
+  aiButtons = false # true (default) or false
 
   # Homepage
   sectionFooter = false # false (default) or true
@@ -80,7 +80,7 @@ mathEngine = "KaTeX" # "KaTeX" (default) or "MathJax"
   editPage = false # false (default) or true
   lastMod = false # false (default) or true
   repoHost = "GitHub" # GitHub (default), Gitea, GitLab, Bitbucket, or BitbucketServer
-  docsRepo = "https://github.com/h-enk/doks"
+  docsRepo = "https://github.com/fnb666888/blog"
   docsRepoBranch = "main" # main (default), master, or <branch name>
   docsRepoSubPath = "" # "" (none, default) or <sub path>
 
@@ -135,10 +135,10 @@ mathEngine = "KaTeX" # "KaTeX" (default) or "MathJax"
     icon = "favicon.png" # favicon.png (default)
     svgIcon = "favicon.svg" # favicon.svg (default)
   [seo.schemas]
-    type = "Organization" # Organization (default) or Person
+    type = "Person" # Organization (default) or Person
     logo = "favicon-512x512.png" # Logo of Organization — favicon-512x512.png (default)
-    name = "Thulite" # Name of Organization or Person
-    sameAs = [] # E.g. ["https://github.com/thuliteio/thulite", "https://fosstodon.org/@thulite"]
+    name = "Fengnb" # Name of Organization or Person
+    sameAs = ["https://github.com/fnb666888/blog"] # E.g. ["https://github.com/thuliteio/thulite", "https://fosstodon.org/@thulite"]
     images = ["cover.png"] # ["cover.png"] (default)
     article = [] # Article sections
     newsArticle = [] # NewsArticle sections

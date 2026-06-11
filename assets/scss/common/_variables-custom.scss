@@ -1,93 +1,100 @@
-// ░░░ 朱墨 — Ink & Vermilion ░░░
-// Editorial literary-tech theme. Warm paper / deep ink, single vermilion accent.
-// This file loads BEFORE Bootstrap variables, so these override the defaults.
+// ───────────────────────────────────────────────────────────────
+//  Fengnb — tech-modern personal blog
+//  Loaded BEFORE Bootstrap variables, so these override the defaults.
+//  Blue-anchored, with glass surfaces, glow and gradient accents.
+// ───────────────────────────────────────────────────────────────
 
-// ── Brand palette ───────────────────────────────────────────────
-$ink-vermilion:    hsl(8, 74%, 52%);   // 朱砂 — seal-ink red, the one accent
-$ink-vermilion-dk: hsl(8, 70%, 47%);
-$ink-cinnabar:     hsl(18, 78%, 56%);  // warmer secondary
-$ink-gold:         hsl(38, 56%, 50%);  // restrained metallic
+// ── Accent (blue, with a cyan companion for gradients) ──────────
+$accent:     hsl(212, 84%, 50%);   // electric blue — links & focus
+$accent-dk:  hsl(212, 88%, 42%);
+$accent-2:   hsl(190, 90%, 50%);   // cyan — gradient partner
+$accent-3:   hsl(232, 84%, 64%);   // indigo — gradient partner
 
-// Light "paper" surfaces
-$paper:            hsl(40, 36%, 97%);  // warm rice paper
-$paper-sunk:       hsl(38, 30%, 94%);
-$ink-900:          hsl(220, 18%, 14%); // near-black ink for text
-$ink-700:          hsl(220, 12%, 30%);
-$ink-500:          hsl(220, 8%, 46%);
+// ── Neutral scale ───────────────────────────────────────────────
+$ink-900: hsl(220, 16%, 12%);   // primary text
+$ink-700: hsl(220, 10%, 28%);
+$ink-500: hsl(220, 8%, 46%);    // muted / meta
+$ink-300: hsl(220, 12%, 80%);
+$paper:   hsl(0, 0%, 100%);     // clean white
+$paper-2: hsl(220, 20%, 98%);   // faint sunk surface
 
 // ── Bootstrap theme color overrides ─────────────────────────────
-$primary: $ink-vermilion;
-$info:    $ink-vermilion;
-$red:     $ink-vermilion;
-$yellow:  $ink-gold;
+$primary: $accent;
+$info:    $accent;
 
 $enable-negative-margins: true;
 
 // Surfaces
-$body-bg:              $paper;
-$body-overlay:         hsl(40, 30%, 99%);
+$body-bg:      $paper;
+$body-overlay: $paper-2;
 
 // Text + links
-$body-color:           $ink-900;
-$link-decoration:      none;
+$body-color:            $ink-900;
+$link-decoration:       none;
 $link-hover-decoration: none;
-$link-color:           $ink-vermilion;
-$link-hover-color:     $ink-vermilion-dk;
+$link-color:            $accent;
+$link-hover-color:      $accent-dk;
 
-// ── Typography ──────────────────────────────────────────────────
-// Body: literary serif + CJK serif fallback for clean Chinese rendering
-$font-family-serif-cjk:
-  "Noto Serif SC",
-  "Songti SC",
-  "SimSun",
-  "Source Han Serif SC",
-  serif;
+// ── Typography — clean modern sans, with CJK sans fallback ───────
+$font-family-sans-cjk:
+  "Noto Sans SC",
+  "PingFang SC",
+  "Microsoft YaHei",
+  "Source Han Sans SC",
+  sans-serif;
 
 $font-family-sans-serif:
-  "Newsreader",
-  "Georgia",
-  #{$font-family-serif-cjk},
+  "Inter",
   -apple-system,
+  BlinkMacSystemFont,
   "Segoe UI",
+  #{$font-family-sans-cjk},
+  "Helvetica Neue",
+  Arial,
   sans-serif,
   "Apple Color Emoji",
   "Segoe UI Emoji";
 
-// Expressive display face for headings
-$headings-font-family:
-  "Fraunces",
-  #{$font-family-serif-cjk},
-  Georgia,
-  serif;
+$headings-font-family: $font-family-sans-serif;
 
-$font-size-base:  1.0625rem;          // slightly larger for prose comfort
-$font-size-md:    $font-size-base * 1.125;
-$font-size-xl:    $font-size-base * 1.45;
+$font-family-monospace:
+  "JetBrains Mono",
+  "SFMono-Regular",
+  "SF Mono",
+  Menlo,
+  Consolas,
+  "Liberation Mono",
+  #{$font-family-sans-cjk},
+  monospace;
 
-$headings-font-weight: 600;
-$headings-line-height: 1.18;
-$line-height-base:     1.72;          // airy editorial leading
+$font-size-base: 1rem;                 // 16px — calm, readable
+$font-size-md:   $font-size-base * 1.125;
+$font-size-xl:   $font-size-base * 1.35;
+
+$headings-font-weight: 650;
+$headings-line-height: 1.25;
+$line-height-base:     1.7;
 $lead-font-weight:     400;
 
 $container-max-widths: (
   sm: 540px,
   md: 720px,
-  lg: 960px,
-  xl: 1180px,
-  xxl: 1280px
+  lg: 880px,
+  xl: 1040px,
+  xxl: 1080px
 );
 
 @include _assert-ascending($container-max-widths, "$container-max-widths");
 
 $grid-columns: 16;
-$grid-gutter-width: 3rem;
+$grid-gutter-width: 2.5rem;
 
 // Components
 $border-radius:    0.5rem;
 $border-radius-sm: 0.35rem;
-$border-radius-lg: 0.85rem;
+$border-radius-lg: 0.75rem;
 
-$card-border-color: hsl(38, 24%, 88%);
+$card-border-color: hsl(220, 14%, 91%);
 $card-border-width: 1px;
 $card-cap-bg:       transparent;
 
@@ -95,7 +102,6 @@ $input-btn-focus-width: 0;
 $input-btn-focus-box-shadow: none;
 
 $gray-200: #e9ecef;
-
 $spacer: 1rem;
 
 $alert-padding-x:     $spacer * 1.5;
@@ -103,21 +109,21 @@ $alert-margin-bottom: 0;
 $alert-border-radius: 0;
 $alert-border-width:  0;
 
-$offcanvas-horizontal-width: 332px;
+$offcanvas-horizontal-width: 320px;
 
-// ── Dark "ink" color mode ───────────────────────────────────────
-$body-bg-dark:        hsl(222, 24%, 8%);   // deep midnight ink
-$body-overlay-dark:   hsl(222, 20%, 12%);
-$border-dark:         hsl(222, 16%, 18%);
-$light-bg-subtle-dark:    hsl(222, 20%, 12%);
-$light-border-subtle-dark: hsl(222, 16%, 20%);
-$body-color-dark:     hsl(40, 14%, 80%);   // warm paper-tinted text on ink
-$headings-color-dark: hsl(40, 30%, 94%);
-$dots-dark:           hsl(222, 12%, 26%);
+// ── Dark mode (the showcase) ────────────────────────────────────
+$body-bg-dark:             hsl(222, 28%, 7%);    // deep blue-black
+$body-overlay-dark:        hsl(222, 24%, 10%);
+$border-dark:              hsl(220, 16%, 20%);
+$light-bg-subtle-dark:     hsl(222, 22%, 11%);
+$light-border-subtle-dark: hsl(220, 16%, 22%);
+$body-color-dark:          hsl(218, 14%, 80%);
+$headings-color-dark:      hsl(210, 22%, 96%);
+$dots-dark:                hsl(220, 14%, 26%);
 
-$link-color-dark:     hsl(12, 90%, 68%);   // glowing vermilion on dark
-$button-color-dark:   $link-color-dark;
-$focus-color-dark:    lighten($link-color-dark, 4%);
+$link-color-dark:    hsl(204, 96%, 66%);
+$button-color-dark:  $link-color-dark;
+$focus-color-dark:   lighten($link-color-dark, 4%);
 
 $navbar-dark-color:        $body-color-dark;
 $navbar-dark-hover-color:  $link-color-dark;

@@ -1,7 +1,7 @@
 ---
 title: "AI 对话记录 — 2026年6月11日"
-description: "在 Hugo 中创建自定义短代码需要在 layouts/shortcodes/ 目录下创建 .html 文件。"
-summary: "在 Hugo 中创建自定义短代码需要在 layouts/shortcodes/ 目录下创建 .html 文件。"
+description: "与 AI 协作时的一组问答记录：涵盖 Hugo 短代码、站内搜索、目录生成、性能优化，以及 Claude Code 插件与模型配置等。"
+summary: "与 AI 协作时的一组问答记录，涵盖 Hugo 短代码、搜索、目录、性能优化与 Claude Code 配置。"
 date: 2026-06-11T00:00:00+08:00
 lastmod: 2026-06-11T13:03:20+08:00
 draft: false

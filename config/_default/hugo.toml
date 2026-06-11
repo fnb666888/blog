@@ -1,4 +1,4 @@
-title = "朱墨"
+title = "Fengnb"
 baseurl = "http://localhost/"
 disableAliases = true
 disableHugoGeneratorInject = true
@@ -6,7 +6,7 @@ disableHugoGeneratorInject = true
 enableEmoji = true
 enableGitInfo = false
 enableRobotsTXT = true
-languageCode = "en-US"
+locale = "en-US"
 rssLimit = 10
 summarylength = 20 # 70 (default)
 
@@ -14,7 +14,7 @@ summarylength = 20 # 70 (default)
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 
-copyRight = "Copyright (c) 2020-2026 Thulite"
+copyRight = "Copyright (c) 2026 Fengnb"
 
 [build.buildStats]
   enable = true

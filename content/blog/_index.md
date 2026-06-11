@@ -1,6 +1,6 @@
 ---
 title: "Blog"
-description: "Read product updates, release highlights, and practical tips that explain what’s new, why it matters, and how to get the most value from this project."
+description: "Fengnb 的文章列表：技术笔记、阅读与思考、AI 对话记录。把走过的路、踩过的坑、想明白的事沉淀下来。"
 summary: ""
 date: 2023-09-07T16:21:44+02:00
 lastmod: 2023-09-07T16:21:44+02:00

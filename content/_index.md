@@ -1,12 +1,12 @@
 ---
-title: "朱墨"
-description: "一个关于技术、写作与思考的个人博客 —— 以墨为底，以朱为记。"
-eyebrow: "Notes in ink & vermilion"
-heroTitle: "以 <em>墨</em> 记事，<br>以 <em>朱</em> 为印。"
-lead: "记录技术探索、阅读与思考的角落。慢一点，写得久一点。"
+title: "Fengnb"
+description: "Fengnb 的个人博客 —— 向外求，十年如一日；向内求，日日如新生。收录技术笔记、阅读与日常思考，写给未来的自己。"
+eyebrow: "Fengnb 的博客"
+heroTitle: "记录，思考，<br>然后继续向前。"
+motto: "<span>向外求，<em>十年如一日</em>；</span><span>向内求，<em>日日如新生</em>。</span>"
+lead: "这里收录技术笔记、阅读与日常思考。写给未来的自己。"
 ctaText: "阅读文章"
-sealChar: "墨"
-date: 2023-09-07T16:33:54+02:00
+date: 2026-06-11T10:00:00+08:00
 lastmod: 2026-06-11T10:00:00+08:00
 draft: false
 params:

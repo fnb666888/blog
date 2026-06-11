@@ -1,0 +1,10 @@
+<footer class="footer text-muted">
+  <div class="container-{{ site.Params.doks.containerBreakpoint | default "lg" }}">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-xl-8 text-center py-2">
+        {{ with site.Params.footer }}<p class="mb-1">{{ . | safeHTML }}</p>{{ end }}
+        <p class="mb-0 small">© {{ now.Format "2006" }} Fengnb</p>
+      </div>
+    </div>
+  </div>
+</footer>

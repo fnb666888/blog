@@ -56,7 +56,11 @@ const purgecss = purgeCSSPlugin({
         'not-content',
         'copy',
         'btn-copy',
-        'read-progress' // custom.js dynamically creates this element
+        'read-progress', // custom.js dynamically creates this element
+        'collapse', // Bootstrap collapse
+        'navbar-collapse', // Bootstrap navbar collapse
+        'navbar-toggler', // Bootstrap navbar toggler button
+        'collapsing' // Bootstrap collapse animation state
     ]
 });
 

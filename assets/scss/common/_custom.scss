@@ -124,18 +124,22 @@ h3,
 
 // Mobile menu collapse
 .navbar-collapse {
+    // Only apply custom styles when the menu is shown (Bootstrap adds .show class)
     @media (max-width: 991.98px) {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--glass-bg);
-        backdrop-filter: saturate(1.4) blur(14px);
-        -webkit-backdrop-filter: saturate(1.4) blur(14px);
-        border-bottom: 1px solid var(--glass-brd);
-        box-shadow: 0 8px 24px -12px color-mix(in srgb, var(--bs-body-color) 15%, transparent);
-        padding: 1rem 0;
-        margin-top: 1px;
+        &.show {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--glass-bg);
+            backdrop-filter: saturate(1.4) blur(14px);
+            -webkit-backdrop-filter: saturate(1.4) blur(14px);
+            border-bottom: 1px solid var(--glass-brd);
+            box-shadow: 0 8px 24px -12px color-mix(in srgb, var(--bs-body-color) 15%, transparent);
+            padding: 1rem 0;
+            margin-top: 1px;
+            z-index: 1000;
+        }
 
         .navbar-nav {
             padding: 0 1rem;

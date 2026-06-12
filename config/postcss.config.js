@@ -40,6 +40,12 @@ const purgecss = purgeCSSPlugin({
         'container-lg',
         'container-fluid',
         'offcanvas-backdrop',
+        'offcanvas', // Bootstrap offcanvas base class
+        'offcanvas-body',
+        'offcanvas-end',
+        'offcanvas-header',
+        'offcanvas-title',
+        'offcanvas-start', // in case used elsewhere
         'figcaption',
         'dt',
         'dd',
@@ -49,7 +55,8 @@ const purgecss = purgeCSSPlugin({
         'page-link',
         'not-content',
         'copy',
-        'btn-copy'
+        'btn-copy',
+        'read-progress' // custom.js dynamically creates this element
     ]
 });
 

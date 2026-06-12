@@ -1,0 +1,72 @@
+{{ if site.Params.doks.navbarSticky -}}
+<div class="sticky-top">
+{{ end -}}
+
+<header class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand me-auto me-lg-3" href="{{ relLangURL "" }}">{{ .Site.Title }}</a>
+
+    <!-- Direct navigation links (visible on all screen sizes) -->
+    <ul class="navbar-nav flex-row flex-grow-1 d-flex">
+      <li class="nav-item">
+        <a class="nav-link" href="/blog/">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about/">About</a>
+      </li>
+    </ul>
+
+    <!-- FlexSearch -->
+    {{ partial "main/showFlexSearch" . }}
+    {{ $showFlexSearch := .Scratch.Get "showFlexSearch" -}}
+    {{ if $showFlexSearch -}}
+    <button type="button" id="searchToggleMobile" class="btn btn-link nav-link mx-2 d-lg-none" aria-label="Search website">
+      <svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="10" cy="10" r="7"/>
+        <line x1="21" y1="21" x2="15" y2="15"/>
+      </svg>
+    </button>
+    <button type="button" id="searchToggleDesktop" class="btn btn-link nav-link p-2 d-none d-lg-block" aria-label="Search website">
+      <svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="10" cy="10" r="7"/>
+        <line x1="21" y1="21" x2="15" y2="15"/>
+      </svg>
+    </button>
+    {{ end -}}
+
+    <!-- Color mode toggler -->
+    {{ if and (eq site.Params.doks.colorMode "auto") site.Params.doks.colorModeToggler -}}
+    <button id="buttonColorMode" class="btn btn-link nav-link p-0 ms-lg-2 me-lg-1" type="button" aria-label="Toggle theme">
+      <svg data-bs-theme-value="dark" class="icon icon-tabler icon-tabler-moon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/>
+      </svg>
+      <svg data-bs-theme-value="light" class="icon icon-tabler icon-tabler-sun" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0m-5 0h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"/>
+      </svg>
+    </button>
+    {{ end -}}
+
+    <!-- Social menu -->
+    {{ if .Site.Menus.social -}}
+    <ul id="socialMenu" class="nav flex-row order-lg-4">
+      {{ range .Site.Menus.social -}}
+        <li class="nav-item">
+          <a class="nav-link social-link" href="{{ .URL | relURL }}">{{ .Pre | safeHTML }}<small class="ms-2 visually-hidden">{{ .Name | safeHTML }}</small></a>
+        </li>
+      {{ end -}}
+    </ul>
+    {{ end -}}
+  </div>
+</header>
+
+{{ if site.Params.doks.navbarSticky -}}
+</div>
+{{ end -}}
+
+{{ if site.Params.doks.flexSearch -}}
+{{ partial "header/search-modal" . }}
+{{ end -}}

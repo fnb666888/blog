@@ -19,6 +19,17 @@ copyRight = "Copyright (c) 2026 Fengnb"
 [build.buildStats]
   enable = true
 
+[build]
+  writeStats = false
+
+# 忽略这些文件的变化，避免无限重建
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.112.0"
+
+ignoreFiles = ["hugo_stats\\.json$"]
+
 [outputs]
   home = ["html", "rss", "sitemap", "searchIndex", "llms"]
   page = ["html", "markdown"]

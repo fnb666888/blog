@@ -50,9 +50,9 @@
           <span class="section-rule__count">{{ len . }} 篇</span>
         </div>
         <div class="post-grid">
-          {{ range $i, $p := first 7 . }}
-            <div class="post-grid__item{{ if eq $i 0 }} post-grid__item--lead{{ end }} fade-in">
-              <article class="post-card{{ if eq $i 0 }} post-card--lead{{ end }}" data-card-glow>
+          {{ range $i, $p := first 3 . }}
+            <div class="post-grid__item post-grid__item--lead fade-in">
+              <article class="post-card post-card--lead" data-card-glow>
                 <h2 class="post-card__title"><a href="{{ $p.RelPermalink }}">{{ $p.Params.title }}</a></h2>
                 {{ with $p.Params.summary }}<p class="post-card__summary">{{ . | safeHTML }}</p>{{ end }}
                 <div class="post-card__meta">

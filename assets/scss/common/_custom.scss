@@ -106,13 +106,60 @@ h3,
     }
 }
 
-// 移动端导航对齐修复
-@media (max-width: 991.98px) {
+// Hamburger menu button styling
+.navbar-toggler {
+    border: none;
+    padding: 0.5rem;
+    color: var(--bs-body-color);
+    transition: color 0.2s var(--ease);
+
+    &:hover {
+        color: var(--accent);
+    }
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+// Mobile menu collapse
+.navbar-collapse {
+    @media (max-width: 991.98px) {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--glass-bg);
+        backdrop-filter: saturate(1.4) blur(14px);
+        -webkit-backdrop-filter: saturate(1.4) blur(14px);
+        border-bottom: 1px solid var(--glass-brd);
+        box-shadow: 0 8px 24px -12px color-mix(in srgb, var(--bs-body-color) 15%, transparent);
+        padding: 1rem 0;
+        margin-top: 1px;
+
+        .navbar-nav {
+            padding: 0 1rem;
+            gap: 0.5rem;
+
+            .nav-link {
+                padding: 0.75rem 1rem;
+                border-radius: var(--bs-border-radius);
+                transition: background-color 0.2s var(--ease);
+
+                &:hover {
+                    background: color-mix(in srgb, var(--accent) 8%, transparent);
+                }
+            }
+        }
+    }
+}
+
+// 移动端导航对齐修复 - 保持桌面端导航横向排列
+@media (min-width: 992px) {
     .navbar-nav {
-        gap: 1.5rem;
+        flex-direction: row;
+        gap: 1rem;
         align-items: center;
-        margin-top: -0.2rem;
-        margin-left: 1rem;
     }
 }
 
@@ -406,6 +453,12 @@ h3,
 
     // first card spans full width — the "featured" slot
     &__item--lead {
+        grid-column: 1 / -1;
+    }
+
+    // last non-lead item: span full if it would be alone in its row
+    // This handles: 2 posts (even), 3 posts (odd), 4 posts (even), etc.
+    &__item:not(&__item--lead):last-child:nth-child(2n) {
         grid-column: 1 / -1;
     }
 }

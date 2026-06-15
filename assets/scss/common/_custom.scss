@@ -124,13 +124,28 @@ h3,
 
 // Mobile menu collapse
 .navbar-collapse {
-    // Only apply custom styles when the menu is shown (Bootstrap adds .show class)
     @media (max-width: 991.98px) {
+        // 始终绝对定位，不占用文档流
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+
+        // 默认状态：隐藏且向上偏移
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: max-height 0.35s var(--ease),
+                    opacity 0.25s var(--ease),
+                    transform 0.35s var(--ease);
+
+        // 展开状态
         &.show {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
+            max-height: 500px; // 足够大的高度
+            opacity: 1;
+            transform: translateY(0);
             background: var(--glass-bg);
             backdrop-filter: saturate(1.4) blur(14px);
             -webkit-backdrop-filter: saturate(1.4) blur(14px);
@@ -138,7 +153,6 @@ h3,
             box-shadow: 0 8px 24px -12px color-mix(in srgb, var(--bs-body-color) 15%, transparent);
             padding: 1rem 0;
             margin-top: 1px;
-            z-index: 1000;
         }
 
         .navbar-nav {

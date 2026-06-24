@@ -7,7 +7,7 @@ images = ["cover.png"]
 mainSections = ["blog"]
 
 # Enable mathematical rendering on every page (unless you set the `math` parameter to `false` in front matter)
-math = false # false (default) or true
+math = true # false (default) or true
 mathEngine = "KaTeX" # "KaTeX" (default) or "MathJax"
 
 [social]

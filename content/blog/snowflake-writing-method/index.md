@@ -6,8 +6,8 @@ date: 2026-06-20T17:09:52+08:00
 lastmod: 2026-06-20T17:09:52+08:00
 draft: false
 weight: 50
-categories: [生产力]
-tags: [写作, 创作方法, 小说, 雪花写作法]
+categories: [艺术]
+tags: [写作, 创作方法]
 contributors: []
 pinned: false
 homepage: false

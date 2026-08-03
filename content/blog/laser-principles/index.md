@@ -1,13 +1,13 @@
 ---
-title: "激光原理知识问答"
+title: "《激光原理》"
 description: "关于激光原理、谐振腔、高斯光束、速率方程等核心概念的AI对话记录，涵盖从基础理论到脉冲技术的完整知识体系"
 summary: "关于激光原理、谐振腔、高斯光束、速率方程等核心概念的AI对话记录，涵盖从基础理论到脉冲技术的完整知识体系"
 date: 2026-06-24T22:10:51+08:00
 lastmod: 2026-06-24T22:10:51+08:00
 draft: false
 weight: 50
-categories: [AI对话]
-tags: [Claude, AI, 日记, 激光, 物理]
+categories: [物理]
+tags: [激光, 物理]
 contributors: []
 pinned: false
 homepage: false

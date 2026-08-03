@@ -1,13 +1,13 @@
 ---
-title: "Claude Code 插件市场完整目录（203个插件）"
+title: "Claude Code 插件市场（203个插件）"
 description: "Claude Code 插件市场完整目录，涵盖 203 个插件的功能说明和分类汇总，包括安全、开发、数据库、生产力工具、监控、部署、设计等类别"
 summary: "Claude Code 插件市场完整目录，涵盖 203 个插件的功能说明和分类汇总，包括安全、开发、数据库、生产力工具、监控、部署、设计等类别"
 date: 2026-06-26T22:44:01+08:00
 lastmod: 2026-06-26T22:44:01+08:00
 draft: false
 weight: 50
-categories: ["技术"]
-tags: ["Claude", "Codex", "Plugins", "AI", "市场目录"]
+categories: ["AI"]
+tags: ["Claude", "Plugins"]
 contributors: []
 pinned: false
 homepage: false

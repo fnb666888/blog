@@ -1,13 +1,13 @@
 ---
-title: "光学核心知识问答"
+title: "光学"
 description: "关于光学核心概念的 AI 问答合集，涵盖干涉、衍射、偏振、散射、色散、激光器等多个主题，系统梳理光学基础知识。"
 summary: "关于光学核心概念的 AI 问答合集，涵盖干涉、衍射、偏振、散射、色散、激光器等多个主题，系统梳理光学基础知识。"
 date: 2026-06-24T22:10:40+08:00
 lastmod: 2026-06-24T22:10:40+08:00
 draft: false
 weight: 50
-categories: ["AI对话"]
-tags: ["Claude", "AI", "光学", "物理", "学习笔记"]
+categories: [物理]
+tags: ["光学", "物理"]
 contributors: []
 pinned: false
 homepage: false

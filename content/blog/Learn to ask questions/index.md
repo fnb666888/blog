@@ -7,7 +7,7 @@ lastmod: 2026-06-12T17:28:04+08:00
 draft: false
 weight: 50
 categories: ["阅读"]
-tags: ["摘抄", "书籍", "学会提问", "批判性思维"]
+tags: ["摘抄", "书籍", "批判性思维"]
 contributors: []
 pinned: false
 homepage: false

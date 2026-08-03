@@ -1,13 +1,13 @@
 ---
-title: "计算机是怎么工作的"
+title: "《计算机是怎么工作的》"
 description: "深入浅出地介绍计算机工作原理，涵盖CPU架构、内存系统、操作系统、网络协议、Web技术等核心概念。"
 summary: "深入浅出地介绍计算机工作原理，涵盖CPU架构、内存系统、操作系统、网络协议等核心概念。"
 date: 2026-06-20T17:22:39+08:00
 lastmod: 2026-06-20T17:22:39+08:00
 draft: false
 weight: 50
-categories: [技术]
-tags: [计算机原理, CPU, 操作系统, 网络, 学习笔记]
+categories: [硬件]
+tags: [计算机原理, CPU, 操作系统, 网络]
 contributors: []
 pinned: false
 homepage: false

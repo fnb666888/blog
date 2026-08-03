@@ -7,7 +7,7 @@ lastmod: 2026-06-12T16:48:05+08:00
 draft: false
 weight: 50
 categories: ["阅读"]
-tags: ["摘抄", "书籍", "人性的弱点", "人际关系"]
+tags: ["摘抄", "书籍"]
 contributors: []
 pinned: false
 homepage: false

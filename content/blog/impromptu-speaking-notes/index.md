@@ -1,13 +1,13 @@
 ---
-title: "即兴表达学习笔记"
+title: "《即兴表达》"
 description: "关于即兴表达技巧的系统学习笔记，包含三定原则、同频思维、观点提炼、黄金三圈、汉堡原则等实用表达框架和策略"
 summary: "关于即兴表达技巧的系统学习笔记，包含三定原则、同频思维、观点提炼、黄金三圈、汉堡原则等实用表达框架和策略"
 date: 2026-06-20T17:00:22+08:00
 lastmod: 2026-06-20T17:00:22+08:00
 draft: false
 weight: 50
-categories: [生产力]
-tags: [沟通, 表达, 演讲, 即兴表达]
+categories: [阅读]
+tags: [沟通, 演讲, 即兴表达]
 contributors: []
 pinned: false
 homepage: false

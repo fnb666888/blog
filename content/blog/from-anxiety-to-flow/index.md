@@ -7,7 +7,7 @@ lastmod: 2026-06-20T17:13:50+08:00
 draft: false
 weight: 50
 categories: [阅读]
-tags: [摘抄, 书籍, 从内耗到心流, 心流, 心理学]
+tags: [摘抄, 书籍, 心流, 心理学]
 contributors: []
 pinned: false
 homepage: false

@@ -1,13 +1,13 @@
 ---
-title: "电动力学小问题问答"
+title: "电动力学"
 description: "关于麦克斯韦方程组独立性、时谐电磁波、谐振腔、光子晶体、等离子体等电动力学及相关物理问题的问答记录"
 summary: "关于麦克斯韦方程组独立性、时谐电磁波、谐振腔、光子晶体、等离子体等电动力学及相关物理问题的问答记录"
 date: 2026-06-24T21:53:30+08:00
 lastmod: 2026-06-24T21:53:30+08:00
 draft: false
 weight: 50
-categories: ["AI对话"]
-tags: ["AI", "Kimi", "电动力学", "物理", "相对论"]
+categories: ["物理"]
+tags: ["电动力学", "物理"]
 contributors: []
 pinned: false
 homepage: false

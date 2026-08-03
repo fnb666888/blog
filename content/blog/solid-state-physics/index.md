@@ -1,13 +1,13 @@
 ---
-title: "固体物理核心概念问答"
+title: "固体物理"
 description: "关于固体物理中倒点阵、X射线衍射、晶格振动、能带理论等核心概念的AI对话记录，涵盖从晶体结构到电子输运的完整知识体系"
 summary: "关于固体物理中倒点阵、X射线衍射、晶格振动、能带理论等核心概念的AI对话记录，涵盖从晶体结构到电子输运的完整知识体系"
 date: 2026-06-24T22:13:47+08:00
 lastmod: 2026-06-24T22:13:47+08:00
 draft: false
 weight: 50
-categories: [AI对话]
-tags: [Claude, AI, 日记, 固体物理, 物理]
+categories: [物理]
+tags: [固体物理, 物理]
 contributors: []
 pinned: false
 homepage: false

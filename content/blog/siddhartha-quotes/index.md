@@ -7,7 +7,7 @@ lastmod: 2026-06-20T17:26:32+08:00
 draft: false
 weight: 50
 categories: [阅读]
-tags: [摘抄, 书籍, 悉达多, 哲学, 黑塞]
+tags: [摘抄, 书籍, 哲学, 黑塞]
 contributors: []
 pinned: false
 homepage: false

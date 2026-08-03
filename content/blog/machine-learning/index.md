@@ -6,8 +6,8 @@ date: 2026-07-23
 lastmod: 2026-07-23
 draft: false
 weight: 50
-categories: ["知识"]
-tags: [ "AI"]
+categories: ["AI"]
+tags: [ "AI, 机器学习"]
 contributors: []
 pinned: false
 homepage: false

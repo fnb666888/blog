@@ -1,13 +1,13 @@
 ---
-title: "中医气功学笔记"
+title: "中医气功学"
 description: "关于中医气功学的系统学习笔记，涵盖三调理论、具象思维、意守与存想、入静方法、六字诀等核心修炼技法。"
 summary: "关于中医气功学的系统学习笔记，涵盖三调理论、具象思维、意守与存想、入静方法等核心修炼技法。"
 date: 2026-06-20T17:28:02+08:00
 lastmod: 2026-06-20T17:28:02+08:00
 draft: false
 weight: 50
-categories: [健康]
-tags: [中医, 气功, 养生, 学习笔记]
+categories: [艺术]
+tags: [中医, 气功, 养生]
 contributors: []
 pinned: false
 homepage: false

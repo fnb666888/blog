@@ -7,7 +7,7 @@ lastmod: 2026-06-20T16:54:15+08:00
 draft: false
 weight: 50
 categories: [阅读]
-tags: [摘抄, 书籍, 被讨厌的勇气, 心理学, 阿德勒]
+tags: [摘抄, 书籍, 心理学, 阿德勒]
 contributors: []
 pinned: false
 homepage: false

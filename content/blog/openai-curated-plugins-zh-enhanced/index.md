@@ -1,13 +1,13 @@
 ---
-title: "OpenAI Curated Plugins 中文增强版"
+title: "OpenAI Curated Plugins"
 description: "OpenAI 官方 Curated Plugins 中文增强版目录，涵盖 148 个插件的用途说明、典型场景和安装建议，助力 Codex 高效工作"
 summary: "OpenAI 官方 Curated Plugins 中文增强版目录，涵盖 148 个插件的用途说明、典型场景和安装建议"
 date: 2026-06-26T22:39:50+08:00
 lastmod: 2026-06-26T22:39:50+08:00
 draft: false
 weight: 50
-categories: ["技术"]
-tags: ["OpenAI", "Plugins", "Codex", "AI", "参考"]
+categories: ["AI"]
+tags: ["OpenAI", "Plugins", "Codex"]
 contributors: []
 pinned: false
 homepage: false

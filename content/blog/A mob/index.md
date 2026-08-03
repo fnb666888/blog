@@ -7,7 +7,7 @@ lastmod: 2026-06-12T17:13:12+08:00
 draft: false
 weight: 50
 categories: ["阅读"]
-tags: ["摘抄", "书籍", "乌合之众", "群体心理"]
+tags: ["摘抄", "书籍", "群体心理"]
 contributors: []
 pinned: false
 homepage: false

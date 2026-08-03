@@ -7,7 +7,7 @@ lastmod: 2026-06-20T17:18:44+08:00
 draft: false
 weight: 50
 categories: [阅读]
-tags: [摘抄, 书籍, 高效能人士的七个习惯, 个人成长, 时间管理]
+tags: [摘抄, 书籍, 个人成长]
 contributors: []
 pinned: false
 homepage: false

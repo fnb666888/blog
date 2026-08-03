@@ -1,13 +1,13 @@
 ---
-title: "理论力学核心概念问答"
+title: "理论力学"
 description: "关于保守力、质心运动、转动参考系等理论力学核心概念的对话记录，涵盖了从经典力学基础到分析力学的关键知识点"
 summary: "关于保守力、质心运动、转动参考系等理论力学核心概念的对话记录，涵盖了从经典力学基础到分析力学的关键知识点"
 date: 2026-06-24T21:49:18+08:00
 lastmod: 2026-06-24T21:49:18+08:00
 draft: false
 weight: 50
-categories: ["AI对话"]
-tags: ["AI", "Kimi", "理论力学", "物理", "日记"]
+categories: ["物理"]
+tags: ["理论力学", "物理"]
 contributors: []
 pinned: false
 homepage: false

@@ -6,8 +6,8 @@ date: 2026-06-20T17:25:00+08:00
 lastmod: 2026-06-20T17:25:00+08:00
 draft: false
 weight: 50
-categories: [摄影]
-tags: [摄影, 构图, 曝光, 学习笔记]
+categories: [艺术]
+tags: [摄影, 构图, 曝光]
 contributors: []
 pinned: false
 homepage: false

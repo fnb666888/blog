@@ -64,7 +64,7 @@ const purgecss = purgeCSSPlugin({
             'collapsing' // Bootstrap collapse animation state
         ],
         // 使用正则表达式匹配所有 Bootstrap 动态类
-        deep: [/^navbar-/, /^collapse/, /^modal-/, /^offcanvas-/],
+        deep: [/^navbar-/, /^collapse/, /^modal-/, /^offcanvas-/, /^pagination-/],
         greedy: [/^btn-/, /^nav-/, /^dropdown-/, /^fade/, /^show/, /^hide/]
     }
 });

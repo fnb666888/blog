@@ -18,9 +18,9 @@ copyRight = "Copyright (c) 2026 Fengnb"
 
 [build.buildStats]
   enable = true
-
-[build]
-  writeStats = false
+  disableTags = false
+  disableClasses = false
+  disableIDs = false
 
 # 忽略这些文件的变化，避免无限重建
 [module]

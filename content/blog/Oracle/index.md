@@ -6,7 +6,7 @@ date: 2026-08-03
 lastmod: 2026-08-03
 draft: false
 weight: 50
-categories: ["云服务"]
+categories: ["说明文档"]
 tags: ["云服务", "硬件"]
 contributors: []
 pinned: false

@@ -6,7 +6,7 @@ date: 2026-06-20T16:50:04+08:00
 lastmod: 2026-06-20T16:50:04+08:00
 draft: false
 weight: 50
-categories: [软件]
+categories: [说明文档]
 tags: [设计模式, 面向对象, 编程思想]
 contributors: []
 pinned: false

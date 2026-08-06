@@ -65,7 +65,7 @@ date: 2026-06-10T10:00:00+08:00 # 必填，ISO 8601 格式
 lastmod: 2026-06-10T10:00:00+08:00 # 最后修改时间
 draft: true # 草稿状态，发布前改为 false
 weight: 50 # 排序权重
-categories: [技术] # 分类
+categories: [基础知识] # 分类
 tags: [Hugo, 教程] # 标签
 contributors: [] # 贡献者
 pinned: false # 是否置顶

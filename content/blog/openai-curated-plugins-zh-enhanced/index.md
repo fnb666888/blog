@@ -6,7 +6,7 @@ date: 2026-06-26T22:39:50+08:00
 lastmod: 2026-06-26T22:39:50+08:00
 draft: false
 weight: 50
-categories: ["AI"]
+categories: ["说明文档"]
 tags: ["OpenAI", "Plugins", "Codex"]
 contributors: []
 pinned: false

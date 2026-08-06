@@ -6,7 +6,7 @@ date: 2026-06-20T17:22:39+08:00
 lastmod: 2026-06-20T17:22:39+08:00
 draft: false
 weight: 50
-categories: [硬件]
+categories: [说明文档]
 tags: [计算机原理, CPU, 操作系统, 网络]
 contributors: []
 pinned: false

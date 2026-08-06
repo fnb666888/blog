@@ -6,7 +6,7 @@ date: 2026-08-04T10:01:41+08:00
 lastmod: 2026-08-04T10:01:41+08:00
 draft: false
 weight: 50
-categories: [技术]
+categories: [基础知识]
 tags: [开发, Web, 框架, 网络, 速查]
 contributors: []
 pinned: false

@@ -923,6 +923,16 @@ article {
     }
 }
 
+// Dark mode: --accent is a bright sky blue, so white text is unreadable on it.
+// Switch to dark ink for sufficient contrast on the bright accent background.
+[data-bs-theme="dark"] .pagination-link--active {
+    color: #07111f;
+
+    &:hover {
+        color: #07111f;
+    }
+}
+
 .pagination-item--prev,
 .pagination-item--next {
     .pagination-link {

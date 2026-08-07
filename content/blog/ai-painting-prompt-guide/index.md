@@ -6,7 +6,7 @@ date: 2026-08-04T10:01:41+08:00
 lastmod: 2026-08-04T10:01:41+08:00
 draft: false
 weight: 50
-categories: [基础知识]
+categories: [艺术]
 tags: [AI, 绘画, 提示词, Midjourney, Stable Diffusion]
 contributors: []
 pinned: false

@@ -2,8 +2,8 @@
 title: "LIBS详细算法"
 description: "介绍LIBS全流程的不同算法"
 summary: "介绍LIBS全流程的不同算法"
-date: 2026-06-24T20:47:28+08:00
-lastmod: 2026-06-24T20:47:28+08:00
+date: 2026-08-08
+lastmod: 2026-08-08
 draft: false
 weight: 50
 categories: ["LIBS"]

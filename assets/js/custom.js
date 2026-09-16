@@ -2,6 +2,9 @@
 (function () {
     'use strict';
 
+    if (window.__zhumoCustomInitialized) return;
+    window.__zhumoCustomInitialized = true;
+
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // ── Scroll-reveal: fade/slide elements marked .fade-in ─────────
@@ -62,6 +65,127 @@
             { passive: true }
         );
         update();
+    }
+
+    // ── Table of contents: smooth scrolling + active section ─────
+    function initToc() {
+        const links = Array.from(
+            document.querySelectorAll('.docs-toc a[href^="#"]')
+        );
+        if (!links.length) return;
+
+        const headings = links
+            .map((link) => {
+                try {
+                    return document.getElementById(decodeURIComponent(link.getAttribute('href').slice(1)));
+                } catch (error) {
+                    return null;
+                }
+            })
+            .filter(Boolean);
+
+        if (!headings.length) return;
+
+        let activeId = '';
+        let ticking = false;
+
+        function setActive(id) {
+            if (id === activeId) return;
+            activeId = id;
+
+            links.forEach((link) => {
+                let linkId = '';
+                try {
+                    linkId = decodeURIComponent(link.getAttribute('href').slice(1));
+                } catch (error) {
+                    linkId = link.getAttribute('href').slice(1);
+                }
+                link.classList.toggle('active', linkId === id);
+            });
+        }
+
+        function update() {
+            const marker = 130;
+            let current = headings[0];
+
+            for (const heading of headings) {
+                if (heading.getBoundingClientRect().top <= marker) {
+                    current = heading;
+                }
+            }
+
+            setActive(current.id);
+            ticking = false;
+        }
+
+        window.addEventListener(
+            'scroll',
+            () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(update);
+                    ticking = true;
+                }
+            },
+            { passive: true }
+        );
+
+        update();
+    }
+
+    // ── Mobile table of contents: floating button + bottom sheet ──
+    function initMobileToc() {
+        const toggle = document.querySelector('.toc-mobile-toggle');
+        const panel = document.querySelector('.toc-mobile-panel');
+        const backdrop = document.querySelector('.toc-mobile-backdrop');
+        if (!toggle || !panel || !backdrop) return;
+
+        const closeButton = panel.querySelector('.toc-mobile-panel__close');
+
+        function setOpen(open) {
+            toggle.classList.toggle('is-active', open);
+            panel.classList.toggle('is-open', open);
+            backdrop.classList.toggle('is-open', open);
+            toggle.setAttribute('aria-expanded', String(open));
+            panel.setAttribute('aria-hidden', String(!open));
+            document.body.style.overflow = open ? 'hidden' : '';
+        }
+
+        function close() {
+            if (panel.classList.contains('is-open')) {
+                setOpen(false);
+            }
+        }
+
+        toggle.addEventListener('click', () => setOpen(!panel.classList.contains('is-open')));
+        closeButton?.addEventListener('click', close);
+        backdrop.addEventListener('click', close);
+        panel.addEventListener('click', (event) => {
+            if (event.target.closest('a')) {
+                close();
+            }
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                close();
+            }
+        });
+    }
+
+    // ── Desktop table of contents: collapse/expand sidebar ────────
+    function initDesktopToc() {
+        const wrap = document.querySelector('.blog-toc-wrap');
+        const toggle = document.querySelector('.toc-desktop-toggle');
+        if (!wrap || !toggle) return;
+
+        function setCollapsed(collapsed) {
+            wrap.classList.toggle('toc-collapsed', collapsed);
+            toggle.setAttribute('aria-expanded', String(!collapsed));
+            toggle.setAttribute('aria-label', collapsed ? '展开目录' : '收起目录');
+        }
+
+        toggle.addEventListener('click', () => {
+            setCollapsed(!wrap.classList.contains('toc-collapsed'));
+        });
     }
 
     // ── Hero cursor-follow glow ─────────────────────────────────────
@@ -136,6 +260,9 @@
     function init() {
         initReveal();
         initProgress();
+        initToc();
+        initMobileToc();
+        initDesktopToc();
         initHeroGlow();
         initMagnetic();
         initCardGlow();

@@ -32,6 +32,7 @@ const purgecss = purgeCSSPlugin({
             'modal-backdrop', // search-modal.js
             'selected', // search-modal.js
             'show',
+            'is-open',
             'img-fluid',
             'blur-up',
             'lazyload',
@@ -58,6 +59,7 @@ const purgecss = purgeCSSPlugin({
             'copy',
             'btn-copy',
             'read-progress', // custom.js dynamically creates this element
+            'toc-collapsed', // custom.js toggles this class on the TOC wrapper
             'collapse', // Bootstrap collapse
             'navbar-collapse', // Bootstrap navbar collapse
             'navbar-toggler', // Bootstrap navbar toggler button

@@ -6,8 +6,8 @@ date: 2026-08-11
 lastmod: 2026-08-11
 draft: false
 weight: 50
-categories: ["互联网"]
-tags: ["1688", "电商"]
+categories: ["说明文档"]
+tags: ["1688"]
 contributors: []
 pinned: false
 homepage: false

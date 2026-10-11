@@ -1,3 +1,24 @@
+---
+title: "互联网层级"
+description: "介绍互联网层级的基础知识。"
+summary: "介绍互联网层级的基础知识"
+date: 2026-09-25
+lastmod: 2026-09-25
+draft: false
+weight: 50
+categories: [基础知识]
+tags: ["互联网"]
+contributors: []
+pinned: false
+homepage: false
+params:
+  seo:
+    title: ""
+    description: ""
+    canonical: ""
+    robots: ""
+---
+
 **互联网的分层模型：从网线到网页，每一层在干什么、用什么协议**
 
 互联网能跑起来，靠的不是某个“超级协议”，而是一套分工明确的分层体系。每层只解决一类问题，只和上下两层打交道，对等层之间用统一的格式对话。这种设计让“换掉底层技术不影响上层应用”成为可能——比如把网线换成 Wi-Fi、把 HTTP 换成 HTTP/3，其他层几乎不用改。

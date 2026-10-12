@@ -1,9 +1,9 @@
 ---
-title: "激光原理"
+title: "激光基本概念"
 description: "关于激光原理、谐振腔、高斯光束、速率方程等核心概念
 summary: "关于激光原理、谐振腔、高斯光束、速率方程等核心概念"
-date: 2026-06-24T22:10:51+08:00
-lastmod: 2026-06-24T22:10:51+08:00
+date: 2026-06-24
+lastmod: 2026-06-24
 draft: false
 weight: 50
 categories: [物理]

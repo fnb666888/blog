@@ -19,16 +19,18 @@ params:
     robots: ""
 ---
 
+### HTML：结构与语义
+
 HTML（HyperText Markup Language，超文本标记语言）是 Web 的**骨架与语义基础**。它不是编程语言，而是一种**结构化标记语言**，负责定义内容的含义、层级和关系，而非外观或行为。
 
 以下是 HTML 核心知识体系的系统梳理，注重**现代标准（HTML5+）** 与**工程实践**，而非过时用法。
 
 ---
 
-### 1. 核心理念：语义化
+#### 核心理念：语义化
 > HTML 的首要职责是**表达内容是什么**，而不是看起来像什么。
 
-#### ✅ 正确 vs ❌ 错误
+##### 正确 vs ❌ 错误
 ```html
 <!-- ❌ 无语义：仅靠样式区分 -->
 <div class="header">...</div>
@@ -41,7 +43,7 @@ HTML（HyperText Markup Language，超文本标记语言）是 Web 的**骨架�
 <article>...</article>
 ```
 
-#### 为什么重要？
+##### 为什么重要？
 - **无障碍**：屏幕阅读器依赖语义标签导航
 - **SEO**：搜索引擎理解内容结构
 - **可维护性**：代码自文档化，团队协作更高效
@@ -49,7 +51,7 @@ HTML（HyperText Markup Language，超文本标记语言）是 Web 的**骨架�
 
 ---
 
-### 2. 文档结构（Boilerplate）
+#### 文档结构（Boilerplate）
 每个 HTML 页面的最小合规结构：
 
 ```html
@@ -67,7 +69,7 @@ HTML（HyperText Markup Language，超文本标记语言）是 Web 的**骨架�
 </html>
 ```
 
-#### `<head>` 关键元素
+##### `<head>` 关键元素
 | 元素 | 作用 |
 | :--- | :--- |
 | `<meta charset>` | 字符编码（UTF-8 唯一推荐） |
@@ -80,8 +82,8 @@ HTML（HyperText Markup Language，超文本标记语言）是 Web 的**骨架�
 
 ---
 
-### 3. 语义化标签体系
-#### 🏗️ 页面级结构
+#### 语义化标签体系
+##### 页面级结构
 | 标签 | 用途 | 注意事项 |
 | :--- | :--- | :--- |
 | `<header>` | 页头/区块头部 | 可嵌套在 `<article>`/`<section>` 内 |
@@ -92,7 +94,7 @@ HTML（HyperText Markup Language，超文本标记语言）是 Web 的**骨架�
 | `<section>` | 主题性分组 | **应有标题**（h1-h6），否则用 `<div>` |
 | `<article>` | 独立可复用内容 | 博客文章、评论、产品卡片 |
 
-#### 📝 文本级语义
+##### 📝 文本级语义
 | 标签 | 含义 | 何时用 |
 | :--- | :--- | :--- |
 | `<strong>` | **重要性强调** | 语义强，视觉通常加粗 |
@@ -107,8 +109,8 @@ HTML（HyperText Markup Language，超文本标记语言）是 Web 的**骨架�
 
 ---
 
-### 4. 表单（Forms）—— 交互核心
-#### 基础结构
+#### 表单（Forms）—— 交互核心
+##### 基础结构
 ```html
 <form action="/submit" method="POST" novalidate>
   <label for="email">邮箱：</label>
@@ -125,7 +127,7 @@ HTML（HyperText Markup Language，超文本标记语言）是 Web 的**骨架�
 </form>
 ```
 
-#### 关键原则
+##### 关键原则
 - **永远用 `<label for="id">`**：点击标签聚焦输入框，无障碍必需
 - **`type` 要精确**：`email` / `tel` / `url` / `number` / `date` → 移动端弹出对应键盘 + 内置验证
 - **`autocomplete` 属性**：提升用户体验（`username`, `current-password`, `cc-number` 等标准值）
@@ -135,7 +137,7 @@ HTML（HyperText Markup Language，超文本标记语言）是 Web 的**骨架�
 
 ---
 
-### 5. 多媒体与嵌入
+#### 多媒体与嵌入
 ```html
 <!-- 响应式图片 -->
 <picture>
@@ -153,7 +155,7 @@ HTML（HyperText Markup Language，超文本标记语言）是 Web 的**骨架�
 </video>
 ```
 
-#### ⚠️ 关键点
+##### 关键点
 - **`alt` 属性**：装饰图用 `alt=""`；信息图必须描述内容
 - **`loading="lazy"`**：原生懒加载（首屏图片勿用）
 - **`decoding="async"`**：非阻塞解码，提升 LCP
@@ -161,7 +163,7 @@ HTML（HyperText Markup Language，超文本标记语言）是 Web 的**骨架�
 
 ---
 
-### 6. 全局属性（所有标签可用）
+#### 全局属性（所有标签可用）
 | 属性 | 用途 |
 | :--- | :--- |
 | `id` | 唯一标识符（锚点、JS 选择器） |
@@ -174,8 +176,8 @@ HTML（HyperText Markup Language，超文本标记语言）是 Web 的**骨架�
 
 ---
 
-### 7. 现代 HTML 最佳实践
-#### ✅ DO
+#### 现代 HTML 最佳实践
+##### DO
 - 使用小写标签名（HTML5 不强制，但约定俗成）
 - 属性值加引号（`class="btn"` 而非 `class=btn`）
 - 自闭合标签省略斜杠（`<img>` 而非 `<img />`）
@@ -183,7 +185,7 @@ HTML（HyperText Markup Language，超文本标记语言）是 Web 的**骨架�
 - 用 `<dialog>` 实现模态框（原生支持焦点陷阱、ESC 关闭）
 - 用 `<details>` / `<summary>` 实现折叠面板（零 JS）
 
-#### ❌ DON'T
+##### ❌ DON'T
 - 用 `<div>` / `<span>` 替代语义标签
 - 用 `<br>` 控制布局间距
 - 用 `<table>` 做页面布局
@@ -193,25 +195,7 @@ HTML（HyperText Markup Language，超文本标记语言）是 Web 的**骨架�
 
 ---
 
-### 8. HTML 与 CSS/JS 的边界
-| 层 | 职责 | 示例 |
-| :--- | :--- | :--- |
-| **HTML** | 内容与语义 | “这是一篇关于气候变化的文章” |
-| **CSS** | 表现与布局 | “文章标题用 2rem 蓝色字体，左对齐” |
-| **JS** | 行为与状态 | “点击按钮展开评论区，异步加载数据” |
-
-> 💡 **黄金法则**：如果去掉 CSS 和 JS，HTML 仍应传达完整内容结构。
-
----
-
-### 📚 学习资源推荐
-1. **MDN HTML Guide**：最权威、更新及时的参考
-2. **HTML Spec (WHATWG)**：标准原文（进阶查阅）
-3. **Web Accessibility Initiative (WAI)**：ARIA 与无障碍实践
-4. **Can I Use**：特性兼容性查询
-5. **Nu Html Checker**：官方验证器，检测语法/语义错误
-
----
+### CSS：样式、布局与响应式设计
 
 CSS（Cascading Style Sheets，层叠样式表）是 Web 的**表现层语言**，负责控制 HTML 内容的视觉呈现、布局、动画与响应式适配。它不是编程语言，而是一套**声明式规则系统**，核心在于理解“层叠”、“继承”与“盒模型”。
 
@@ -219,10 +203,10 @@ CSS（Cascading Style Sheets，层叠样式表）是 Web 的**表现层语言**�
 
 ---
 
-### 1. 核心机制：层叠、优先级与继承
+#### 核心机制：层叠、优先级与继承
 > CSS 的名称中 “Cascading” 决定了样式的最终生效逻辑。
 
-#### 🔺 优先级计算（Specificity）
+##### 🔺 优先级计算（Specificity）
 当多条规则作用于同一元素时，按以下权重决胜（从高到低）：
 
 | 层级 | 选择器示例 | 权重值 (a,b,c,d) |
@@ -240,19 +224,19 @@ CSS（Cascading Style Sheets，层叠样式表）是 Web 的**表现层语言**�
 .nav-link.active   { /* (0,0,2,0) → 前者胜 */ }
 ```
 
-#### 🔄 继承
+##### 🔄 继承
 - **可继承属性**：文本相关（`color`, `font-*`, `line-height`, `visibility`）
 - **不可继承属性**：盒模型（`margin`, `padding`, `border`）、定位、背景
 - 强制继承：`inherit` / 强制不继承：`initial` / 重置为浏览器默认：`revert`
 
-#### 💡 工程建议
+##### 工程建议
 - 避免 `!important`，通过提升选择器语义或调整源码顺序解决冲突
 - 使用 BEM / CSS Modules / Tailwind 等方案降低优先级复杂度
 - 用 DevTools "Computed" 面板实时查看最终生效值及来源
 
 ---
 
-### 2. 盒模型：一切布局的基础
+#### 盒模型：一切布局的基础
 每个 HTML 元素都是一个矩形盒子，由四层组成：
 
 ```
@@ -267,7 +251,7 @@ CSS（Cascading Style Sheets，层叠样式表）是 Web 的**表现层语言**�
 └───────────────────────────────────┘
 ```
 
-#### ⚠️ 关键陷阱：`box-sizing`
+##### 关键陷阱：`box-sizing`
 | 值 | width/height 包含 | 推荐度 |
 | :--- | :--- | :--- |
 | `content-box` (默认) | 仅 content | ❌ 易导致溢出 |
@@ -280,18 +264,18 @@ CSS（Cascading Style Sheets，层叠样式表）是 Web 的**表现层语言**�
 }
 ```
 
-#### 外边距折叠
+##### 外边距折叠
 垂直方向相邻的 margin 会合并（取较大值），常见于块级元素之间。解决方案：Flex/Grid 布局、BFC、或统一使用单侧 margin。
 
 ---
 
-### 3. 布局体系演进
-#### 📏 传统布局（了解即可）
+#### 布局体系演进
+##### 📏 传统布局（了解即可）
 - `float` + `clear`：已淘汰，仅用于文字环绕图片
 - `inline-block`：间隙问题难处理，对齐困难
 - `table-cell`：等高列可行，但语义污染
 
-#### 🎯 现代布局双雄
+##### 现代布局双雄
 | 特性 | Flexbox | Grid |
 | :--- | :--- | :--- |
 | 维度 | 一维（行或列） | 二维（行和列同时） |
@@ -300,7 +284,7 @@ CSS（Cascading Style Sheets，层叠样式表）是 Web 的**表现层语言**�
 | 自动换行 | `flex-wrap: wrap` | `grid-auto-flow: dense` |
 | 间距控制 | `gap` (现代浏览器支持) | `gap` (原生支持) |
 
-#### 💡 实战模式
+##### 实战模式
 ```css
 /* Flex：水平居中 + 等间距 */
 .nav { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
@@ -328,8 +312,8 @@ CSS（Cascading Style Sheets，层叠样式表）是 Web 的**表现层语言**�
 
 ---
 
-### 4. 响应式设计
-#### 移动优先原则
+#### 响应式设计
+##### 移动优先原则
 ```css
 /* 基础样式 = 移动端 */
 .card { padding: 1rem; }
@@ -340,7 +324,7 @@ CSS（Cascading Style Sheets，层叠样式表）是 Web 的**表现层语言**�
 }
 ```
 
-#### 现代响应式技术栈
+##### 现代响应式技术栈
 | 技术 | 用途 |
 | :--- | :--- |
 | `clamp(min, preferred, max)` | 流体排版/间距：`font-size: clamp(1rem, 2.5vw, 2rem)` |
@@ -351,7 +335,7 @@ CSS（Cascading Style Sheets，层叠样式表）是 Web 的**表现层语言**�
 
 ---
 
-### 5. 自定义属性（CSS Variables）
+#### 自定义属性（CSS Variables）
 > 原生变量，无需预处理器
 
 ```css
@@ -371,15 +355,15 @@ CSS（Cascading Style Sheets，层叠样式表）是 Web 的**表现层语言**�
 .dark-theme { --color-primary: #60a5fa; }
 ```
 
-#### 优势
+##### 优势
 - 主题切换零 JS 重绘
 - 组件作用域隔离（在组件根定义）
 - 与 JS 互通：`el.style.setProperty('--x', value)`
 
 ---
 
-### 6. 过渡与动画
-#### Transition（状态变化）
+#### 过渡与动画
+##### Transition（状态变化）
 ```css
 .btn {
   transition: background-color 0.2s ease, transform 0.1s;
@@ -387,7 +371,7 @@ CSS（Cascading Style Sheets，层叠样式表）是 Web 的**表现层语言**�
 .btn:hover { background-color: var(--color-primary-hover); }
 ```
 
-#### Animation（独立循环/复杂序列）
+##### Animation（独立循环/复杂序列）
 ```css
 @keyframes spin {
   to { transform: rotate(360deg); }
@@ -398,7 +382,7 @@ CSS（Cascading Style Sheets，层叠样式表）是 Web 的**表现层语言**�
 }
 ```
 
-#### ⚠️ 性能黄金法则
+##### 性能黄金法则
 - **只动画 `transform` 和 `opacity`**：触发 GPU 合成层，不引起重排重绘
 - 避免动画 `width`, `height`, `top`, `left`, `margin`, `padding`
 - 使用 `will-change: transform` 提示浏览器优化（勿滥用）
@@ -406,7 +390,7 @@ CSS（Cascading Style Sheets，层叠样式表）是 Web 的**表现层语言**�
 
 ---
 
-### 7. 现代 CSS 新特性速览
+#### 现代 CSS 新特性速览
 | 特性 | 作用 | 兼容性 |
 | :--- | :--- | :--- |
 | `:has()` | 父选择器 / 条件样式 | ✅ 主流浏览器 |
@@ -419,8 +403,30 @@ CSS（Cascading Style Sheets，层叠样式表）是 Web 的**表现层语言**�
 
 ---
 
-### 8. 工程化最佳实践
-#### ✅ DO
+### 职责边界、工程实践与学习资源
+
+#### HTML 与 CSS/JS 的边界
+| 层 | 职责 | 示例 |
+| :--- | :--- | :--- |
+| **HTML** | 内容与语义 | “这是一篇关于气候变化的文章” |
+| **CSS** | 表现与布局 | “文章标题用 2rem 蓝色字体，左对齐” |
+| **JS** | 行为与状态 | “点击按钮展开评论区，异步加载数据” |
+
+> 💡 **黄金法则**：如果去掉 CSS 和 JS，HTML 仍应传达完整内容结构。
+
+---
+
+#### 学习资源推荐
+1. **MDN HTML Guide**：最权威、更新及时的参考
+2. **HTML Spec (WHATWG)**：标准原文（进阶查阅）
+3. **Web Accessibility Initiative (WAI)**：ARIA 与无障碍实践
+4. **Can I Use**：特性兼容性查询
+5. **Nu Html Checker**：官方验证器，检测语法/语义错误
+
+---
+
+#### 工程化最佳实践
+##### DO
 - 使用 CSS Reset / Normalize.css 统一基线
 - 采用方法论：BEM（命名）、ITCSS（分层）、CUBE CSS（现代组合）
 - 利用 PostCSS / Autoprefixer 处理兼容
@@ -428,11 +434,9 @@ CSS（Cascading Style Sheets，层叠样式表）是 Web 的**表现层语言**�
 - 关键 CSS 内联，非关键异步加载
 - 用 DevTools Coverage 面板检测未使用样式
 
-#### ❌ DON'T
+##### ❌ DON'T
 - 深层嵌套选择器（>3 层即危险信号）
 - 魔法数字（用变量或设计令牌）
 - `z-index` 军备竞赛（建立明确的 stacking context 管理策略）
 - 用 CSS 做本应由 JS 处理的逻辑（如复杂状态判断）
 - 忽略无障碍：确保颜色对比度 ≥ 4.5:1，焦点可见
-
-

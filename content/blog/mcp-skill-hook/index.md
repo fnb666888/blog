@@ -19,7 +19,9 @@ params:
     robots: ""
 ---
 
-### 1. MCP (Model Context Protocol)
+### MCP、Skill、Hook 与 Plugin 的基本概念
+
+#### MCP (Model Context Protocol)
 **模型上下文协议**
 
 *   **定义**：由 Anthropic 提出的一种开放标准协议，旨在解决 AI 模型与外部数据源、工具之间的连接碎片化问题。它类似于 AI 世界的“USB-C 接口”，定义了 AI 如何安全、标准化地访问本地文件、数据库或第三方 API。
@@ -38,7 +40,7 @@ params:
 
 ---
 
-### 2. Skill (技能)
+#### Skill (技能)
 **原子化能力单元**
 
 *   **定义**：在 Agent 框架中，Skill 是对特定任务能力的封装。它比 Plugin 更轻量，比 Tool 更具语义化。Skill 通常包含“意图识别 + 执行逻辑 + 输出规范”，是 Agent 完成复杂任务的积木。
@@ -57,7 +59,7 @@ params:
 
 ---
 
-### 3. Hook (钩子)
+#### Hook (钩子)
 **生命周期拦截点**
 
 *   **定义**：一种编程机制，允许在程序执行的特定节点（生命周期）插入自定义代码。它是**被动触发**的，不改变主流程逻辑，但能监听或修改流经的数据。
@@ -76,7 +78,7 @@ params:
 
 ---
 
-### 4. Plugin (插件)
+#### Plugin (插件)
 **模块化扩展包**
 
 *   **定义**：一种完整的、可插拔的软件模块，用于为宿主应用添加新功能。Plugin 是一个**容器概念**，它内部可能包含多个 Tools、Skills、Hooks 甚至 UI 组件。
@@ -92,11 +94,12 @@ params:
 
 ---
 
+### 创建工具与扩展的示例
 
-### 1. 创建一个 MCP Tool
+#### 创建一个 MCP Tool
 **目标**：让 AI 能查询本机 SQLite 数据库
 
-#### 步骤：用官方 SDK 声明一个工具
+##### 步骤：用官方 SDK 声明一个工具
 ```python
 # server.py
 from mcp.server.fastmcp import FastMCP
@@ -124,17 +127,17 @@ if __name__ == "__main__":
     mcp.run(transport="stdio")
 ```
 
-#### 创作要点
+##### 创作要点
 - 使用 `@mcp.tool()` 装饰器，函数名即工具名，docstring 即 LLM 看到的描述。
 - 参数类型注解自动生成 JSON Schema。
 - 运行后通过 stdio 与 AI Client 通信，无需手写 JSON-RPC。
 
 ---
 
-### 2. 创建一个 Skill
+#### 创建一个 Skill
 **目标**：让 Agent 能把 Markdown 转成 PDF
 
-#### 步骤：在 Dify / LangChain 等框架中定义 Skill
+##### 步骤：在 Dify / LangChain 等框架中定义 Skill
 ```yaml
 # skills/md_to_pdf.yaml
 name: markdown_to_pdf
@@ -168,17 +171,17 @@ def execute(markdown_content: str, filename: str = "export.pdf") -> str:
     return f"/tmp/{filename}"
 ```
 
-#### 创作要点
+##### 创作要点
 - **YAML 元数据是核心**：`description` 写给 LLM 看，决定它何时被选中。
 - 执行函数签名必须与 YAML 中 `parameters` 一一对应。
 - Skill = 元数据文件 + 执行函数，两者配对注册到 Agent 框架。
 
 ---
 
-### 3. 创建一个 Hook
+#### 创建一个 Hook
 **目标**：在每次 AI 回复后自动记录 Token 消耗
 
-#### 步骤：注册一个生命周期回调
+##### 步骤：注册一个生命周期回调
 ```python
 # hooks/token_logger.py
 from agent_framework import hook
@@ -204,7 +207,7 @@ from hooks.token_logger import log_token_usage
 app.register_hook("after_llm_response", log_token_usage)
 ```
 
-#### 创作要点
+##### 创作要点
 - **不能独立存在**：必须挂载到宿主系统的某个事件点上。
 - **签名固定**：参数由框架定义，你只能按规范接收。
 - **无返回值**：Hook 是观察者，不应改变主流程结果（除非框架明确允许）。
@@ -212,10 +215,10 @@ app.register_hook("after_llm_response", log_token_usage)
 
 ---
 
-### 4. 创建一个 Plugin
+#### 创建一个 Plugin
 **目标**：为 Obsidian 添加一个“AI 摘要笔记”插件
 
-#### 步骤：搭建插件目录结构
+##### 步骤：搭建插件目录结构
 ```
 ai-summarizer/
 ├── manifest.json          ← 插件身份证
@@ -260,7 +263,7 @@ export default class AISummarizerPlugin extends Plugin {
 }
 ```
 
-#### 创作要点
+##### 创作要点
 - **manifest.json 是必须的**：没有它宿主不识别这是插件。
 - **实现生命周期接口**：`onload()` / `onunload()` 是插件的入口契约。
 - **在 onload 中注册功能**：命令、设置面板、Ribbon 图标等都在此处挂载。
@@ -268,7 +271,7 @@ export default class AISummarizerPlugin extends Plugin {
 
 ---
 
-### 🎯 四者“创作工具”时的核心区别
+### 四种扩展方式的区别
 
 | 你在创作什么 | 交付物形态 | 谁来调用它 | 创作时最关心什么 |
 | :--- | :--- | :--- | :--- |
@@ -276,4 +279,3 @@ export default class AISummarizerPlugin extends Plugin {
 | **Skill** | YAML 元数据 + 执行函数 | Agent 编排器根据意图匹配选择 | description 写得让 LLM 能准确理解用途 |
 | **Hook** | 一个固定签名的回调函数 | 宿主系统在特定事件点自动触发 | 签名是否正确、副作用是否安全 |
 | **Plugin** | manifest + 入口模块的完整包 | 宿主应用加载后由用户或系统触发 | 接口契约 + 权限声明 + 版本兼容 |
-

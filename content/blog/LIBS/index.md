@@ -19,7 +19,18 @@ params:
     robots: ""
 ---
 
-# LIBS 化学计量学方法全解：原理、步骤与铁矿应用实例
+> **本文定位**：从预处理、定性识别到定量分析的算法总览，以铁矿样品串联完整工作流。
+
+**系列阅读路线**
+
+- [算法原理与方法比较]({{< relref "blog/LIBS-detail/index.md" >}})
+- [预处理尺度、评估指标与结果表达]({{< relref "blog/LIBS-operate/index.md" >}})
+- [烧蚀、辐射与等离子体诊断]({{< relref "blog/LIBS-Physics/index.md" >}})
+- [CF-LIBS 基础与假设]({{< relref "blog/CF-LIBS/index.md" >}})
+- [CF-LIBS 实现步骤]({{< relref "blog/CF-LIBS-details/index.md" >}})
+
+---
+
 > **背景设定（贯穿全文的铁矿案例）**
 > 假设我们用 LIBS 仪器对一批矿石样品打谱，每个样品在 200–900 nm 范围内采集一条光谱（约 12000 个波长点，即 12000 维变量）。样品标签已知一部分：
 > - **类别标签**（用于定性/分类）：磁铁矿（Fe₃O₄）、赤铁矿（Fe₂O₃）、褐铁矿（FeO(OH)·nH₂O）、菱铁矿（FeCO₃）、以及混入的脉石（石英 SiO₂、方解石 CaCO₃）。
@@ -31,11 +42,13 @@ params:
 
 通过激光诱导击穿光谱（LIBS）获取光谱数据后，结合机器学习进行分类（如物质识别、产地溯源）或回归（如元素定量分析）是目前极其主流且高效的研究范式。
 
-一个完整的 LIBS 机器学习建模流程通常包含以下核心步骤。针对您提到的具体疑问，我也在对应环节做出了详细解答：
+下面先介绍 LIBS 机器学习建模的完整流程，再依次展开预处理、定性分析、定量分析与铁矿应用实例。
 
-## LIBS 机器学习分析完整步骤
+---
 
-### 1. 数据预处理（重点：必须剔除异常数据）
+### LIBS 机器学习分析完整步骤
+
+#### 1. 数据预处理（重点：必须剔除异常数据）
 
 LIBS 信号受激光能量波动、样品基体效应和环境影响很大，存在明显的“脉冲到脉冲（Shot-to-shot）”的不稳定性。
 
@@ -54,14 +67,14 @@ LIBS 信号受激光能量波动、样品基体效应和环境影响很大，存
 
 **归一化/标准化：** 消除绝对强度波动的影响（如最大值归一化、全谱面积归一化或内标法）。
 
-### 2. 特征选择与降维
+#### 2. 特征选择与降维
 
 LIBS 光谱通常包含上万个波长点（高维数据），直接输入模型容易导致“维数灾难”和过拟合。
 
 **降维：** 主成分分析（PCA）是最常用的无监督降维方法。
 
 **特征选择：** 根据物理先验知识挑选目标元素的特征谱线，或使用变量投影重要性（VIP）、连续投影算法（SPA）、无信息变量消除（UVE）等算法筛选有用波长。
-### 3. 数据集划分（必须划分训练集和测试集）
+#### 3. 数据集划分（必须划分训练集和测试集）
 
 **必须划分。** 这是评估机器学习模型是否真正具备预测能力（泛化能力）的基础。
 
@@ -69,7 +82,7 @@ LIBS 光谱通常包含上万个波长点（高维数据），直接输入模型
 
 **测试集（Test Set）：** 占 20%~30%，**模型在训练阶段绝对不能看到这些数据**。它相当于最终的“期末考试”，用于检验模型在面对全新样品时的真实表现。
 
-### 4. 模型选择与构建
+#### 4. 模型选择与构建
 
 根据您的任务目标选择合适的算法：
 
@@ -77,7 +90,7 @@ LIBS 光谱通常包含上万个波长点（高维数据），直接输入模型
 
 **回归任务（如测定土壤中重金属的浓度）：** 偏最小二乘回归（PLSR，LIBS领域最经典）、支持向量回归（SVR）、随机森林回归（RFR）、多层感知机（MLP）。
 
-### 5. 模型优化与验证（K折交叉验证与袋外估计的作用）
+#### 5. 模型优化与验证（K折交叉验证与袋外估计的作用）
 
 在训练集上训练模型时，我们需要寻找最佳的“超参数”（例如 SVM 的惩罚系数、PLS 的主成分个数、随机森林的树的数量）。这需要用到验证机制：
 
@@ -98,7 +111,7 @@ LIBS 光谱通常包含上万个波长点（高维数据），直接输入模型
 **原理：** 随机森林在构建每一棵决策树时，采用有放回抽样（Bootstrap）。数学上可以证明，每次抽样大约有 的样本没有被抽中用于建树，这些没被抽中的数据就是“袋外数据（OOB）”。
 
 **意义：** 可以直接使用这 36.8% 的 OOB 数据来测试当前树的性能（即 OOB 误差）。如果使用随机森林，你甚至可以省略 K折交叉验证，直接通过 OOB 误差来评估模型性能和进行特征重要性排序，计算速度更快。
-### 6. 模型评估
+#### 6. 模型评估
 使用测试集数据输入已经训练并调优好的模型，得出最终的评价指标。
 
 **分类指标：** 准确率（Accuracy）、精确率（Precision）、召回率（Recall）、混淆矩阵（Confusion Matrix）。
@@ -111,12 +124,11 @@ LIBS 光谱通常包含上万个波长点（高维数据），直接输入模型
 > **袋外估计（OOB）** 是随机森林等集成算法自带的“交叉验证”平替，用于快速评估模型误差和特征重要性。
 
 
-
-## 一、光谱数据预处理（Spectral data preprocessing）
+### 一、光谱数据预处理（Spectral data preprocessing）
 
 LIBS 原始谱 = 真实原子发射线 + 连续背景（baseline）+ 随机噪声 + 仪器漂移。预处理的目标是把"信号"从这三类干扰里剥出来。表中预处理对应的方法有：**Model-free algorithm、WT、SWT、WTD、CWT、L-M**，其中 WT 还兼做数据压缩。
 
-### 1. 无模型算法（Model-free algorithm）
+#### 1. 无模型算法（Model-free algorithm）
 
 
 在激光诱导击穿光谱（LIBS）分析中，由于等离子体早期的韧致辐射（Bremsstrahlung radiation）和电子离子复合辐射（Recombination radiation），光谱中不可避免地会产生一个宽泛的、连续的背景信号（即**基线**）。这种基线会抬高原子和离子的特征发射峰，严重影响定性和定量分析的准确性。
@@ -125,7 +137,7 @@ LIBS 原始谱 = 真实原子发射线 + 连续背景（baseline）+ 随机噪�
 
 以下是LIBS分析中几种最主流的无模型基线去除算法及其详细工作原理：
 
-### 不对称惩罚最小二乘法及其变体 \(ALS / airPLS\)
+##### 不对称惩罚最小二乘法及其变体 \(ALS / airPLS\)
 
 这可以说是目前光谱基线校正中最强大、使用最广泛的无模型算法家族。
 
@@ -135,7 +147,7 @@ LIBS 原始谱 = 真实原子发射线 + 连续背景（baseline）+ 随机噪�
 
 **进阶变体 \(airPLS  适应性迭代重加权惩罚最小二乘法\)：** 由于基础的ALS需要手动调节权重参数，airPLS进行了改进。它不需要用户提供峰值区域的先验信息，而是能够在迭代过程中**自适应地更新权重向量**。对于LIBS这种谱峰密集、基线起伏大的复杂光谱，airPLS通常能表现出极高的鲁棒性。
 
-### 数学形态学滤波 \(Mathematical Morphology / TopHat 变换\)
+##### 数学形态学滤波 \(Mathematical Morphology / TopHat 变换\)
 
 这种方法将一维的光谱数据视作图像，通过类似于“滑动窗口”的形态学操作来过滤掉峰值，只保留宽泛的背景。
 
@@ -148,7 +160,7 @@ LIBS 原始谱 = 真实原子发射线 + 连续背景（baseline）+ 随机噪�
 
 **关键点：** 结构元素（窗口）的宽度必须略大于光谱中最宽的特征峰，否则宽峰会被误认为基线而保留下来。
 
-### 敏感非线性迭代峰值裁剪算法 \(SNIP\)
+##### 敏感非线性迭代峰值裁剪算法 \(SNIP\)
 
 SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射线荧光光谱（XRF），后来被广泛引入LIBS领域。它是一种极其直观的“削峰”算法。
 
@@ -157,7 +169,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **迭代效果：** 随着迭代次数的增加和窗口 的动态变化，像针尖一样的特征峰会迅速被削平，最后剩下的包络线就是平滑的连续背景基线。
 
-### 小波变换法 \(Wavelet Transform\)
+##### 小波变换法 \(Wavelet Transform\)
 
 小波变换是基于**频率特征**分离基线和特征峰的无模型方法。
 
@@ -166,7 +178,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **处理过程：** 通过选择合适的小波基（如 Symlets 或 Daubechies 小波），将原始光谱进行多尺度分解。分解后，光谱被分成“近似系数”（Approximation，低频部分）和“细节系数”（Detail，高频部分）。 算法将包含峰值的高频细节系数置零或削弱，然后仅使用低频近似系数进行**小波重构**。重构出的平滑曲线即为估计出的基线。
 
-### 主流算法对比总结
+##### 主流算法对比总结
 
 | 算法名称 | 核心逻辑 | 优点 | 缺点 / 挑战 |
 |---|---|---|---|
@@ -180,7 +192,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：Fe II 259.94 nm 附近连续背景很高（等离子体早期轫致辐射），用 airPLS 自动把这条缓变背景扣掉，而不去人为指定"哪几个点是无峰区"——这对铁矿这种"几乎处处有线"的复杂谱特别有用，因为根本找不到干净的背景窗口。
 
-### 2. 小波变换 WT（Wavelet Transform）—— 兼做去噪与压缩
+#### 2. 小波变换 WT（Wavelet Transform）—— 兼做去噪与压缩
 
 **什么是“小波” (Wavelet)？**
 顾名思义，“小波”就是一个“小小的波”。与无限长的正弦波不同，小波是一种能量集中在很短时间范围内的波形。它的振幅从零开始，迅速增大，然后又迅速衰减回零。
@@ -205,13 +217,13 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 相比于傅里叶变换“一刀切”的频率分离，小波变换在时域（波长域）和频域都拥有极高的分辨率，它不仅能把基线“剥”下来，还能顺手把高频的随机噪声也过滤掉，是一种一举两得的信号处理武器。
 
-### 3. 平稳小波变换 SWT（Stationary Wavelet Transform）
+#### 3. 平稳小波变换 SWT（Stationary Wavelet Transform）
 
 在你了解了离散小波变换（DWT）的“分层滤波”原理后，理解平稳小波变换（Stationary Wavelet Transform, SWT）就非常顺理成章了。
 
 平稳小波变换，在学术界也常被称为**非抽取小波变换（Undecimated Wavelet Transform, UWT）**或**平移不变小波变换**。它的出现，纯粹是为了解决标准离散小波变换（DWT）中的一个致命缺陷。
 
-### 为什么需要 SWT？（DWT的“平移突变”缺陷）
+##### 为什么需要 SWT？（DWT的“平移突变”缺陷）
 
 回顾一下 DWT 的工作机制：信号经过高通/低通滤波器后，数据量会进行**下采样（Downsampling，或称抽取）**。即每隔一个数据点丢弃一个，以此来减少计算量和存储空间（尺度变大，数据量减半）。
 
@@ -219,7 +231,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 在信号降噪或去除基线时，这种特性会导致重构后的信号在峰值边缘出现剧烈的震荡（这被称为**伪吉布斯现象**或**振铃效应**），原本平滑的基线会变得坑坑洼洼，特征峰的形状也会被扭曲。
 
-### SWT 是如何工作的？（核心机制）
+##### SWT 是如何工作的？（核心机制）
 
 为了解决平移突变的问题，SWT 采取了一种简单粗暴但极其有效的策略：**干脆不进行下采样。**
 
@@ -240,10 +252,9 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 这样一来，**在 SWT 的每一层分解中，得到的近似系数和细节系数的长度，都和原始信号一模一样**。
 
 
-
 上图\(a\)为SWT系数，长度始终不变；下图\(b\)为DWT系数，逐层减半且变得稀疏. 来源：ResearchGate
 
-### SWT 与 DWT 的直观对比
+##### SWT 与 DWT 的直观对比
 
 | 特性 | 离散小波变换 \(DWT\) | 平稳小波变换 \(SWT\) |
 |---|---|---|
@@ -253,7 +264,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 | **数据冗余度** | 无冗余（正交） | **高度冗余** |
 | **计算速度与内存** | 极快，占用内存小 | 较慢，占用内存随层数成倍增加 |
 
-### 为什么 SWT 在光谱分析（如 LIBS）中如此重要？
+##### 为什么 SWT 在光谱分析（如 LIBS）中如此重要？
 
 尽管 SWT 牺牲了计算速度和存储空间（引入了大量冗余数据），但在处理高精度的科学数据时，这完全是值得的：
 
@@ -268,7 +279,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：铁矿谱中 Fe I 438.36 nm 这种弱峰，用 DWT 去噪时可能因峰位与采样网格不对齐而被抹掉；改用 SWT 后该峰稳定保留，提升后续低含量 Fe 线用于定量的可靠性。
 
-### 4. 小波阈值去噪 WTD（Wavelet Threshold Denoising）
+#### 4. 小波阈值去噪 WTD（Wavelet Threshold Denoising）
 
 **原理**：噪声在小波域表现为**幅值小、遍布各系数**，而真实峰表现为**少数幅值大的系数**。因此对细节系数设阈值：小于阈值的置零（或收缩），大于阈值的保留，即可滤噪。阈值规则有**硬阈值**（ $|c|<T$ 置 0，否则不变，去噪强但有振铃）和**软阈值**（ $|c|<T$ 置 0，否则 $\text{sign}(c)(|c|-T)$ ，更平滑）。阈值 $T$ 常用通用阈值 $T=\sigma\sqrt{2\ln N}$ ， $\sigma$ 由第一层细节系数稳健估计： $\sigma=\text{median}(|cD_1|)/0.6745$ 。
 
@@ -281,7 +292,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：LIBS 单发脉冲信噪比低（铁矿中微量元素 P、S 的线常被噪声淹没）。对 50 发平均谱再做 WTD（软阈值、BayesShrink），可在不损失 Fe 主峰分辨率的前提下，把 P I 213.6/214.9 nm 弱线从噪声中提出来，为后续 P 定量打基础。
 
-### 5. 连续小波变换 CWT（Continuous Wavelet Transform）—— 用于分辨重叠峰
+#### 5. 连续小波变换 CWT（Continuous Wavelet Transform）—— 用于分辨重叠峰
 
 **原理**：CWT 在**连续尺度**上计算小波系数 $W(a,b)=\frac{1}{\sqrt{a}}\int y(t)\psi^*(\frac{t-b}{a})dt$ ，得到尺度—位置图（scalogram）。关键技巧：当母小波取**与峰形匹配的二阶导数型（如 Mexican hat / Ricker 小波，即高斯二阶导）**时，CWT 在某个尺度上，**每个真实峰对应系数图上的一个局部极大（或过零点）**，而重叠在一起的峰在细尺度上会被"分开"。因此 CWT 是**峰检测与重叠峰分辨**的利器，等价于在多个尺度上做匹配滤波。
 
@@ -294,7 +305,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：Fe I 371.99 nm 与邻近的 Ca/Si 线、以及 Fe I 404.58 nm 与 Cr I 404.58 nm（同位/近同位重叠）在原始谱上是一个"胖峰"。用 CWT（Ricker 小波）在细尺度 scalogram 上能看到两个分立的极大，从而判定这里是两条线而非一条，避免把 Cr 的强度错算到 Fe 上（铁矿中 Cr 是常见伴生元素，错算会污染 TFe 模型）。
 
-### 6. Levenberg-Marquardt（L-M）算法 —— 用于重叠峰拟合分解
+#### 6. Levenberg-Marquardt（L-M）算法 —— 用于重叠峰拟合分解
 
 **原理**：L-M 是求解**非线性最小二乘** $\min_\beta \sum_i [y_i - f(x_i;\beta)]^2$ 的迭代法，介于高斯-牛顿法与梯度下降法之间，通过阻尼因子 $\mu$ 自适应切换： $\mu$ 小→接近高斯-牛顿（快但需初值好）， $\mu$ 大→接近梯度下降（稳但慢）。在光谱中， $f$ 是**峰形模型之和**，如多个 Voigt/Lorentz/Gauss 峰 \+ 多项式背景： $f(\lambda)=\sum_k A_k \cdot V(\lambda;\lambda_{0k},w_k) + \sum_m p_m \lambda^m$ 。L-M 同时优化所有峰的幅值 $A_k$ 、中心 $\lambda_{0k}$ 、半宽 $w_k$ 和背景系数 $p_m$ ，从而把重叠峰"数学拆开"。
 
@@ -308,7 +319,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：把 259–261 nm 窗口里 Fe II 259.94、Fe II 260.71、Si II 259.5 等重叠线用一个"3 个 Voigt \+ 1 阶背景"模型做 L-M 拟合，得到 Fe II 259.94 的纯峰面积，作为定量变量，比直接取峰高（受重叠抬高）准确得多。
 
-### 7. 数据压缩用的小波变换（WT for data compression）
+#### 7. 数据压缩用的小波变换（WT for data compression）
 
 **原理**：LIBS 一条谱上万点，多变元建模时矩阵巨大。小波把能量**集中**到少数大系数（能量紧支性），因此**只保留幅值最大的 $K$ 个系数**（或保留到某层近似系数），即可用极少参数近似重构原谱，实现降维/压缩，且保留峰形信息（优于简单 binning 或等间隔抽点）。
 
@@ -323,15 +334,15 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 ---
 
-## 二、定性分析 / 模式识别（Qualitative analysis, pattern recognition）
+### 二、定性分析 / 模式识别（Qualitative analysis, pattern recognition）
 
 目标：根据光谱"指纹"判断矿石**属于哪一类**（矿种识别、产地判别、品位分级）。分有监督与无监督。
 
-### （A）有监督模式识别（Supervised pattern recognition）
+#### （A）有监督模式识别（Supervised pattern recognition）
 
 需要已知类别标签的训练集。
 
-#### 8. 偏最小二乘判别分析 PLS-DA（Partial Least Squares Discriminant Analysis）
+##### 8. 偏最小二乘判别分析 PLS-DA（Partial Least Squares Discriminant Analysis）
 
 **原理**：把类别标签 $Y$ 编码为**哑变量矩阵**（如 5 类→5 列 0/1 指示变量），对其做 PLS 回归：在 $X$ （光谱）和 $Y$ （哑变量）之间找潜变量（LV），使二者协方差最大。预测时得到每类的"得分"，取最大者或设阈值（如 0.5）判定类别。本质是"用回归做分类"，能处理高维共线光谱。
 
@@ -345,7 +356,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：把 5 类矿（磁/赤/褐/菱/脉石）做 PLS-DA，VIP 高的波长落在 Fe 氧化态敏感线、Ca（菱铁矿伴生 Ca？实际菱铁矿 FeCO₃ 常伴 Ca/Mg）、以及 OH/H 线（褐铁矿含结晶水，H、O 线强）上，模型据此区分褐铁矿（含水特征）与赤铁矿。
 
-#### 9. SIMCA（Soft Independent Modeling of Class Analogy，软独立类类比）
+##### 9. SIMCA（Soft Independent Modeling of Class Analogy，软独立类类比）
 
 **原理**：对**每一类单独**做 PCA，建立该类的"主成分子空间模型"，定义类内残差与得分距离的接受域（如 95% 置信椭圆）。新样品分别投影到每个类模型，计算到该类的**正交距离（残差，Q/OD）**和**得分距离（SD/Hotelling T²）**，落在接受域内即判属该类。"软"指一个样品可同时属于多类或不属于任何类（开放类建模），适合"鉴别真伪/是否属于某矿种"。
 
@@ -358,7 +369,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：建立"高品位磁铁矿"类模型后，对来料做 SIMCA：落在类内→合格精矿；OD 超标（出现模型没见过的 Si/Al 强线）→判为掺了脉石的异常样，触发拒收。SIMCA 的"开放类"特性正适合这种"只认合格品、其余皆异常"的质检场景。
 
-#### 10. 最小二乘支持向量机 LSSVM（Least Squares SVM）
+##### 10. 最小二乘支持向量机 LSSVM（Least Squares SVM）
 
 **原理**：标准 SVM 把分类写成**凸二次规划 \+ 不等式约束**（ hinge 损失 \+ 稀疏解）。LSSVM 把不等式约束改为**等式约束**、把 hinge 损失改为**平方误差损失**，于是 KKT 条件退化为一个**线性方程组**，求解更快、实现更简单，代价是解不再稀疏（所有训练点都是支持向量）。分类时仍用核函数（RBF/线性）把光谱映到高维，找最优超平面；多类用"一对多/一对一"或编码。
 
@@ -372,7 +383,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：用 RBF-LSSVM 对"赤铁矿 vs 磁铁矿"二分类，因二者 Fe 线相近、差异细微（氧化态/伴生元素），RBF 核的非线性边界能比线性 LDA 分得更干净；LSSVM 训练只解一次线性方程，适合在线快速建模。
 
-#### 11. 分类与回归树 CART（Classification and Regression Tree）
+##### 11. 分类与回归树 CART（Classification and Regression Tree）
 
 **原理**：递归地用**单个波长（或波长强度比/比值特征）的阈值**把样本二分，选择使**不纯度下降最大**（基尼指数 Gini 或熵信息增益）的分裂点，生成二叉树；叶节点给出类别（多数表决）。可解释性极强——每个分裂节点就是一个"谱线强度判据"。
 
@@ -386,7 +397,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：CART 第一刀可能落在"Fe I 382.04 / Si I 288.16 比值 \> τ₁"（铁硅比，区分矿石与脉石），第二刀落在"H I 656.3 强度 \> τ₂"（区分含水的褐铁矿）。最终得到一棵可读的"矿种判别决策树"，便于现场工程师理解和审计。
 
-#### 12. 独立成分分析 ICA（Independent Component Analysis）
+##### 12. 独立成分分析 ICA（Independent Component Analysis）
 
 **原理**：与 PCA 找"不相关"方向不同，ICA 找**统计独立**的非高斯成分，假设观测光谱是若干**独立源信号**（如各纯元素/矿物端元的发射轮廓）的线性混合：$X=AS$，求分离矩阵 $W$ 使 $S=WX$ 各分量尽可能独立（最大化非高斯性，如负熵/峰度，典型算法 FastICA）。在监督框架下，可把提取的独立成分作为特征再分类，或用已知端元做约束 ICA。
 
@@ -398,7 +409,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：把混合矿谱分解为"铁端元、硅端元、钙端元、背景端元"等独立成分，每个成分的"权重"作为特征喂给分类器；因为 ICA 分离出的成分比 PCA 主成分更接近物理端元，对"混矿比例不同导致的类别差异"更敏感。
 
-#### 13. 判别因子分析 DFA（Discriminant Factor Analysis）
+##### 13. 判别因子分析 DFA（Discriminant Factor Analysis）
 
 **原理**：DFA 是**因子分析 + 判别**的结合：先假设变量由少数公共因子+特异因子生成，提取能**最大化类间差异**的判别因子（在因子模型框架下做判别），降维后在因子空间分类。可视为带因子模型约束的判别分析，对噪声/共线有一定稳健性。
 
@@ -409,7 +420,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：当 LIBS 谱受基体效应导致大量波长高度共线时，DFA 先用因子模型"去冗余"，再在低维判别因子上区分矿种，比直接 LDA 更稳。
 
-#### 14. 线性判别分析 LDA（Linear Discriminant Analysis）
+##### 14. 线性判别分析 LDA（Linear Discriminant Analysis）
 
 **原理**：Fisher 准则——找投影方向 $w$ 使**类间散度 $S_B$ 与类内散度 $S_W$ 之比**最大：$J(w)=\frac{w^TS_Bw}{w^TS_Ww}$，解为广义特征问题 $S_Bw=\lambda S_Ww$，最多得 $C-1$ 个判别方向。在所得子空间用最近类中心或贝叶斯（假设各类高斯同协方差）判类。LDA 同时是降维与分类器。
 
@@ -422,7 +433,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：5 类矿最多 4 个判别方向，把 12000 维谱压到 4 维散点图，肉眼可见磁铁矿与赤铁矿团簇分开；但因 LDA 是线性边界，对"褐铁矿与含水赤铁矿"这种非线性交叠可能分不好，此时换 SVM/RF。
 
-#### 15. 支持向量机 SVM（Support Vector Machines）
+##### 15. 支持向量机 SVM（Support Vector Machines）
 
 **原理**：在核诱导的高维特征空间找**最大间隔超平面**，最小化 $\frac{1}{2}\|w\|^2+C\sum\xi_i$，约束 $y_i(w^T\phi(x_i)+b)\ge1-\xi_i$。解是**稀疏**的（仅支持向量决定边界），对高维小样本表现优异，泛化理论扎实。多类用 OVO/OVR。
 
@@ -434,7 +445,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：样本量不大（每类几十发）而维数极高，正是 SVM 的强项；用 RBF-SVM 对 5 类矿分类，准确率常高于 LDA。可结合波长选择（如递归特征消除 RFE）剔除无关波长，进一步抗基体干扰。
 
-#### 16. 人工神经网络 ANN（Artificial Neural Networks）
+##### 16. 人工神经网络 ANN（Artificial Neural Networks）
 
 **原理**：多层感知机（MLP）等通过**非线性激活**的层叠神经元拟合 $X\to Y$ 的复杂映射，反向传播（BP）最小化损失。能逼近任意非线性，适合 LIBS 这种基体效应强、类别边界弯曲的问题；但需较多数据、易过拟合、可解释性差。
 
@@ -446,7 +457,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：用 MLP（输入为经小波压缩的 200 维特征，2 个隐层）对矿种+品位等级联合分类；当类别间因基体效应呈强非线性时，ANN 准确率优于线性方法，但需用大量打谱数据训练。
 
-#### 17. K-近邻 KNN（K-Nearest Neighbor）
+##### 17. K-近邻 KNN（K-Nearest Neighbor）
 
 **原理**：**无训练过程**的"懒惰学习"——对新样本，在训练集中按距离（欧氏/马氏/余弦）找最近的 $K$ 个邻居，**多数表决**定类。简单直观，但预测慢、对维数灾难和尺度敏感，需先标准化/降维。
 
@@ -458,7 +469,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：先用 PCA 把谱降到 20 维并标准化，再用 $K=5$ 加权 KNN 判矿种；优点是无需假设分布，缺点是 12000 维直接算距离会被噪声波长主导，故**必须先降维/选波长**。
 
-#### 18. 随机森林 RF（Random Forest）
+##### 18. 随机森林 RF（Random Forest）
 
 **原理**：集成学习——构建大量 CART，每棵树用**Bootstrap 抽样**的样本 + **随机选取的特征子集**做分裂，最终**投票**（分类）或平均（回归）。随机性降低方差、抗过拟合，且天然给出**特征重要性**（基于不纯度下降或置换重要性），对噪声和缺失稳健，几乎"开箱即用"。
 
@@ -470,7 +481,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：RF 对 5 类矿分类通常名列前茅，且其重要性图直接标出"判别矿种最关键的若干条谱线"（如 Fe 氧化态线、H 线、Ca 线），兼具高精度与可解释性，是 LIBS 矿种识别的常用首选。
 
-#### 19. 自适应局部超平面（Adaptive Local Hyperplane, ALH）
+##### 19. 自适应局部超平面（Adaptive Local Hyperplane, ALH）
 
 **原理**：介于 KNN 与线性判别之间的**局部方法**——对新样本，先找其 $K$ 个近邻，在这 $K$ 个近邻张成的**局部线性流形**上，构造一个**局部超平面**（用近邻的仿射组合表示查询点），按查询点到**各类局部超平面的距离**判类。比 KNN 的"点表决"更平滑，比全局 LDA 更适应非线性流形。
 
@@ -481,7 +492,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：当矿种在光谱空间呈弯曲流形（如品位连续变化导致的渐变谱）时，ALH 用局部线性近似比全局线性 LDA 更准，又比纯 KNN 稳定。
 
-#### 20. N 近邻 N3（N nearest neighbors, N3）
+##### 20. N 近邻 N3（N nearest neighbors, N3）
 
 **原理**：KNN 的变体/推广，"N3"通常指**带邻域结构或加权/嵌套的近邻规则**（如考虑近邻的邻域一致性、或用 N 个近邻构造局部统计量再判类，缓解 KNN 在边界处的不稳定）。其思想仍是局部相似性，但通过"近邻的近邻"或邻域投票来**平滑决策边界、抑制噪声标签**。
 
@@ -492,11 +503,11 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：LIBS 单发谱标签可能因打点落在矿物颗粒边界而"脏"，N3 利用邻域一致性可削弱个别错标样本的影响，使矿种判别对噪声标签更鲁棒。
 
-### （B）无监督模式识别（Unsupervised pattern recognition）
+#### （B）无监督模式识别（Unsupervised pattern recognition）
 
 不需要标签，用于**探索性分析/聚类/可视化**，如未知来料的"自然分组"。
 
-#### 21. K-均值聚类（K-means）
+##### 21. K-均值聚类（K-means）
 
 **原理**：把样本划入 $K$ 个簇，使**簇内平方误差和**最小：$\min \sum_{k}\sum_{x\in C_k}\|x-\mu_k\|^2$。迭代"分配—更新"。简单高效，但需预设 $K$、对初值敏感、假设球形簇。
 
@@ -508,7 +519,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：对**无标签**的一批来料谱做 K-means（先 PCA 降维），自动聚成几堆，再人工核对每堆的矿种——用于"我不知道这批料有几种矿"的探索，或发现混料中的异常亚群。
 
-#### 22. 主成分分析 PCA（Principal Components Analysis）
+##### 22. 主成分分析 PCA（Principal Components Analysis）
 
 **原理**：找数据**方差最大**的正交方向（主成分），即对协方差矩阵 $X^TX$ 做特征分解（或对 $X$ 做 SVD），前几个 PC 捕获主要变异，用于**降维与可视化**。无监督，不保证类可分，但常能把矿种在 PC1–PC2 平面上大致分开（因为不同矿的元素组成差异是谱的主要变异来源）。
 
@@ -520,7 +531,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：PC1 载荷上 Fe 线权重高（反映铁含量/基体），PC2 上 Ca、Si、H 线权重高（反映伴生/含水差异）；得分图上磁铁矿、赤铁矿、褐铁矿自然成团，无需标签即可"看见"矿种结构，并据载荷定位判别谱线。
 
-#### 23. 线性判别分析 LDA（在无监督栏中的说明）
+##### 23. 线性判别分析 LDA（在无监督栏中的说明）
 
 **原理/说明**：表格在"无监督"行也列了 LDA。严格说 LDA 需要类别标签（是有监督的）。它出现在此处，通常有两种实际用法：(i) **PCA+LDA 流水线**中，先用无监督 PCA 探索/降维，再用 LDA 做判别可视化，整条流程常被归入"模式识别探索"环节；(ii) 把**K-means 聚出的伪标签**当作类别，再做 LDA 以**放大簇间差异、可视化聚类结果**（即"聚类引导的判别投影"）。其数学原理同第 14 条。
 
@@ -533,15 +544,15 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 ---
 
-## 三、定量分析（Quantitative analysis）
+### 三、定量分析（Quantitative analysis）
 
 目标：从光谱**预测元素/氧化物含量**（TFe、SiO₂、CaO、P、S…）。分**校准曲线法**（单变量/多变量）与**无校准法（CF-LIBS）**。
 
-### （A）校准曲线法（Calibration curve）
+#### （A）校准曲线法（Calibration curve）
 
-#### 单变量校准（Univariate calibration）
+##### 单变量校准（Univariate calibration）
 
-##### 24. 单变量校准曲线（强度–含量线性/非线性拟合）
+###### 24. 单变量校准曲线（强度–含量线性/非线性拟合）
 
 **原理**：LIBS 谱线强度 $I$ 与元素浓度 $c$ 在一定范围近似满足**罗马金-赛伯公式（Lomakin-Scheibe）** $I=a\,c^b$（取对数即线性 $\log I=\log a+b\log c$），或低浓度下线性 $I=kc+I_0$。选**一条分析线**（必要时用内标线比值 $I_{分析}/I_{内标}$ 抵消脉冲能量/基体波动），对标准样做拟合得校准曲线，再反推未知样含量。
 
@@ -553,9 +564,9 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：以 Si I 288.16 nm / Fe I 404.58 nm 强度比对 SiO₂ 参考值做线性校准，预测铁矿中 SiO₂。问题：铁矿基体变化大（磁/赤/褐矿的等离子体温度、电子密度不同），单变量曲线**基体效应严重**，不同矿种需分别建线或用内标/标准加入补偿，精度有限——这正是引入多变量的动机。
 
-#### 多变量校准（Multivariate calibration）
+##### 多变量校准（Multivariate calibration）
 
-##### 25. 偏最小二乘 PLS（Partial Least Squares，含与内标联用）
+###### 25. 偏最小二乘 PLS（Partial Least Squares，含与内标联用）
 
 **原理**：对 $X$（全谱或选波段）和 $y$（含量）同时分解为潜变量，使 $X$ 与 $y$ 协方差最大，用少数 LV 回归，天然抗共线、抗噪声、能利用全谱信息补偿基体效应。表中特别提到**与内标标准化（internal standardization, ECIS 等）联用**：先把每条谱除以内标线（或内标归一化），再喂给 PLS，进一步抑制脉冲间波动。
 
@@ -568,7 +579,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：用全谱 PLS 预测 TFe，模型会自动给 Fe 多条线正权重、给受基体影响的连续背景负权重（隐式基体校正），精度远优于单变量；再叠加"Fe II/Fe I 内标归一化"补偿等离子体温度漂移，使不同矿种的 TFe 模型统一。
 
-##### 26. 偏最小二乘结合内标标准化（PLS + internal standardization / ECIS）
+###### 26. 偏最小二乘结合内标标准化（PLS + internal standardization / ECIS）
 
 **原理**：ECIS（如"能量/内标校正"类方法）在 PLS 之前，用**内标线或等离子体参数**对谱做标准化，使输入 $X$ 已部分消除脉冲能量、烧蚀量、温度的波动，PLS 只需学残余的化学–光谱关系，模型更稳、跨矿种迁移性更好。
 
@@ -579,7 +590,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：铁矿以 Fe 为基体主量，用一条稳定 Fe 线作内标，对每发谱归一化后再 PLS 测 SiO₂/Al₂O₃，可显著降低因激光能量抖动带来的预测方差。
 
-##### 27. 最小二乘支持向量机 LSSVM（定量版）
+###### 27. 最小二乘支持向量机 LSSVM（定量版）
 
 **原理**：同第 10 条，但输出为**连续含量**，损失为平方误差，解线性方程组，用 RBF 核拟合 $X\to y$ 的非线性校准曲面，适合基体效应导致的非线性响应。
 
@@ -591,7 +602,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：TFe 在高品位区因**自吸收**使强度–含量呈弯曲（饱和），线性 PLS 拟合偏差大；RBF-LSSVM 能拟合这条饱和曲线，在高 Fe 区更准。
 
-##### 28. 多元线性回归 MLR（Multiple Linear Regression）
+###### 28. 多元线性回归 MLR（Multiple Linear Regression）
 
 **原理**：$\hat{y}=X\beta+\varepsilon$，普通最小二乘 $\beta=(X^TX)^{-1}X^Ty$。要求**变量数 < 样本数且无严重共线**，否则 $X^TX$ 病态。因此 MLR 必须配合**波长选择**（只选少数互不共线的特征波长）使用，模型可解释（每个波长一个系数）。
 
@@ -603,7 +614,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：选出 Fe I 382.04、Fe II 259.94、Fe I 438.36 等 5 条互不重叠线做 MLR 测 TFe，系数物理意义清楚；但若误选了共线波长，VIF 飙升、系数不稳，需剔除。
 
-##### 29. 支持向量回归 SVR / SVM（回归版）
+###### 29. 支持向量回归 SVR / SVM（回归版）
 
 **原理**：SVR 在 $\varepsilon$-不敏感带内不计误差，最小化 $\frac{1}{2}\|w\|^2+C\sum(\xi+\xi^*)$，用核拟合非线性校准函数，解稀疏。对异常值比 LSSVM 稳健（因 $\varepsilon$ 带与 hinge 型损失）。
 
@@ -615,7 +626,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：铁矿样中偶有"打点落在裂隙/杂质"的离群谱，SVR 的 $\varepsilon$ 带使其对这类离群点不敏感，TFe 回归比 LSSVM 更稳健。
 
-##### 30. 支持向量机 SVM（用于回归/或分类辅助定量，如品位分级）
+###### 30. 支持向量机 SVM（用于回归/或分类辅助定量，如品位分级）
 
 **原理**：同 15/29，SVM 框架既可分类也可回归；在定量栏中，SVM 常指**用 SVM 做品位等级回归或先分类后分模型定量**（如先 SVM 判矿种，再对每矿种用专属回归，规避跨矿种基体差异）。
 
@@ -623,7 +634,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：先 SVM 把样分为磁/赤/褐三组，再各组内建 PLS 测 TFe，避免一个全局模型被矿种基体差异拖累。
 
-##### 31. 人工神经网络 ANN（定量版）
+###### 31. 人工神经网络 ANN（定量版）
 
 **原理**：MLP 拟合 $X\to y$ 非线性映射，能刻画自吸收、基体效应等复杂非线性，但需大数据与正则。
 
@@ -631,7 +642,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：用 ANN 同时输出 TFe、SiO₂、CaO、Al₂O₃、P、S 多组分（多输出网络），一次打谱给出全分析；非线性能力强，但需数百标样训练并严防过拟合。
 
-##### 32. 相关性向量机 RVM（Relevance Vector Machine）
+###### 32. 相关性向量机 RVM（Relevance Vector Machine）
 
 **原理**：SVM 的**贝叶斯稀疏**对应物——对权重施加**自动相关性确定（ARD）先验**，贝叶斯推断后绝大多数权重后验趋于 0，留下极少数"相关性向量"，解**比 SVM 更稀疏**，且**直接给出预测的概率分布/置信区间**（无需交叉验证调 $C$）。核函数同 SVM。
 
@@ -642,11 +653,11 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：RVM 用极少相关性向量（几十而非几百）即可拟合 TFe 校准，模型轻量、适合嵌入式；且对每发预测给出**置信区间**，在线分选时可"低置信度则复测"，提升可靠性。
 
-##### 33. 人工神经网络 ANN（表中重复列出，强调不同结构/用途）
+###### 33. 人工神经网络 ANN（表中重复列出，强调不同结构/用途）
 
 **说明**：表格在定量多变量栏两次出现 ANN，意在涵盖**不同网络结构**用于定量，如 MLP、RBF 网络、以及后文的 ELM 等广义神经网络家族。原理同 16/31。
 
-##### 34. 极限学习机 ELM（Extreme Learning Machine）
+###### 34. 极限学习机 ELM（Extreme Learning Machine）
 
 **原理**：单隐层前馈网络的"快训"变体——**隐层权重与偏置随机生成且固定**，只需求输出层权重，归结为**最小二乘/伪逆** $\beta=H^\dagger T$（$H$ 为隐层输出矩阵，$T$ 为目标）。训练极快、无需迭代调隐层，泛化常优于 BP-ANN，且避免局部极小。
 
@@ -658,7 +669,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：在线 LIBS 需"秒级建模/更新"，ELM 训练比 BP-ANN 快几个数量级，适合传送带上随来料分布漂移而**快速重训** TFe 模型。
 
-##### 35. 随机森林 RF（回归版）
+###### 35. 随机森林 RF（回归版）
 
 **原理**：同 18，叶节点取**均值**做回归，集成降方差、抗过拟合、给特征重要性，对非线性与离群稳健，几乎免调参。
 
@@ -666,7 +677,7 @@ SNIP（Statisticssensitive Nonlinear Iterative Peakclipping）最初用于X射�
 
 **铁矿示例**：RF 回归测 TFe/SiO₂ 常与 PLS 媲美且更抗离群打点；其重要性图直接告诉工艺人员"哪几条线最该盯紧"，便于做硬件上的波长监控。
 
-### （B）无校准法（Calibration-free）
+#### （B）无校准法（Calibration-free）
 
 无需标准样，靠**等离子体物理模型**从谱线绝对/相对强度反推元素浓度，适合"无标样/标样难制备"的场景。
 
@@ -685,7 +696,7 @@ $$I_{ki}=F\,c_s\,A_{ki}\,\frac{g_k}{U_s(T)}\,\exp\!\left(-\frac{E_k}{k_BT}\right
 
 **铁矿示例**：来料矿种未知、无对应标样时，用 CF-LIBS 直接由 Fe/Ca/Si/Al/Mg 的多条线 Boltzmann 图给出 TFe 与脉石氧化物的**半定量–定量**组成，无需建校准曲线；难点是铁矿 Fe 线**自吸收强**，必须做自吸收校正（否则 Fe 被低估、脉石被高估），且 LTE 需通过 McWhirter 判据与时间门控验证。
 
-##### 37. 遗传算法 GA（Genetic Algorithm，用于 CF/建模中的优化）
+###### 37. 遗传算法 GA（Genetic Algorithm，用于 CF/建模中的优化）
 
 **原理**：模拟自然选择的全局优化：把待优化参数（如 CF-LIBS 中的 $T,n_e$、自吸收系数，或波长子集、模型超参）编码为**染色体**，通过**选择、交叉、变异**迭代进化，适应度函数为待最小化的目标（如 Boltzmann 图各元素斜率不一致度、或预测残差）。擅长**非凸、多峰、组合**优化，避免陷入局部极小。
 
@@ -697,7 +708,7 @@ $$I_{ki}=F\,c_s\,A_{ki}\,\frac{g_k}{U_s(T)}\,\exp\!\left(-\frac{E_k}{k_BT}\right
 
 **铁矿示例**：CF-LIBS 中 $T$ 与自吸收参数耦合、目标非凸，用 GA 全局搜索最优 $(T,n_e,\text{自吸收修正})$，比手工/梯度法更稳；也可用 GA 为 PLS/MLR **选波长**（染色体=波长 0/1 掩码，适应度=验证 RMSEP），自动剔共线/无信息波长。
 
-##### 38. 二元搜索算法（Binary Search Algorithm，用于参数/阈值优化）
+###### 38. 二元搜索算法（Binary Search Algorithm，用于参数/阈值优化）
 
 **原理**：在**单调/有序**搜索空间上，反复取中点、据判别缩半区间，$O(\log n)$ 收敛。在 LIBS 中用于**单参数单调目标**的快速定位，如：CF-LIBS 中在已知区间内二分搜索使某判据（如中性/离子线 Saha 一致性、或自吸收校正后双线强度比=理论值）成立的 $T$ 或光学厚度；或分类阈值/自吸收修正因子的快速求解。
 
@@ -709,7 +720,7 @@ $$I_{ki}=F\,c_s\,A_{ki}\,\frac{g_k}{U_s(T)}\,\exp\!\left(-\frac{E_k}{k_BT}\right
 
 **铁矿示例**：用"自吸收校正后，同一上能级两条 Fe I 线的强度比应等于理论 $gA$ 比"这一单调判据，二分搜索光学厚度 $\tau$，快速完成 CF-LIBS 的自吸收校正，比 GA 更省算力（当问题确为单参数单调时）。
 
-##### 39. 混合无校准/ANN（Hybrid calibration-free / ANN）
+###### 39. 混合无校准/ANN（Hybrid calibration-free / ANN）
 
 **原理**：把 **CF-LIBS 的物理量**（如 Boltzmann 图斜率/截距、$T,n_e$、自吸收校正后的相对浓度、Saha 比等）作为**特征**，喂给 **ANN** 学习"CF 物理特征→真实含量"的**残余非线性映射**，用少量标样修正 CF 的系统偏差（如 LTE 偏离、光学薄假设失效、参数误差）。兼具"无需大量标样"与"数据驱动纠偏"的优点。
 
@@ -720,7 +731,7 @@ $$I_{ki}=F\,c_s\,A_{ki}\,\frac{g_k}{U_s(T)}\,\exp\!\left(-\frac{E_k}{k_BT}\right
 
 **铁矿示例**：纯 CF-LIBS 测铁矿 TFe 因自吸收/LTE 偏离有 ~5–10% 系统偏差；用 20–30 个标样训练"CF 特征→TFe"的 ANN 残差模型，可把偏差压到 ~1–2%，而无需为每种矿建完整校准曲线——是"少标样+物理可解释"的折中方案。
 
-##### 40. 蒙特卡洛 MC（Monte Carlo，用于不确定度/CF 稳健性）
+###### 40. 蒙特卡洛 MC（Monte Carlo，用于不确定度/CF 稳健性）
 
 **原理**：通过**随机抽样传播误差**：对输入量（谱线强度、$A_{ki}$、$E_k$、$T,n_e$、自吸收系数等）按其不确定度分布**重复抽样**，每次跑一遍 CF-LIBS（或任一模型），得到输出的**分布**，从而给出含量估计的**置信区间/不确定度**，并能做**敏感性分析**（哪个输入误差对结果影响最大）。也用于 CF 中难以解析求解的积分/迭代问题的随机逼近。
 
@@ -734,7 +745,7 @@ $$I_{ki}=F\,c_s\,A_{ki}\,\frac{g_k}{U_s(T)}\,\exp\!\left(-\frac{E_k}{k_BT}\right
 
 ---
 
-## 四、把全表串成一条"铁矿 LIBS 分析流水线"（综合示例）
+### 四、把全表串成一条"铁矿 LIBS 分析流水线"（综合示例）
 
 为让你看清各算法如何协作，给出一个端到端流程：
 
@@ -747,7 +758,7 @@ $$I_{ki}=F\,c_s\,A_{ki}\,\frac{g_k}{U_s(T)}\,\exp\!\left(-\frac{E_k}{k_BT}\right
 
 ---
 
-### 小结对照表（算法 → 一句话本质 → 铁矿关键作用）
+#### 小结对照表（算法 → 一句话本质 → 铁矿关键作用）
 
 | 算法 | 本质 | 铁矿关键作用 |
 |---|---|---|

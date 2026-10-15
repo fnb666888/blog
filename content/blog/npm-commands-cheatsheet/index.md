@@ -19,8 +19,6 @@ params:
     robots: ""
 ---
 
-# npm 常用命令
-
 ## 一、项目初始化与配置
 
 - `npm init`: 交互式创建 package.json，需逐项填写项目信息

@@ -19,8 +19,6 @@ params:
     robots: ""
 ---
 
-# Claude Code 插件市场完整目录（203个插件）
-
 两个市场来源：
 - **claude-plugins-official**（官方市场）：202 个插件
 - **karpathy-skills**（第三方市场）：1 个插件

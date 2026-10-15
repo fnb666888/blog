@@ -18,6 +18,13 @@ params:
     canonical: ""
     robots: ""
 ---
+
+> **本文定位**：记录具体实现中的测温、密度估计、配分函数、Saha 合并、谱线筛选与后处理。
+>
+> **关联阅读**：[基本原理与流程]({{< relref "blog/CF-LIBS/index.md" >}}) · [物理假设与诊断]({{< relref "blog/LIBS-Physics/index.md" >}}) · [指标解释与结果表达]({{< relref "blog/LIBS-operate/index.md" >}})。
+
+---
+
 ## CF-LIBS 执行流程详细拆解
 
 CF-LIBS（Calibration-Free LIBS，GB/T 38257—2019 第 9.2.3 条）的核心逻辑位于 `libs_analysis/src/libs_analyzer/models/cf_libs.py` 的 `CFLIBS` 类中。整个多元素全成分输出由 `predict_composition()` 编排，依次执行以下 **5 个核心步骤** + **1 个后处理步骤**。

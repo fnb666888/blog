@@ -19,9 +19,6 @@ params:
     robots: ""
 ---
 
-
-# 物理学单位制：基本单位、自然单位制与无量纲化
-
 ## 一、SI 七个基本单位（简述）
 
 | 基本量 | 单位 | 符号 |
@@ -161,4 +158,3 @@ $$c = 1,\quad \hbar = 1,\quad k_B = 1,\quad G = 1 \quad (\text{普朗克单位�
 $$\underbrace{\text{物理量}}_{\text{有量纲}} = \underbrace{\text{纯数}}_{\text{无量纲}} \times \underbrace{\text{基准单位}}_{\text{有量纲常数}}$$
 
 令基准单位 $= 1$，物理量就退化为纯数。
-

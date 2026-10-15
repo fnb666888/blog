@@ -18,6 +18,13 @@ params:
     canonical: ""
     robots: ""
 ---
+
+> **本文定位**：解释免定标定量分析的基本思想、核心假设、计算顺序与局限。
+>
+> **关联阅读**：[等离子体物理与假设依据]({{< relref "blog/LIBS-Physics/index.md" >}}) · [计算步骤与实现细节]({{< relref "blog/CF-LIBS-details/index.md" >}})。
+
+---
+
 ## 详细介绍一下 CF-LIBS 的原理和步骤
 
 **无定标激光诱导击穿光谱技术**（Calibration-Free Laser-Induced Breakdown Spectroscopy, 简称 **CF-LIBS**）是传统 LIBS 技术的一种重要演进。

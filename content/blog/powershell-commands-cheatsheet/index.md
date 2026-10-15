@@ -19,8 +19,6 @@ params:
     robots: ""
 ---
 
-# PowerShell 常用命令
-
 PowerShell 提供了丰富的内置别名（Aliases），主要是为了兼容传统的 CMD 和 Linux/Unix 用户的习惯，让命令行操作更加快捷。
 
 ## 1. 文件与目录管理

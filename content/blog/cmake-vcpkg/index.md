@@ -19,9 +19,9 @@ params:
     robots: ""
 ---
 
-## 一、CMake：跨平台构建系统生成器
+### 一、CMake：跨平台构建系统生成器
 
-### 1. CMake 是什么？
+#### 1. CMake 是什么？
 CMake **不是**编译器，也**不是**构建工具（如 Make/Ninja）。它是一个 **构建系统生成器**：
 - 你编写平台无关的 `CMakeLists.txt`
 - CMake 根据目标平台生成对应的构建文件（Windows 上生成 `.sln`/Ninja，Linux 上生成 Makefile/Ninja）
@@ -31,7 +31,7 @@ CMake **不是**编译器，也**不是**构建工具（如 Make/Ninja）。它�
 CMakeLists.txt → CMake → Ninja/Makefile/VS Solution → 编译器 → 可执行文件
 ```
 
-### 2. 核心特点
+#### 2. 核心特点
 
 | 特点 | 说明 |
 | :--- | :--- |
@@ -43,9 +43,9 @@ CMakeLists.txt → CMake → Ninja/Makefile/VS Solution → 编译器 → 可执
 | **测试/打包** | 内置 CTest（测试）、CPack（安装包生成） |
 | **Presets** | CMakePresets.json 统一配置多环境构建参数 |
 
-### 3. 核心语法速查
+#### 3. 核心语法速查
 
-#### 最小项目
+##### 最小项目
 ```cmake
 cmake_minimum_required(VERSION 3.20)
 project(my_app VERSION 1.0.0 LANGUAGES CXX)
@@ -56,7 +56,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(my_app src/main.cpp src/utils.cpp)
 ```
 
-#### 链接库
+##### 链接库
 ```cmake
 # 查找库
 find_package(fmt CONFIG REQUIRED)
@@ -70,14 +70,14 @@ target_link_libraries(my_app PRIVATE
 )
 ```
 
-#### 子目录组织
+##### 子目录组织
 ```cmake
 add_subdirectory(src/core)     # 子目录有自己的 CMakeLists.txt
 add_subdirectory(src/network)
 add_subdirectory(tests)
 ```
 
-#### 条件编译
+##### 条件编译
 ```cmake
 if(WIN32)
     target_compile_definitions(my_app PRIVATE PLATFORM_WINDOWS)
@@ -86,7 +86,7 @@ elseif(UNIX)
 endif()
 ```
 
-### 4. Modern CMake 核心原则
+#### 4. Modern CMake 核心原则
 > ⚠️ **最重要的一条**：一切以 **Target** 为中心，避免使用全局命令
 
 | ❌ 旧式（避免） | ✅ 现代（推荐） |
@@ -98,7 +98,7 @@ endif()
 
 **原因**：Target 级别的属性具有传播性（`PRIVATE/PUBLIC/INTERFACE`），不会污染其他目标，支持多目标共存。
 
-### 5. 常用命令行
+#### 5. 常用命令行
 ```bash
 # 配置（生成构建系统）
 cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
@@ -118,16 +118,16 @@ rm -rf build && cmake -S . -B build
 
 ---
 
-## 二、vcpkg：微软官方 C/C++ 包管理器
+### 二、vcpkg：微软官方 C/C++ 包管理器
 
-### 1. vcpkg 是什么？
+#### 1. vcpkg 是什么？
 vcpkg 是一个 **源码级包管理器**：
 - 从源码编译第三方库（保证与你的编译器/运行时一致）
 - 自动处理依赖关系
 - 与 CMake 无缝集成（通过 toolchain file）
 - 支持 Windows / Linux / macOS
 
-### 2. 核心特点
+#### 2. 核心特点
 
 | 特点 | 说明 |
 | :--- | :--- |
@@ -140,7 +140,7 @@ vcpkg 是一个 **源码级包管理器**：
 | **Binary Caching** | 编译过一次后缓存二进制，后续安装秒级完成 |
 | **Overlay Ports** | 自定义/修改 port，满足特殊需求 |
 
-### 3. 两种使用模式对比
+#### 3. 两种使用模式对比
 
 | | Classic Mode | Manifest Mode ✅推荐 |
 |---|---|---|
@@ -151,9 +151,9 @@ vcpkg 是一个 **源码级包管理器**：
 | CI/CD | 困难 | 天然支持 |
 | 适用场景 | 学习、临时实验 | 正式项目 |
 
-### 4. Manifest Mode 完整用法
+#### 4. Manifest Mode 完整用法
 
-#### vcpkg.json
+##### vcpkg.json
 ```json
 {
   "name": "my-project",
@@ -185,7 +185,7 @@ vcpkg 是一个 **源码级包管理器**：
 -   **`platform`**: 条件依赖（`!uwp` = 非 UWP 平台才安装）
 -   **`overrides`**: 强制指定某个依赖的确切版本
 
-#### CMakeLists.txt 中使用
+##### CMakeLists.txt 中使用
 ```cmake
 # 只需正常 find_package，vcpkg toolchain 会自动处理
 find_package(fmt CONFIG REQUIRED)
@@ -199,7 +199,7 @@ target_link_libraries(my_app PRIVATE
 )
 ```
 
-### 5. 常用命令
+#### 5. 常用命令
 ```bash
 # 搜索可用库
 vcpkg search json
@@ -221,7 +221,7 @@ vcpkg list
 vcpkg remove --outdated
 ```
 
-### 6. Triplet 常见选项
+#### 6. Triplet 常见选项
 | Triplet | 说明 |
 | :--- | :--- |
 | `x64-windows` | Windows x64, 动态链接 CRT |
@@ -233,7 +233,7 @@ vcpkg remove --outdated
 
 ---
 
-## 三、CMake + vcpkg 协作流程
+### 三、CMake + vcpkg 协作流程
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -255,7 +255,7 @@ vcpkg remove --outdated
 
 ---
 
-## 四、选型建议
+### 四、选型建议
 
 | 场景 | 建议 |
 | :--- | :--- |

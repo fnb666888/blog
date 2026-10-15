@@ -19,11 +19,11 @@ params:
     robots: ""
 ---
 
-**互联网的分层模型：从网线到网页，每一层在干什么、用什么协议**
+### 网络分层模型与协议
 
 互联网能跑起来，靠的不是某个“超级协议”，而是一套分工明确的分层体系。每层只解决一类问题，只和上下两层打交道，对等层之间用统一的格式对话。这种设计让“换掉底层技术不影响上层应用”成为可能——比如把网线换成 Wi-Fi、把 HTTP 换成 HTTP/3，其他层几乎不用改。
 
-### 一、先搞清三套模型，别混着说
+#### 先搞清三套模型，别混着说
 
 | 模型 | 层级 | 定位 |
 |---|---|---|
@@ -35,9 +35,9 @@ params:
 
 > 另外有个工程上的补充：**“2.5 层”**的说法，指 MPLS、VXLAN、GRE 这类隧道技术——它们夹在二层和三层之间，既不是纯 MAC 转发也不是纯 IP 路由。
 
-### 二、逐层拆解
+#### 逐层拆解
 
-#### 第 1 层：物理层（Physical Layer）
+##### 第 1 层：物理层（Physical Layer）
 
 **要解决的问题**：比特怎么变成电信号、光信号或无线电波传出去。它不关心“这是什么数据”，只关心电压高低、光脉冲有无、频率相位、引脚定义、时钟同步。
 
@@ -52,7 +52,7 @@ params:
 - 只提供**原始比特流传输**，不检错、不重传、不寻址——出错留给上层处理。
 - 关键参数：带宽、波特率、信噪比、衰减、双工方式（半双工/全双工）。
 
-#### 第 2 层：数据链路层（Data Link Layer）
+##### 第 2 层：数据链路层（Data Link Layer）
 
 **要解决的问题**：在同一个局域网（同一广播域）内，把比特组装成帧，用 MAC 地址找到下一跳，并做差错检测。
 
@@ -76,7 +76,7 @@ params:
 - 交换机工作在二层：靠 **MAC 地址表自学习**转发，隔离冲突域但不隔离广播域。
 - 这一层的关键词：**广播域、冲突域、VLAN、二层环路、MAC 表泛洪**。
 
-#### 第 3 层：网络层（Network Layer）——你问的重点
+##### 第 3 层：网络层（Network Layer）
 
 **要解决的问题**：跨越多个网络，把数据包从源主机送到目的主机。核心是三件事：**寻址、路由、分片**。
 
@@ -102,7 +102,7 @@ params:
 - **分片与重组**：当包大于链路 MTU 时切分（IPv6 取消中间节点分片，改由源端做路径 MTU 发现）。
 - 路由器工作在这一层：查**路由表**做最长前缀匹配转发，隔离广播域。
 
-#### 第 4 层：传输层（Transport Layer）
+##### 第 4 层：传输层（Transport Layer）
 
 **要解决的问题**：进程到进程的通信（主机到主机是 IP 干的），加上可靠性、流量控制、拥塞控制、多路复用。
 
@@ -123,7 +123,7 @@ params:
 - **Nagle 算法**合并小报文，**Delayed ACK**延迟确认，两者相遇可能产生 40ms 延迟。
 - 首部最小 20B，通过**端口号（16 位，0~65535）**区分进程：0~1023 知名端口（80/443/22/53），1024~49151 注册端口，49152~65535 动态端口。
 
-#### 第 5 层：会话层（Session Layer）& 第 6 层：表示层（Presentation Layer）
+##### 第 5 层：会话层（Session Layer）& 第 6 层：表示层（Presentation Layer）
 
 这两层在 TCP/IP 体系里没有独立实现，功能被并进了应用层，但概念依然有用：
 
@@ -132,7 +132,7 @@ params:
 
 > ⚠️ 一个常见误区：**TLS 不是应用层协议**。它在传输层和应用层之间，给上层提供安全通道，对应 OSI 的表示层/会话层。所以准确说法是 HTTPS = HTTP over TLS over TCP。
 
-#### 第 7 层：应用层（Application Layer）
+##### 第 7 层：应用层（Application Layer）
 
 **要解决的问题**：应用程序之间的语义交互，即“数据长什么样、什么意思”。
 
@@ -157,7 +157,7 @@ params:
 
 **特点**：协议多为**请求-响应**或**发布-订阅**语义，数据是人类可读或可序列化的格式，安全性靠下层 TLS 保障。
 
-### 三、一次完整的数据流动（封装与解封装）
+#### 一次完整的数据流动（封装与解封装）
 
 你在浏览器输入 `https://www.example.com` 回车：
 
@@ -171,7 +171,11 @@ params:
 
 这条链路清晰地体现了分层的核心规律：**越往下，作用范围越短（本机→局域网→全网），头部开销越小，语义越简单；越往上，越接近业务，越复杂。**
 
-### 四、各层对应的硬件设备
+---
+
+### 网络设备、易错概念与技术演进
+
+#### 各层对应的硬件设备
 
 | 层级 | 设备 |
 |---|---|
@@ -181,7 +185,7 @@ params:
 | 四层 | 四层负载均衡（LVS，基于 IP+Port）、NAT 网关、防火墙 |
 | 七层 | 反向代理（Nginx）、WAF、API 网关、CDN 边缘节点 |
 
-### 五、几个容易踩坑的点
+#### 几个容易踩坑的点
 
 1. **ARP 不算纯粹的二层协议**——它用以太网帧承载，但内容是 IP→MAC 的映射，为三层服务，所以常被称作“2.5 层”。
 2. **MAC 地址 ≠ IP 地址**：MAC 扁平、不可路由、本地有效；IP 分层、可聚合、全局可达。这就是为什么需要分层寻址——如果全网靠 MAC 路由，路由表将膨胀到无法维护。
@@ -190,7 +194,7 @@ params:
 5. **HTTPS 的 S 不在应用层**——TLS 在传输层与应用层之间。抓包时看到的是 TLS 握手而不是 HTTP 明文。
 6. **MTU 问题很隐蔽**：1500 字节以太网 MTU + 20B IP + 20B TCP + 20~60B TLS 开销，MSS 大约 1460。VPN、Docker overlay 网络常常因为额外包头导致大包被丢，表现为“能 ping 通但打不开网页”。
 
-### 六、现代演进方向（加分项）
+#### 现代演进方向（加分项）
 
 - **协议瘦身与融合**：HTTP/3 + QUIC 把 TLS、重传、拥塞控制从内核态移到用户态，绕开操作系统内核的 TCP 栈升级慢的问题。
 - **SDN（软件定义网络）**：把控制平面（路由决策）和数据平面（转发）分离，OpenFlow 协议下发流表，网络可编程。
@@ -200,12 +204,11 @@ params:
 
 ---
 
-
-**工控机“一堆线、一堆口、一堆协议”，怎么对上号**
+### 工控接口、系统设备名与协议识别
 
 核心思路：**分三层定位，互相交叉验证**。物理接口（哪个孔/哪根线）→ 系统设备名（COM几、ttyUSB几）→ 协议特征（波特率、站号、报文格式）。只靠一层很容易对不上，比如 USB 转串口每次重启 `ttyUSB0/1` 会漂移，或者一个 RS-485 口上挂了 5 个站号的设备。
 
-### 一、先把概念拆开（很多人卡在这里）
+#### 先把概念拆开（很多人卡在这里）
 
 | 概念 | 是什么 | 举例 |
 |---|---|---|
@@ -216,61 +219,7 @@ params:
 
 **关键点**：一个串口 ≠ 一台设备。RS-485 总线上通常挂一串设备，靠**站号（地址）**区分；而 USB 设备基本是一对一。所以排查时要先分清“这条线上有几个设备”。
 
-### 二、Windows 下的做法
-
-**1. 设备管理器定位**
-`设备管理器 → 端口(COM 和 LPT)`，展开后显示类似 `USB-SERIAL CH340 (COM3)`。右键 → 属性 → **详细信息**，切这几个属性：
-- **硬件 ID**：`USB\VID_1A86&PID_7523`（VID/PID 对应芯片厂：FTDI 0403、Prolific 067B、CP210x 10C4、CH340 1A86、沁恒 4348）
-- **位置信息 / 父系**：`Port_#0003.Hub_#0002`，这是它在 USB 树上的物理位置，**只要插的 hub 口不变就不变**，比 COM 号可靠。
-- **友好名称**：有时会直接带设备型号。
-
-**2. 插拔对比法（最笨但最有效）**
-全部拔掉 → 记下当前列表 → 插一个 → 看新增哪个 COM → 贴标签。重复。配合 **USBDeview** 或 **Device Tree Viewer** 能直接看到 bus/port 路径和序列号，比设备管理器直观。
-
-**3. PowerShell 一键导出**
-```powershell
-Get-WmiObject Win32_PnPEntity | Where-Object {$_.PNPClass -eq "Ports"} |
-  Select-Object Name, DeviceID, PNPDeviceID | Format-Table -AutoSize
-```
-想查注册表原始信息：`HKLM\SYSTEM\CurrentControlSet\Enum\USB\` 下有每个设备的 `FriendlyName`、`PortName`、`SerialNumber`。
-
-**4. 固化 COM 号**
-设备管理器 → 端口属性 → 端口设置 → 高级 → 改 COM 号（避开 1~4，从 COM10 起用，减少老软件兼容问题）。更稳的做法是写脚本按 VID/PID/序列号创建固定符号链接或写配置文件，程序读配置而不硬编码 `COM3`。
-
-### 三、Linux 下的做法（更规范，推荐）
-
-**1. 看拓扑和挂载点**
-```bash
-lsusb -t                      # 树状拓扑，bus-port:dev，含 VID:PID
-dmesg | grep -iE "tty|usb"    # 插拔瞬间内核报的设备和名字
-ls /dev/tty{USB,ACM,S}*       # USB转串口 / CDC设备 / 原生串口
-```
-
-**2. 查设备详情**
-```bash
-udevadm info -a -n /dev/ttyUSB0 | grep -iE "vendor|product|serial|devpath|interface"
-```
-关注 `idVendor`、`idProduct`、`serial`、`devpath`（如 `1-2.3` = bus1 的 2 口再接 3 口）。
-
-**3. 用稳定命名，别用 ttyUSB0（重点）**
-udev 自带两套持久名：
-```bash
-ls -l /dev/serial/by-id/     # 按 VID/PID/序列号绑定，换插口也不变
-ls -l /dev/serial/by-path/   # 按物理 USB 端口路径绑定，同型号无序列号时用这个
-```
-程序里直接开 `/dev/serial/by-path/pci-0000:00:14.0-usb-0:2.3:1.0-port0`，**彻底解决重启漂移**。
-
-**4. 自己写 udev rule（同型号多台设备）**
-`/etc/udev/rules.d/99-serial.rules`：
-```
-SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="FT1ABC", SYMLINK+="plc_main", MODE="0666"
-SUBSYSTEM=="tty", KERNELS=="1-2.3", SYMLINK+="weigher", MODE="0666"
-```
-重载：`udevadm control --reload-rules && udevadm trigger`。之后用 `/dev/plc_main`、`/dev/weigher`，可读性直接拉满。
-
-**5. 实时监控插拔**：`udevadm monitor --property`，插一个看一堆属性，顺手抄走做 rule。
-
-### 四、协议层验证：确认“这个口连的是不是我要的那台”
+#### 协议层验证：确认“这个口连的是不是我要的那台”
 
 知道 COM3 对应某个转换器还不够，得确认它后面挂的是什么、站号多少。
 
@@ -306,7 +255,69 @@ Windows 用 Putty/SSCOM/Modbus Poll/QModBus，Linux 用 `minicom`、`screen /dev
 - 共地问题：不同设备地电位差大会导致间歇性乱码，加光电隔离模块。
 - USB 长线（>3m）易丢包，用有源延长线或光纤 USB 延长器；多个转换器集中插容易**供电不足**，表现就是“能枚举但一通信就掉”。
 
-### 五、工程化落地：别让下次维护再来一遍
+---
+
+### Windows 与 Linux 下的设备定位
+
+#### Windows 下的做法
+
+**1. 设备管理器定位**
+`设备管理器 → 端口(COM 和 LPT)`，展开后显示类似 `USB-SERIAL CH340 (COM3)`。右键 → 属性 → **详细信息**，切这几个属性：
+- **硬件 ID**：`USB\VID_1A86&PID_7523`（VID/PID 对应芯片厂：FTDI 0403、Prolific 067B、CP210x 10C4、CH340 1A86、沁恒 4348）
+- **位置信息 / 父系**：`Port_#0003.Hub_#0002`，这是它在 USB 树上的物理位置，**只要插的 hub 口不变就不变**，比 COM 号可靠。
+- **友好名称**：有时会直接带设备型号。
+
+**2. 插拔对比法（最笨但最有效）**
+全部拔掉 → 记下当前列表 → 插一个 → 看新增哪个 COM → 贴标签。重复。配合 **USBDeview** 或 **Device Tree Viewer** 能直接看到 bus/port 路径和序列号，比设备管理器直观。
+
+**3. PowerShell 一键导出**
+```powershell
+Get-WmiObject Win32_PnPEntity | Where-Object {$_.PNPClass -eq "Ports"} |
+  Select-Object Name, DeviceID, PNPDeviceID | Format-Table -AutoSize
+```
+想查注册表原始信息：`HKLM\SYSTEM\CurrentControlSet\Enum\USB\` 下有每个设备的 `FriendlyName`、`PortName`、`SerialNumber`。
+
+**4. 固化 COM 号**
+设备管理器 → 端口属性 → 端口设置 → 高级 → 改 COM 号（避开 1~4，从 COM10 起用，减少老软件兼容问题）。更稳的做法是写脚本按 VID/PID/序列号创建固定符号链接或写配置文件，程序读配置而不硬编码 `COM3`。
+
+#### Linux 下的做法（更规范，推荐）
+
+**1. 看拓扑和挂载点**
+```bash
+lsusb -t                      # 树状拓扑，bus-port:dev，含 VID:PID
+dmesg | grep -iE "tty|usb"    # 插拔瞬间内核报的设备和名字
+ls /dev/tty{USB,ACM,S}*       # USB转串口 / CDC设备 / 原生串口
+```
+
+**2. 查设备详情**
+```bash
+udevadm info -a -n /dev/ttyUSB0 | grep -iE "vendor|product|serial|devpath|interface"
+```
+关注 `idVendor`、`idProduct`、`serial`、`devpath`（如 `1-2.3` = bus1 的 2 口再接 3 口）。
+
+**3. 用稳定命名，别用 ttyUSB0（重点）**
+udev 自带两套持久名：
+```bash
+ls -l /dev/serial/by-id/     # 按 VID/PID/序列号绑定，换插口也不变
+ls -l /dev/serial/by-path/   # 按物理 USB 端口路径绑定，同型号无序列号时用这个
+```
+程序里直接开 `/dev/serial/by-path/pci-0000:00:14.0-usb-0:2.3:1.0-port0`，**彻底解决重启漂移**。
+
+**4. 自己写 udev rule（同型号多台设备）**
+`/etc/udev/rules.d/99-serial.rules`：
+```
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="FT1ABC", SYMLINK+="plc_main", MODE="0666"
+SUBSYSTEM=="tty", KERNELS=="1-2.3", SYMLINK+="weigher", MODE="0666"
+```
+重载：`udevadm control --reload-rules && udevadm trigger`。之后用 `/dev/plc_main`、`/dev/weigher`，可读性直接拉满。
+
+**5. 实时监控插拔**：`udevadm monitor --property`，插一个看一堆属性，顺手抄走做 rule。
+
+---
+
+### 工程化配置与排查流程
+
+#### 工程化落地：别让下次维护再来一遍
 
 1. **标签三重对应**：线缆两端 + 设备本体 + 机柜图纸，统一编号（例：`J3 ↔ COM3 ↔ PLC-01 ↔ 站号1`）。拍照存档，存在设备台账里。
 2. **建一张映射表**（建议做成 CSV/JSON 进版本管理）：
@@ -322,7 +333,7 @@ Windows 用 Putty/SSCOM/Modbus Poll/QModBus，Linux 用 `minicom`、`screen /dev
  - 距离远或设备分散时，改用**串口服务器/以太网 IO 模块**，走网线+IP，排查难度下降一个量级。
  - 关键场合考虑现场总线（CANopen、Profinet、EtherCAT）或直接上 MQTT/Modbus TCP。
 
-### 六、给你一个可直接执行的流程
+#### 给你一个可直接执行的流程
 
 ```
 ① 全部断电/拔线 → 记录当前设备列表 baseline
@@ -340,5 +351,3 @@ Windows 用 Putty/SSCOM/Modbus Poll/QModBus，Linux 用 `minicom`、`screen /dev
 - 工控机**原生串口**是 `ttyS0/COM1`，USB 转的是 `ttyUSB*/COMx`，别混着找。
 - 485 A/B 接反是最常见的“完全不通”原因，先测电压再调软件。
 - 多台同型号转换器插同一个无源 hub，重启后顺序随机——要么用 by-path，要么换带序列号的型号。
-
----

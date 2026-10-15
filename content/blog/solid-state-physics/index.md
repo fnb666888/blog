@@ -6,7 +6,7 @@ date: 2026-06-24T22:13:47+08:00
 lastmod: 2026-06-24T22:13:47+08:00
 draft: false
 weight: 50
-categories: [物理]
+categories: ["物理与科学基础"]
 tags: [固体物理, 物理]
 contributors: []
 pinned: false

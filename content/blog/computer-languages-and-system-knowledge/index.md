@@ -6,8 +6,8 @@ date: 2026-08-07T17:07:02+08:00
 lastmod: 2026-08-07T17:07:02+08:00
 draft: false
 weight: 50
-categories: [基础知识]
-tags: [操作系统, 编程语言, 网络协议, Web开发, 机器学习, DNS]
+categories: ["计算机与网络"]
+tags: ["操作系统", "编程语言", "网络协议", "Web 开发", "机器学习", "DNS"]
 contributors: []
 pinned: false
 homepage: false

@@ -6,7 +6,7 @@ date: 2026-06-20T17:28:02+08:00
 lastmod: 2026-06-20T17:28:02+08:00
 draft: false
 weight: 50
-categories: [艺术]
+categories: ["生活与健康"]
 tags: [中医, 气功, 养生]
 contributors: []
 pinned: false

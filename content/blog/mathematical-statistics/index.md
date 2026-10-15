@@ -6,7 +6,7 @@ date: 2026-10-11
 lastmod: 2026-10-11
 draft: false
 weight: 50
-categories: [数学]
+categories: ["数学"]
 tags: ["数理统计"]
 contributors: []
 pinned: false

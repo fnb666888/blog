@@ -6,8 +6,8 @@ date: 2026-06-24T20:47:28+08:00
 lastmod: 2026-06-24T20:47:28+08:00
 draft: false
 weight: 50
-categories: ["物理"]
-tags: ["电动力学", "麦克斯韦方程组", "物理学"]
+categories: ["物理与科学基础"]
+tags: ["电动力学", "麦克斯韦方程组", "物理"]
 contributors: []
 pinned: false
 homepage: false

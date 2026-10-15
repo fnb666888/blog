@@ -6,7 +6,7 @@ date: 2026-08-07T17:07:02+08:00
 lastmod: 2026-08-07T17:07:02+08:00
 draft: false
 weight: 50
-categories: [基础知识]
+categories: ["艺术与创作"]
 tags: [颜色理论, 配色技巧, 设计, RGB, HSB, 视觉设计]
 contributors: []
 pinned: false

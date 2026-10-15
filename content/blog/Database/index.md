@@ -6,7 +6,7 @@ date: 2026-09-19
 lastmod: 2026-09-19
 draft: false
 weight: 50
-categories: [基础知识]
+categories: ["计算机与网络"]
 tags: ["数据库"]
 contributors: []
 pinned: false

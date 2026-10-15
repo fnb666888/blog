@@ -6,8 +6,8 @@ date: 2026-08-03
 lastmod: 2026-08-03
 draft: false
 weight: 50
-categories: ["说明文档"]
-tags: ["云服务", "硬件"]
+categories: ["开发工具与云服务"]
+tags: ["Oracle Cloud", "云服务", "命令行"]
 contributors: []
 pinned: false
 homepage: false

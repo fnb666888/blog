@@ -6,7 +6,7 @@ date: 2026-09-15
 lastmod: 2026-09-15
 draft: false
 weight: 50
-categories: ["物理"]
+categories: ["物理与科学基础"]
 tags: ["单位制"]
 contributors: []
 pinned: false

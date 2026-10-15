@@ -6,7 +6,7 @@ date: 2026-09-21
 lastmod: 2026-09-21
 draft: false
 weight: 50
-categories: [数学]
+categories: ["数学"]
 tags: ["张量分析"]
 contributors: []
 pinned: false

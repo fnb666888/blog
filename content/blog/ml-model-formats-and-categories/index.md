@@ -6,8 +6,8 @@ date: 2026-08-07T17:07:02+08:00
 lastmod: 2026-08-07T17:07:02+08:00
 draft: false
 weight: 50
-categories: [基础知识]
-tags: [机器学习, 模型格式, ONNX, PyTorch, HuggingFace, 深度学习]
+categories: ["人工智能"]
+tags: ["机器学习", "模型格式", "ONNX", "PyTorch", "Hugging Face", "深度学习"]
 contributors: []
 pinned: false
 homepage: false

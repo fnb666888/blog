@@ -6,7 +6,7 @@ date: 2026-10-11
 lastmod: 2026-10-11
 draft: false
 weight: 50
-categories: [物理]
+categories: ["光学与激光"]
 tags: ["光学"]
 contributors: []
 pinned: false

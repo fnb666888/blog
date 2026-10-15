@@ -6,8 +6,8 @@ date: 2026-06-26T22:44:01+08:00
 lastmod: 2026-06-26T22:44:01+08:00
 draft: false
 weight: 50
-categories: ["说明文档"]
-tags: ["Claude", "Plugins"]
+categories: ["人工智能"]
+tags: ["Claude Code", "Plugin"]
 contributors: []
 pinned: false
 homepage: false

@@ -6,8 +6,8 @@ date: 2026-08-13
 lastmod: 2026-08-13
 draft: false
 weight: 50
-categories: ["说明文档"]
-tags: ["云服务", "硬件"]
+categories: ["人工智能"]
+tags: ["ModelScope", "AI", "模型部署", "云服务"]
 contributors: []
 pinned: false
 homepage: false

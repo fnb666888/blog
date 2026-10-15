@@ -6,8 +6,8 @@ date: 2026-06-20T16:56:04+08:00
 lastmod: 2026-06-20T16:56:04+08:00
 draft: false
 weight: 50
-categories: [阅读]
-tags: [摘抄, 书籍, 价值投资]
+categories: ["商业与投资"]
+tags: ["摘抄", "读书笔记", "价值投资"]
 contributors: []
 pinned: false
 homepage: false

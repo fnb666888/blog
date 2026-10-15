@@ -6,7 +6,7 @@ date: 2026-09-17
 lastmod: 2026-09-17
 draft: false
 weight: 50
-categories: [数学]
+categories: ["数学"]
 tags: ["复变函数"]
 contributors: []
 pinned: false

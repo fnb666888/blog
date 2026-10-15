@@ -6,8 +6,8 @@ date: 2026-06-12T17:13:12+08:00
 lastmod: 2026-06-12T17:13:12+08:00
 draft: false
 weight: 50
-categories: ["阅读"]
-tags: ["摘抄", "书籍", "群体心理"]
+categories: ["阅读与思考"]
+tags: ["摘抄", "读书笔记", "群体心理"]
 contributors: []
 pinned: false
 homepage: false

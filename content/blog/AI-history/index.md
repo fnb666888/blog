@@ -6,7 +6,7 @@ date: 2026-09-19
 lastmod: 2026-09-19
 draft: false
 weight: 50
-categories: [说明文档]
+categories: ["人工智能"]
 tags: ["AI"]
 contributors: []
 pinned: false

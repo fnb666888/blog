@@ -6,8 +6,8 @@ date: 2026-08-21
 lastmod: 2026-08-21
 draft: false
 weight: 50
-categories: ["基础知识"]
-tags: ["MCP", "Plugins", "SKILL"]
+categories: ["人工智能"]
+tags: ["MCP", "Skill", "Hook", "Plugin"]
 contributors: []
 pinned: false
 homepage: false

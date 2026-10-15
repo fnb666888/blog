@@ -6,8 +6,8 @@ date: 2026-08-21
 lastmod: 2026-08-21
 draft: false
 weight: 50
-categories: ["基础知识"]
-tags: ["Schema", "API",]
+categories: ["编程与软件开发"]
+tags: ["Schema", "API", "OpenAPI", "REST"]
 contributors: []
 pinned: false
 homepage: false

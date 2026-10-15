@@ -6,7 +6,7 @@ date: 2026-09-23
 lastmod: 2026-09-23
 draft: false
 weight: 50
-categories: [数学]
+categories: ["数学"]
 tags: ["变分法"]
 contributors: []
 pinned: false

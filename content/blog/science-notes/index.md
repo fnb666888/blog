@@ -6,7 +6,7 @@ date: 2026-08-04T10:01:41+08:00
 lastmod: 2026-08-04T10:01:41+08:00
 draft: false
 weight: 50
-categories: [基础知识]
+categories: ["物理与科学基础"]
 tags: [科学, 物理, 量子力学, 核物理, 材料科学]
 contributors: []
 pinned: false

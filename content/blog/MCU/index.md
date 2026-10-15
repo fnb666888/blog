@@ -6,7 +6,7 @@ date: 2026-08-24
 lastmod: 2026-08-24
 draft: false
 weight: 50
-categories: ["基础知识"]
+categories: ["电子与嵌入式"]
 tags: ["单片机"]
 contributors: []
 pinned: false

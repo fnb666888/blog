@@ -6,7 +6,7 @@ date: 2026-06-20T17:09:52+08:00
 lastmod: 2026-06-20T17:09:52+08:00
 draft: false
 weight: 50
-categories: [艺术]
+categories: ["艺术与创作"]
 tags: [写作, 创作方法]
 contributors: []
 pinned: false

@@ -6,7 +6,7 @@ date: 2026-09-18
 lastmod: 2026-09-18
 draft: false
 weight: 50
-categories: [数学]
+categories: ["数学"]
 tags: ["傅里叶变换"]
 contributors: []
 pinned: false

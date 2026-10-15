@@ -6,7 +6,7 @@ date: 2026-08-04
 lastmod: 2026-09-19
 draft: false
 weight: 50
-categories: [基础知识]
+categories: ["编程与软件开发"]
 tags: [数据结构, 算法]
 contributors: []
 pinned: false

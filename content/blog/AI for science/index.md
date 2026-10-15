@@ -6,8 +6,8 @@ date: 2026-08-14
 lastmod: 2026-08-14
 draft: false
 weight: 50
-categories: ["说明文档"]
-tags: ["科研", "AI"]
+categories: ["人工智能"]
+tags: ["AI", "科研", "AI for Science"]
 contributors: []
 pinned: false
 homepage: false

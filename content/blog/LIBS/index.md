@@ -6,8 +6,8 @@ date: 2026-07-31
 lastmod: 2026-07-31
 draft: false
 weight: 50
-categories: ["LIBS"]
-tags: [ "libs, 机器学习"]
+categories: ["LIBS 与光谱分析"]
+tags: ["LIBS", "机器学习"]
 contributors: []
 pinned: false
 homepage: false

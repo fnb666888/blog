@@ -6,8 +6,8 @@ date: 2026-06-20T17:06:16+08:00
 lastmod: 2026-06-20T17:06:16+08:00
 draft: false
 weight: 50
-categories: [阅读]
-tags: [摘抄, 书籍, 英文原著, 哲理]
+categories: ["阅读与思考"]
+tags: ["摘抄", "读书笔记", "英文原著", "哲理"]
 contributors: []
 pinned: false
 homepage: false

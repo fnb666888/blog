@@ -6,7 +6,7 @@ date: 2026-08-04T10:01:41+08:00
 lastmod: 2026-08-04T10:01:41+08:00
 draft: false
 weight: 50
-categories: [基础知识]
+categories: ["编程与软件开发"]
 tags: [Python]
 contributors: []
 pinned: false

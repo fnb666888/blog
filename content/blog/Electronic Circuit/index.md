@@ -6,7 +6,7 @@ date: 2026-06-24T21:20:43+08:00
 lastmod: 2026-06-24T21:20:43+08:00
 draft: false
 weight: 50
-categories: ["物理"]
+categories: ["电子与嵌入式"]
 tags: ["电子线路", "模拟电路", "数字电路"]
 contributors: []
 pinned: false

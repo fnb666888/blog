@@ -6,7 +6,7 @@ date: 2026-06-24T22:05:45+08:00
 lastmod: 2026-06-24T22:05:45+08:00
 draft: false
 weight: 50
-categories: ["物理"]
+categories: ["物理与科学基础"]
 tags: ["热力学", "统计物理"]
 contributors: []
 pinned: false

@@ -6,7 +6,7 @@ date: 2026-08-11
 lastmod: 2026-08-11
 draft: false
 weight: 50
-categories: ["说明文档"]
+categories: ["商业与投资"]
 tags: ["1688"]
 contributors: []
 pinned: false

@@ -6,8 +6,8 @@ date: 2026-08-25
 lastmod: 2026-08-25
 draft: false
 weight: 50
-categories: ["基础知识"]
-tags: ["C++"]
+categories: ["开发工具与云服务"]
+tags: ["C++", "CMake", "vcpkg"]
 contributors: []
 pinned: false
 homepage: false

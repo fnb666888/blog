@@ -6,8 +6,8 @@ date: 2026-08-25
 lastmod: 2026-08-25
 draft: false
 weight: 50
-categories: ["基础知识"]
-tags: ["声音"]
+categories: ["物理与科学基础"]
+tags: ["声学", "音频", "信号处理"]
 contributors: []
 pinned: false
 homepage: false

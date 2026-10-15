@@ -6,8 +6,8 @@ date: 2026-06-20T17:26:32+08:00
 lastmod: 2026-06-20T17:26:32+08:00
 draft: false
 weight: 50
-categories: [阅读]
-tags: [摘抄, 书籍, 哲学, 黑塞]
+categories: ["阅读与思考"]
+tags: ["摘抄", "读书笔记", "哲学", "黑塞"]
 contributors: []
 pinned: false
 homepage: false

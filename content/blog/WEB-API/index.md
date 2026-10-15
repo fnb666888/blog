@@ -6,8 +6,8 @@ date: 2026-08-19
 lastmod: 2026-08-19
 draft: false
 weight: 50
-categories: ["基础知识"]
-tags: ["API"]
+categories: ["编程与软件开发"]
+tags: ["Web API", "DevTools", "Web"]
 contributors: []
 pinned: false
 homepage: false

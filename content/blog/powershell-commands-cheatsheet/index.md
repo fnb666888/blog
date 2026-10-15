@@ -6,7 +6,7 @@ date: 2026-08-07T17:07:02+08:00
 lastmod: 2026-08-07T17:07:02+08:00
 draft: false
 weight: 50
-categories: [基础知识]
+categories: ["开发工具与云服务"]
 tags: [PowerShell, Windows, 命令行, 系统管理, 别名]
 contributors: []
 pinned: false

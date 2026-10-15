@@ -6,7 +6,7 @@ date: 2026-06-20T17:00:22+08:00
 lastmod: 2026-06-20T17:00:22+08:00
 draft: false
 weight: 50
-categories: [阅读]
+categories: ["阅读与思考"]
 tags: [沟通, 演讲, 即兴表达]
 contributors: []
 pinned: false

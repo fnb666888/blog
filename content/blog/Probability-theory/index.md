@@ -6,8 +6,8 @@ date: 2026-09-23
 lastmod: 2026-09-23
 draft: false
 weight: 50
-categories: [物理]
-tags: ["光学"]
+categories: ["数学"]
+tags: ["概率论", "随机变量", "概率分布"]
 contributors: []
 pinned: false
 homepage: false

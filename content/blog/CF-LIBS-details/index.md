@@ -6,8 +6,8 @@ date: 2026-08-17
 lastmod: 2026-08-17
 draft: false
 weight: 50
-categories: ["LIBS"]
-tags: ["LIBS"]
+categories: ["LIBS 与光谱分析"]
+tags: ["LIBS", "CF-LIBS"]
 contributors: []
 pinned: false
 homepage: false
